@@ -50,22 +50,22 @@
         <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">미니프로젝트 · AllPick</p>
-            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">역할별 요청이 섞이며 권한 검증이 흔들리는 문제</h2>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">역할 기반 JWT 인증 흐름에서 Role 정보 불일치가 발생한 문제</h2>
           </div>
           <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">JWT · Redis · Spring Security</span>
         </div>
         <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-red-700">Problem</dt>
-            <dd class="text-neutral-700">AllPick은 구매자, 판매자, 관리자가 함께 사용하는 쇼핑몰 플랫폼입니다. 기능 구현 이후 QA 과정에서 관리자 API, 판매자 API, 일반 회원 API 요청이 같은 인증 흐름으로 처리되며 역할별 접근 오류가 발생할 수 있다는 점을 확인했습니다. 예를 들어 판매자 승인, 상품 승인, 주문/환불 처리처럼 역할이 명확히 나뉘어야 하는 기능에서 토큰 저장 위치와 요청 헤더 기준이 섞이면 잘못된 권한으로 요청이 전달될 위험이 있었습니다.</dd>
+            <dd class="text-neutral-700">AllPick은 구매자, 판매자, 관리자가 함께 사용하는 쇼핑몰 플랫폼입니다. QA 과정에서 로그인은 성공했지만 이후 일부 요청에서 사용자 역할이 정상적으로 인식되지 않아, 역할별로 접근해야 하는 API 흐름이 흔들리는 문제가 발생했습니다. 판매자 승인, 상품 승인, 주문/환불 처리처럼 권한 기준이 명확해야 하는 기능에서 토큰과 역할 정보가 맞지 않으면 잘못된 인증 상태로 요청이 처리될 수 있었습니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-neutral-950">Cause</dt>
-            <dd class="text-neutral-700">처음에는 단순히 화면 버튼 노출이나 라우팅 문제로 볼 수 있었지만, 실제 원인은 클라이언트와 서버 사이의 인증 계약이 역할별로 충분히 분리되지 않은 데 있었습니다. Spring Security는 토큰의 권한을 기준으로 API 접근을 판단하지만, 프론트엔드에서 userToken, sellerToken, adminToken의 사용 기준이 모호하면 요청 단계에서 잘못된 토큰이 포함될 수 있었습니다. 또한 로그아웃, 토큰 만료, 재로그인 상황에서 기존 토큰이 남아 있으면 서버 권한 검증과 화면 상태가 어긋날 수 있었습니다.</dd>
+            <dd class="text-neutral-700">처음에는 로그인/회원가입 API 응답 문제이거나 JWT 보안 설정 문제라고 판단해 인증 API와 토큰 검증 로직을 먼저 확인했습니다. 토큰 저장 방식, 요청 헤더, Spring Security 설정을 수정해보았지만 문제가 해결되지 않았고, 정상 로그인 이후에도 특정 역할이 계속 인식되지 않았습니다. 이후 로그인 응답과 회원 도메인 변경 이력을 함께 추적하면서, 초기 설계에서는 member에 role을 부여했다가 이후 제거했는데 기존 로그인 코드에는 role을 기준으로 처리하는 로직이 남아 있다는 점을 발견했습니다. 결과적으로 현재 회원 데이터 구조와 로그인 코드의 역할 처리 방식이 서로 맞지 않아 JWT 인증 이후 권한 판단이 어긋난 것이 원인이었습니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-blue-700">Solution</dt>
-            <dd class="text-neutral-700">역할별 토큰을 userToken, sellerToken, adminToken으로 분리하고, API 경로에 따라 어떤 토큰을 Authorization 헤더에 실을지 명확히 나눴습니다. 서버에서는 JWT 권한 정보를 기준으로 관리자, 판매자, 일반 회원 접근 범위를 다시 검증하도록 정리했습니다. Refresh Token은 Redis에 저장하고, 로그아웃 또는 토큰 폐기 시 블랙리스트 처리 흐름을 두어 사용자가 로그아웃한 뒤 기존 Access Token이 계속 사용되지 않도록 했습니다.</dd>
+            <dd class="text-neutral-700">먼저 로그인 코드에서 더 이상 사용하지 않는 member role 의존 로직을 제거하고, 실제 서비스 구조에 맞게 일반 회원, 판매자, 관리자 인증 흐름을 분리했습니다. 프론트엔드에서는 userToken, sellerToken, adminToken을 구분해 저장하고 API 경로에 따라 올바른 토큰을 Authorization 헤더에 실도록 정리했습니다. 서버에서는 JWT의 권한 정보와 요청 대상 API의 역할 기준을 다시 맞췄고, Refresh Token은 Redis에 저장하며 로그아웃 또는 토큰 폐기 시 블랙리스트 처리로 기존 토큰이 계속 사용되지 않도록 보완했습니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-emerald-700">Result</dt>
