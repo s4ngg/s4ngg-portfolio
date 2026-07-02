@@ -51,11 +51,254 @@
       <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <p class="text-xs font-bold uppercase text-blue-700">파이널프로젝트 · TFT-gogo</p>
-          <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">성능개선 작업 작성 예정</h2>
+          <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">Guide 페이지(<code class="rounded bg-neutral-100 px-1 py-0.5 text-lg text-rose-600">/api/guide</code>) 성능 기준 측정과 병목 분석</h2>
         </div>
-        <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">진행 중</span>
+        <span class="shrink-0 rounded bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">개선 방법 확정 · PR 병합 대기</span>
       </div>
-      <p class="mt-6 leading-7 text-neutral-700">현재 기준 성능 측정을 마치고 병목 지점을 분석하는 단계입니다. 실제 개선을 적용하고 개선 전후 비교까지 검증한 뒤, 측정 방법과 원인 분석, 적용한 해결 방법, 재검증 결과를 이 페이지에 정리할 예정입니다.</p>
+
+      <p class="mt-6 leading-7 text-neutral-700">Guide 페이지를 첫 번째 성능개선 대상으로 선정하고, 개선 전 기준 성능을 측정한 뒤 병목 지점을 좁혀 1개 단위로 개선하는 작업입니다. 팀원과 각자 다른 방식으로 원인을 조사하고 개선안을 테스트한 뒤, <strong class="text-neutral-950">근본 원인을 없애는 방식으로 개선 방법을 확정하고 개선 후 측정까지 마친 단계</strong>입니다. 실제 코드 변경 PR은 아직 병합 전이며, 병합되면 운영 코드 기준으로 다시 검증할 예정입니다.</p>
+
+      <a class="mt-3 inline-flex items-center gap-1 text-sm font-bold text-blue-700 hover:underline" href="https://github.com/s4ngg/TFT-gogo/issues/647" target="_blank" rel="noreferrer">
+        GitHub Issue #647 보기
+        <span class="material-symbols-outlined text-base">arrow_outward</span>
+      </a>
+
+      <!-- 측정 환경 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">측정 환경</h3>
+        <ul class="mt-3 grid gap-2 text-sm leading-6 text-neutral-700 md:grid-cols-2">
+          <li>· 로컬 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">localhost:8080</code> / Docker MySQL 3307</li>
+          <li>· Apache JMeter 5.6.3 CLI (non-GUI)</li>
+          <li>· CDragon 패치 17.6, 측정 전 워밍업 1회</li>
+          <li>· 대상 API: <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide</code> (catalog) 외 tab-items 3종</li>
+        </ul>
+      </div>
+
+      <!-- 개선 전 기준 성능 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">개선 전 기준 성능 (부하 테스트)</h3>
+        <p class="mt-2 text-sm leading-6 text-neutral-700">동시 사용자 50명 고정 · <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">/api/guide</code> 5,000건 + tab-items 3종 각 1,700건, 총 10,100건 요청 · TPS 468.5/s · 에러율 0%</p>
+        <div class="mt-3 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-neutral-200 bg-neutral-50">
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">API</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">평균</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">p95</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">p99</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">응답 크기</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-100">
+              <tr class="bg-rose-50/60">
+                <td class="px-4 py-3 font-bold text-rose-700 align-top">GET /api/guide</td>
+                <td class="px-4 py-3 text-right text-neutral-700">125.9ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">198ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">227ms</td>
+                <td class="px-4 py-3 text-right font-bold text-rose-700">296.7 KB</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-blue-700 align-top">GET /api/guide/champions</td>
+                <td class="px-4 py-3 text-right text-neutral-700">106.6ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">179ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">232ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">10.0 KB</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-blue-700 align-top">GET /api/guide/augments</td>
+                <td class="px-4 py-3 text-right text-neutral-700">106.0ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">178ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">199ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">12.5 KB</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-blue-700 align-top">GET /api/guide/traits</td>
+                <td class="px-4 py-3 text-right text-neutral-700">109.5ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">182ms</td>
+                <td class="px-4 py-3 text-right font-bold text-amber-700">317ms</td>
+                <td class="px-4 py-3 text-right text-neutral-700">36.0 KB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-neutral-500">3회 반복 측정(재현성 검증, CV 2.7% 이내) 기준 중앙값: catalog API 평균 82ms · p95 138ms · p99 191ms · 에러율 0%</p>
+      </div>
+
+      <!-- 스트레스/스파이크로 확인한 병목 징후 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">스트레스 · 스파이크 테스트로 확인한 병목 징후</h3>
+        <div class="mt-3 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-neutral-200 bg-neutral-50">
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">테스트</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">시나리오</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">핵심 지표</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">판정</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-100">
+              <tr>
+                <td class="px-4 py-3 font-bold text-blue-700 align-top">스트레스</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">10 → 50 → 100 → 200명 단계 증가</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">200명 p99 43ms · 에러 0%</td>
+                <td class="px-4 py-3 align-top"><span class="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800">안정</span></td>
+              </tr>
+              <tr class="bg-rose-50/60">
+                <td class="px-4 py-3 font-bold text-rose-700 align-top">스파이크</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">10명 → 1초 ramp-up으로 200명 급증 → 10명 회복</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">스파이크 구간 <strong class="text-rose-700">20ms → 570ms (28배)</strong>, p99 1,143ms · 회복 후 즉시 18ms</td>
+                <td class="px-4 py-3 align-top"><span class="rounded bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-800">응답 지연 확인</span></td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-blue-700 align-top">내구성</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">20명, 30분 지속 (93만 건)</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">후반 응답시간 열화 없음</td>
+                <td class="px-4 py-3 align-top"><span class="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800">안정</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-neutral-500">에러 없이 회복은 되지만, 응답 크기 296.7KB가 스파이크 내성을 떨어뜨리는 주요 변수로 확인됨</p>
+      </div>
+
+      <!-- 병목 후보 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">🔍 병목 후보</h3>
+        <div class="mt-3 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-neutral-200 bg-neutral-50">
+                <th class="px-4 py-3 text-left font-bold text-neutral-950 w-14">순위</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">항목</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">근거</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">개선 방향</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-100">
+              <tr>
+                <td class="px-4 py-3 font-bold text-rose-700 align-top">1</td>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">GET /api/guide 응답 296.7 KB</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">tab-items 대비 8~30배 · 스파이크 시 p99 1,143ms 주요 원인</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">응답 경량화 또는 Redis 캐싱 도입</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-rose-700 align-top">2</td>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">매 요청마다 DB 풀스캔</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">캐싱 없이 정적 성격이 강한 catalog 데이터를 매번 재조회</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">정적 가이드 데이터 캐싱 계층 도입</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-rose-700 align-top">3</td>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">GET /api/guide/traits p99 317ms</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">다른 탭 대비 두드러지게 높음</td>
+                <td class="px-4 py-3 text-neutral-700 align-top">special_units 조인 EXPLAIN 확인 필요</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-neutral-500">추가 조사 결과 1·2번 병목의 근본 원인은 응답 크기나 캐싱 여부 이전에 <strong class="text-neutral-700">catalog API가 화면에는 쓰이지도 않는데 매 페이지 로드마다 불필요하게 호출되고 있었다는 점</strong>으로 좁혀졌습니다. 아래는 이 원인을 기준으로 개선 방법을 확정한 과정입니다.</p>
+      </div>
+
+      <!-- 채택한 개선 방법 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">✅ 채택한 개선 방법 — 카탈로그 지연 로딩 전환</h3>
+        <p class="mt-2 leading-7 text-neutral-700">프론트 소비 경로를 추적한 결과 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide</code>(4개 테이블 전체 조회 + JSON 직렬화)는 실제 화면 표시에는 쓰이지 않고, <strong class="text-neutral-950">① patchVersion 표시 ② 탭 조회 실패 시 fallback 원본</strong> 용도로만 매 페이지 로드마다 불필요하게 선호출되고 있었습니다. 실제 화면 데이터는 이미 페이지네이션이 적용된 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide/{tab}</code>에서 가져오고 있었습니다.</p>
+        <ul class="mt-4 space-y-2 text-sm leading-6 text-neutral-700">
+          <li>· 백엔드: 전체 카탈로그 조회 없이 patchVersion만 반환하는 경량 엔드포인트 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide/patch-version</code> 신설</li>
+          <li>· 프론트: <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">useGuideCatalog</code>가 전체 카탈로그 대신 경량 엔드포인트만 호출하도록 전환</li>
+          <li>· fallback: 탭 조회 실패 시 라이브 카탈로그 대신 정적 번들(<code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">guideFallbackData</code>)을 사용하도록 변경</li>
+          <li>· 기존 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide</code> 엔드포인트 자체는 다른 소비처를 위해 코드 그대로 유지</li>
+        </ul>
+      </div>
+
+      <!-- 함께 검토했던 다른 방법 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">함께 검토했던 다른 방법 (미채택)</h3>
+        <p class="mt-2 text-sm leading-6 text-neutral-700">1차 회의에서 "개선 방법 각자 1~2개 조사 후 취합" 하기로 한 대로, 팀원과 서로 다른 방향으로 개선안을 조사하고 실측했습니다.</p>
+        <div class="mt-4 grid gap-4 md:grid-cols-2">
+          <div class="rounded-lg border border-neutral-200 p-4">
+            <p class="text-xs font-bold uppercase text-neutral-500">팀원 조사 — HikariCP 커넥션 풀</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-700"><code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">maximum-pool-size</code>가 기본값 10으로 방치되어 커넥션 획득 대기(<code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">hikari_pending</code> 38~40)가 상시 발생 중임을 확인. 10 → 30 → 50으로 단계적으로 올리며 재검증.</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-700">pool=50에서 pending이 0으로 사라지고 avg 164ms → 134ms까지 개선됐지만, p95/p99(꼬리 지연)는 오히려 악화되고 CPU도 상승. <strong class="text-neutral-950">페이지네이션 없이 4개 테이블을 전부 조회하는 쿼리 자체</strong>가 남은 원인이라는 결론에 도달, 이 조사가 지연 로딩 전환 아이디어로 이어짐.</p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 p-4">
+            <p class="text-xs font-bold uppercase text-neutral-500">본인 조사 — Spring Cache(Caffeine) + 병렬 쿼리</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-700">Guide 데이터는 CDragon import 시에만 갱신되는 준정적 데이터라는 점에 착안해 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">@Cacheable</code>/<code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">@CacheEvict</code> 캐싱과 <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">CompletableFuture</code> 병렬 쿼리를 함께 적용.</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-700">avg 82ms → <strong class="text-neutral-950">12ms(-85%)</strong>, TPS 330/s → <strong class="text-neutral-950">3,744/s(+1,035%)</strong>로 수치상 가장 좋았지만, <strong class="text-neutral-950">애초에 필요 없는 호출을 캐싱으로 빠르게 만드는 것일 뿐</strong>이라 근본 원인 해결이 아니라고 판단해 미채택.</p>
+          </div>
+        </div>
+        <p class="mt-3 text-sm leading-6 text-neutral-700">두 방법 모두 유효한 개선이었지만, "더 이상의 기능 추가 없이 근본적인 문제를 해결하는 것이 맞다"는 판단 아래 <strong class="text-neutral-950">불필요한 호출 자체를 없애는 카탈로그 지연 로딩 전환</strong>을 최종 채택했습니다.</p>
+      </div>
+
+      <!-- 개선 후 측정 결과 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">개선 후 측정 결과</h3>
+        <p class="mt-2 text-sm leading-6 text-neutral-700">동시 사용자 50명 · 300초 지속 · HikariCP pool=50 동일 조건, <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide</code> → <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">GET /api/guide/patch-version</code> 전환</p>
+        <div class="mt-3 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-neutral-200 bg-neutral-50">
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">항목</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">개선 전</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">개선 후</th>
+                <th class="px-4 py-3 text-right font-bold text-neutral-950">변화율</th>
+                <th class="px-4 py-3 text-left font-bold text-neutral-950">비고</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-100">
+              <tr>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">avg latency</td>
+                <td class="px-4 py-3 text-right text-neutral-700">134ms</td>
+                <td class="px-4 py-3 text-right font-bold text-emerald-700">18ms</td>
+                <td class="px-4 py-3 text-right font-bold text-emerald-700">-87%</td>
+                <td class="px-4 py-3 text-neutral-500">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">p95 latency</td>
+                <td class="px-4 py-3 text-right text-neutral-700">247ms</td>
+                <td class="px-4 py-3 text-right font-bold text-emerald-700">24ms</td>
+                <td class="px-4 py-3 text-right font-bold text-emerald-700">-90%</td>
+                <td class="px-4 py-3 text-neutral-500">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">p99 latency</td>
+                <td class="px-4 py-3 text-right text-neutral-700">360ms</td>
+                <td class="px-4 py-3 text-right font-bold text-amber-700">325ms</td>
+                <td class="px-4 py-3 text-right font-bold text-amber-700">-10%</td>
+                <td class="px-4 py-3 text-neutral-500">JVM/OS 레벨 tail 지연으로 추정</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">TPS</td>
+                <td class="px-4 py-3 text-right text-neutral-700">366.7/s</td>
+                <td class="px-4 py-3 text-right font-bold text-emerald-700">2,711.7/s</td>
+                <td class="px-4 py-3 text-right font-bold text-emerald-700">+639%</td>
+                <td class="px-4 py-3 text-neutral-500">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold text-neutral-950 align-top">에러율</td>
+                <td class="px-4 py-3 text-right text-neutral-700">0%</td>
+                <td class="px-4 py-3 text-right font-bold text-neutral-700">0%</td>
+                <td class="px-4 py-3 text-right text-neutral-500">-</td>
+                <td class="px-4 py-3 text-neutral-500">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-neutral-500">성공 기준(catalog API avg latency 50% 이상 감소) 대비 87% 감소로 목표 초과 달성. p99만 개선폭이 작아 JVM/스레드 스케줄링 또는 OS 레벨 지연 가능성으로 별도 기록, 실사용 트래픽에서는 우선순위 낮게 판단.</p>
+      </div>
+
+      <!-- 회귀 테스트 -->
+      <div class="mt-8">
+        <h3 class="display text-lg font-extrabold text-neutral-950">회귀 테스트</h3>
+        <p class="mt-2 leading-7 text-neutral-700">카탈로그 지연 로딩 전환이 기존 5개 Guide 엔드포인트(<code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">catalog</code>, <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">traits</code>, <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">items</code>, <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">augments</code>, <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-rose-600">champions</code>)에 영향을 주는지 baseline과 동일 조건(50명 × 20루프)으로 2회 재검증했습니다. 1차 실행에서 p99만 균일하게 급등했으나 서버 재시작 직후 JVM 워밍업 아티팩트로 확인됐고, 2차 실행에서는 baseline과 동등하거나 더 나은 수치가 나와 <strong class="text-neutral-950">회귀 없음을 확정</strong>했습니다.</p>
+      </div>
+
+      <!-- 다음 단계 -->
+      <div class="mt-8 rounded-lg border border-dashed border-neutral-300 bg-neutral-50 p-4">
+        <p class="text-sm font-bold text-neutral-950">다음 단계</p>
+        <p class="mt-1 text-sm leading-6 text-neutral-700">개선 방법 확정과 측정·회귀 검증까지는 마쳤지만, 실제 코드 변경 <strong class="text-neutral-950">PR은 아직 병합 전</strong>입니다. PR이 머지되면 운영 코드 기준으로 결과를 다시 확인하고, 3차 회의에서 논의할 <strong class="text-neutral-950">다음 성능개선 후보</strong>(traits p99 317ms 등)를 이어서 이 페이지에 채워나갈 예정입니다.</p>
+      </div>
     </article>
   </section>
 </main>
