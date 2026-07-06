@@ -893,7 +893,7 @@
 </div>
 </div>
 <div class="project-grid">
-<a class="project-card reveal-on-scroll" href="mini-project.html" aria-label="미니프로젝트 페이지로 이동">
+<button type="button" class="project-card reveal-on-scroll" data-project-modal="mini" aria-haspopup="dialog" aria-label="미니프로젝트 자세히 보기">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">code</span>
 </div>
@@ -906,9 +906,9 @@
 <li>FastAPI</li>
 <li>AWS</li>
 </ul>
-<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
-</a>
-<a class="project-card reveal-on-scroll" href="final-project.html" aria-label="파이널프로젝트 페이지로 이동">
+<span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</button>
+<button type="button" class="project-card reveal-on-scroll" data-project-modal="final" aria-haspopup="dialog" aria-label="파이널프로젝트 자세히 보기">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">rocket_launch</span>
 </div>
@@ -921,9 +921,9 @@
 <li>FastAPI</li>
 <li>Docker</li>
 </ul>
-<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
-</a>
-<a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슛팅 페이지로 이동">
+<span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</button>
+<button type="button" class="project-card reveal-on-scroll" data-project-modal="troubleshooting" aria-haspopup="dialog" aria-label="트러블슛팅 기록 자세히 보기">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">build</span>
 </div>
@@ -936,8 +936,8 @@
 <li>Deploy</li>
 <li>API</li>
 </ul>
-<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
-</a>
+<span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</button>
 </div>
 </div>
 </section>
@@ -1127,6 +1127,7 @@
 </div>
 </footer>
 <script src="assets/image-modal.js" defer></script>
+<script src="assets/project-modal.js" defer></script>
 <script>
     // Simple Intersection Observer for reveal effects
     const observerOptions = {
