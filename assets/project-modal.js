@@ -2,36 +2,29 @@
   const STYLE_ID = "portfolio-project-modal-style";
   const MODAL_ID = "portfolio-project-modal";
 
+  // TODO: previewImage는 실제 배포 도메인 스크린샷을 촬영한 뒤 assets/에 추가하고 교체할 것
   const PROJECTS = {
     mini: {
-      kind: "Mini Project",
-      title: "미니프로젝트",
+      kind: "쇼핑몰 서비스",
+      title: "AllPick",
       description:
-        "AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 미니 프로젝트입니다.",
+        "AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 프로젝트입니다.",
       domain: { label: "준비중", href: null },
       tags: ["React", "Spring Boot", "FastAPI", "AWS"],
       role: "AI 추천(FastAPI)과 AWS 인프라 구축을 단독으로 담당했고, 프론트엔드·백엔드에서는 JWT 인증 흐름과 주문·결제, 쿠폰·멤버십 기능을 맡았습니다.",
       href: "mini-project.html",
+      previewImage: { src: "assets/blank-placeholder.svg", alt: "AllPick 실제 배포 화면 스크린샷 (준비중)" },
     },
     final: {
-      kind: "Final Project",
-      title: "파이널프로젝트",
+      kind: "롤토체스 전적 검색 서비스",
+      title: "TFT-gogo",
       description:
-        "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 파이널 프로젝트입니다.",
+        "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 프로젝트입니다.",
       domain: { label: "tftgogo.com", href: "https://tftgogo.com" },
       tags: ["Spring Boot", "React", "FastAPI", "Docker"],
       role: "AWS 인프라 구축을 단독으로 담당했고, 프론트엔드·백엔드·AI 전반에서 덱 모음과 AI 기반 덱 추천 기능을 맡았습니다.",
       href: "final-project.html",
-    },
-    troubleshooting: {
-      kind: "Troubleshooting",
-      title: "트러블슛팅 기록",
-      description:
-        "프로젝트 중 만난 배포, API, DB 연동, 인증 흐름 이슈를 재현 조건부터 원인 분석, 해결 방법, 재검증까지 정리했습니다.",
-      domain: null,
-      tags: ["Debugging", "Log", "Deploy", "API"],
-      role: null,
-      href: "troubleshooting.html",
+      previewImage: { src: "assets/blank-placeholder.svg", alt: "TFT-gogo 실제 배포 화면 스크린샷 (준비중)" },
     },
   };
 
@@ -61,12 +54,12 @@
       }
       #${MODAL_ID} .project-modal-panel {
         position: relative;
-        width: min(560px, 100%);
-        max-height: calc(100vh - 48px);
-        overflow-y: auto;
-        padding: 32px;
-        border-radius: 12px;
+        display: flex;
+        width: min(1120px, 94vw);
+        height: min(720px, 88vh);
+        border-radius: 16px;
         background: #ffffff;
+        overflow: hidden;
         transform: scale(0.94);
         opacity: 0;
         transition: transform 0.22s ease, opacity 0.22s ease;
@@ -76,10 +69,42 @@
         transform: scale(1);
         opacity: 1;
       }
+      #${MODAL_ID} .project-modal-preview {
+        position: relative;
+        flex: 1 1 58%;
+        overflow: hidden;
+        background: #f8fafc;
+        border-right: 1px solid #e6e7e9;
+      }
+      #${MODAL_ID} .project-modal-preview img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #${MODAL_ID} .project-modal-preview-badge {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        border-radius: 999px;
+        background: rgba(20, 21, 22, 0.72);
+        padding: 5px 12px;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      #${MODAL_ID} .project-modal-body {
+        flex: 1 1 42%;
+        min-width: 0;
+        padding: 32px;
+        overflow-y: auto;
+      }
       #${MODAL_ID} .project-modal-close {
         position: absolute;
         top: 16px;
         right: 16px;
+        z-index: 1;
         width: 36px;
         height: 36px;
         border: 1px solid #e1e4e7;
@@ -169,8 +194,23 @@
       #${MODAL_ID} .project-modal-link .material-symbols-outlined {
         font-size: 17px;
       }
-      @media (max-width: 640px) {
+      @media (max-width: 800px) {
+        #${MODAL_ID} {
+          padding: 0;
+        }
         #${MODAL_ID} .project-modal-panel {
+          width: 100%;
+          height: 100%;
+          flex-direction: column;
+          border-radius: 0;
+        }
+        #${MODAL_ID} .project-modal-preview {
+          flex: 0 0 34%;
+          border-right: none;
+          border-bottom: 1px solid #e6e7e9;
+        }
+        #${MODAL_ID} .project-modal-body {
+          flex: 1 1 auto;
           padding: 24px;
         }
       }
@@ -190,24 +230,30 @@
     modal.innerHTML = `
       <div class="project-modal-panel">
         <button class="project-modal-close" type="button" aria-label="닫기">×</button>
-        <span class="project-modal-kind"></span>
-        <h3 class="project-modal-title"></h3>
-        <p class="project-modal-copy"></p>
-        <dl class="project-modal-meta">
-          <div class="project-modal-row" data-row="domain">
-            <dt>도메인 주소</dt>
-            <dd></dd>
-          </div>
-          <div class="project-modal-row" data-row="tags">
-            <dt>사용 기술</dt>
-            <dd><ul class="project-modal-tags"></ul></dd>
-          </div>
-          <div class="project-modal-row" data-row="role">
-            <dt>담당 파트</dt>
-            <dd></dd>
-          </div>
-        </dl>
-        <a class="project-modal-link" href="#">상세 페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
+        <div class="project-modal-preview">
+          <img alt="" />
+          <span class="project-modal-preview-badge">실제 배포 화면 준비중</span>
+        </div>
+        <div class="project-modal-body">
+          <span class="project-modal-kind"></span>
+          <h3 class="project-modal-title"></h3>
+          <p class="project-modal-copy"></p>
+          <dl class="project-modal-meta">
+            <div class="project-modal-row" data-row="domain">
+              <dt>도메인 주소</dt>
+              <dd></dd>
+            </div>
+            <div class="project-modal-row" data-row="tags">
+              <dt>사용 기술</dt>
+              <dd><ul class="project-modal-tags"></ul></dd>
+            </div>
+            <div class="project-modal-row" data-row="role">
+              <dt>담당 파트</dt>
+              <dd></dd>
+            </div>
+          </dl>
+          <a class="project-modal-link" href="#">상세 페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
+        </div>
       </div>
     `;
     document.body.appendChild(modal);
@@ -237,6 +283,10 @@
 
   function openModal(modal, project, trigger) {
     lastTrigger = trigger;
+
+    const previewImg = modal.querySelector(".project-modal-preview img");
+    previewImg.src = project.previewImage.src;
+    previewImg.alt = project.previewImage.alt;
 
     modal.querySelector(".project-modal-kind").textContent = project.kind;
     modal.querySelector(".project-modal-title").textContent = project.title;

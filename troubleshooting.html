@@ -19,8 +19,13 @@
     <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김상우</a>
     <nav class="hidden items-center gap-7 md:flex">
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널프로젝트</a>
+      <details class="relative">
+        <summary class="flex list-none cursor-pointer items-center gap-1 text-sm font-semibold text-neutral-600 hover:text-blue-700">프로젝트<span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></summary>
+        <div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+        </div>
+      </details>
       <a class="text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슛팅</a>
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="performance.html">성능개선</a>
     </nav>
@@ -28,8 +33,9 @@
       <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
       <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널프로젝트</a>
+        <p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
         <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슛팅</a>
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
       </nav>
@@ -51,7 +57,7 @@
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
         <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">미니프로젝트 · AllPick</p>
+            <p class="text-xs font-bold uppercase text-blue-700">AllPick</p>
             <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">역할 기반 JWT 인증 흐름에서 Role 정보 불일치가 발생한 문제</h2>
           </div>
           <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">JWT · Redis · Spring Security</span>
@@ -79,15 +85,15 @@
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
         <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">파이널프로젝트</p>
-            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">파이널프로젝트 트러블슈팅 작성 예정</h2>
+            <p class="text-xs font-bold uppercase text-blue-700">TFT-gogo</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">TFT-gogo 트러블슈팅 작성 예정</h2>
           </div>
           <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Coming Soon</span>
         </div>
         <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-red-700">Problem</dt>
-            <dd class="text-neutral-700">파이널프로젝트 진행 중 실제로 재현한 문제를 기준으로 작성할 예정입니다.</dd>
+            <dd class="text-neutral-700">TFT-gogo 진행 중 실제로 재현한 문제를 기준으로 작성할 예정입니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-neutral-950">Cause</dt>

@@ -19,8 +19,13 @@
     <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김상우</a>
     <nav class="hidden items-center gap-7 md:flex">
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널프로젝트</a>
+      <details class="relative">
+        <summary class="flex list-none cursor-pointer items-center gap-1 text-sm font-semibold text-neutral-600 hover:text-blue-700">프로젝트<span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></summary>
+        <div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+        </div>
+      </details>
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
       <a class="text-sm font-bold text-blue-700" href="performance.html">성능개선</a>
     </nav>
@@ -28,8 +33,9 @@
       <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
       <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널프로젝트</a>
+        <p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
         <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="performance.html">성능개선</a>
       </nav>
@@ -42,7 +48,7 @@
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Performance</p>
       <h1 class="display mt-2 text-4xl font-extrabold text-neutral-950 md:text-5xl">기준을 측정하고 병목을 좁혀가는 과정</h1>
-      <p class="mt-5 max-w-3xl leading-7 text-neutral-700">파이널프로젝트 TFT-gogo에서 진행 중인 성능 개선 작업을 정리하는 페이지입니다. 개선 전후 측정 결과와 원인 분석, 적용한 방법을 함께 남길 예정입니다.</p>
+      <p class="mt-5 max-w-3xl leading-7 text-neutral-700">TFT-gogo에서 진행 중인 성능 개선 작업을 정리하는 페이지입니다. 개선 전후 측정 결과와 원인 분석, 적용한 방법을 함께 남길 예정입니다.</p>
     </div>
   </section>
 
@@ -50,7 +56,7 @@
     <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
       <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <p class="text-xs font-bold uppercase text-blue-700">파이널프로젝트 · TFT-gogo</p>
+          <p class="text-xs font-bold uppercase text-blue-700">TFT-gogo</p>
           <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">Guide 페이지(<code class="rounded bg-neutral-100 px-1 py-0.5 text-lg text-rose-600">/api/guide</code>) 성능 기준 측정과 병목 분석</h2>
         </div>
         <span class="shrink-0 rounded bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">개선 방법 확정 · PR 병합 대기</span>

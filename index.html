@@ -346,7 +346,7 @@
         }
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 20px;
         }
         .project-card {
@@ -805,9 +805,6 @@
             .hero-portrait {
                 display: none;
             }
-            .project-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
         }
     </style>
 </head>
@@ -817,8 +814,13 @@
 <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김상우</a>
 <nav class="hidden items-center gap-7 md:flex">
 <a class="text-sm font-bold text-blue-700" href="index.html">홈</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널프로젝트</a>
+<details class="relative">
+<summary class="flex list-none cursor-pointer items-center gap-1 text-sm font-semibold text-neutral-600 hover:text-blue-700">프로젝트<span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></summary>
+<div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+</div>
+</details>
 <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
 <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="performance.html">성능개선</a>
 </nav>
@@ -828,8 +830,9 @@
 </summary>
 <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
 <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="index.html">홈</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널프로젝트</a>
+<p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
+<a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+<a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
 </nav>
@@ -893,13 +896,13 @@
 </div>
 </div>
 <div class="project-grid">
-<button type="button" class="project-card reveal-on-scroll" data-project-modal="mini" aria-haspopup="dialog" aria-label="미니프로젝트 자세히 보기">
+<button type="button" class="project-card reveal-on-scroll" data-project-modal="mini" aria-haspopup="dialog" aria-label="AllPick 자세히 보기">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">code</span>
 </div>
-<span class="project-kind">Mini Project</span>
-<h3 class="project-card-title">미니프로젝트</h3>
-<p class="project-card-copy">AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 미니 프로젝트입니다.</p>
+<span class="project-kind">쇼핑몰 서비스</span>
+<h3 class="project-card-title">AllPick</h3>
+<p class="project-card-copy">AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 프로젝트입니다.</p>
 <ul class="project-tags" aria-label="기술스택">
 <li>React</li>
 <li>Spring Boot</li>
@@ -908,33 +911,18 @@
 </ul>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </button>
-<button type="button" class="project-card reveal-on-scroll" data-project-modal="final" aria-haspopup="dialog" aria-label="파이널프로젝트 자세히 보기">
+<button type="button" class="project-card reveal-on-scroll" data-project-modal="final" aria-haspopup="dialog" aria-label="TFT-gogo 자세히 보기">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">rocket_launch</span>
 </div>
-<span class="project-kind">Final Project</span>
-<h3 class="project-card-title">파이널프로젝트</h3>
-<p class="project-card-copy">TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 파이널 프로젝트입니다.</p>
+<span class="project-kind">롤토체스 전적 검색 서비스</span>
+<h3 class="project-card-title">TFT-gogo</h3>
+<p class="project-card-copy">TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 프로젝트입니다.</p>
 <ul class="project-tags" aria-label="기술스택">
 <li>Spring Boot</li>
 <li>React</li>
 <li>FastAPI</li>
 <li>Docker</li>
-</ul>
-<span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
-</button>
-<button type="button" class="project-card reveal-on-scroll" data-project-modal="troubleshooting" aria-haspopup="dialog" aria-label="트러블슛팅 기록 자세히 보기">
-<div class="project-media project-media--cveradar">
-<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">build</span>
-</div>
-<span class="project-kind">Troubleshooting</span>
-<h3 class="project-card-title">트러블슛팅 기록</h3>
-<p class="project-card-copy">프로젝트 중 만난 배포, API, DB 연동, 인증 흐름 이슈를 재현 조건부터 원인 분석, 해결 방법, 재검증까지 정리했습니다.</p>
-<ul class="project-tags" aria-label="기술스택">
-<li>Debugging</li>
-<li>Log</li>
-<li>Deploy</li>
-<li>API</li>
 </ul>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </button>

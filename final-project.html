@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>파이널프로젝트 | TFT-gogo 전적 검색 서비스</title>
+  <title>TFT-gogo | 김상우 포트폴리오</title>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -20,8 +20,13 @@
     <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김상우</a>
     <nav class="hidden items-center gap-7 md:flex">
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-bold text-blue-700" href="final-project.html">파이널프로젝트</a>
+      <details class="relative">
+        <summary class="flex list-none cursor-pointer items-center gap-1 text-sm font-bold text-blue-700">프로젝트<span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></summary>
+        <div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+          <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="final-project.html">TFT-gogo</a>
+        </div>
+      </details>
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="performance.html">성능개선</a>
     </nav>
@@ -29,8 +34,9 @@
       <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
       <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="final-project.html">파이널프로젝트</a>
+        <p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-bold text-blue-700" href="final-project.html">TFT-gogo</a>
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
       </nav>
@@ -42,7 +48,7 @@
   <section class="bg-white">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:items-center">
       <div>
-        <p class="text-sm font-bold uppercase text-blue-700">Final Project</p>
+        <p class="text-sm font-bold uppercase text-blue-700">롤토체스 전적 검색 서비스</p>
         <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">TFT-gogo 전적 검색 서비스</h1>
         <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">전략적 팀 전투(TFT) 유저가 소환사 전적을 검색하고 최근 매치, 증강, 덱 구성, 메타덱, 패치노트를 확인할 수 있는 서비스입니다. Spring Boot 백엔드, React 프론트엔드, FastAPI AI 서버를 모노레포로 구성하고 Riot API와 OpenAI API 연동 흐름을 함께 다루고 있습니다.</p>
         <div class="mt-8 flex flex-wrap gap-2">
@@ -181,7 +187,7 @@
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Release Management</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">팀 협업과 릴리즈 관리</h2>
-      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">파이널프로젝트는 여러 사람이 동시에 작업하는 팀 프로젝트로 진행했습니다. 요구사항 문서, API 계약, 이슈와 PR, 배포 체크리스트, 릴리즈 이후 확인 기준을 연결해 기능 구현이 실제 실행 가능한 상태까지 이어지도록 관리했습니다.</p>
+      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">TFT-gogo는 여러 사람이 동시에 작업하는 팀 프로젝트로 진행했습니다. 요구사항 문서, API 계약, 이슈와 PR, 배포 체크리스트, 릴리즈 이후 확인 기준을 연결해 기능 구현이 실제 실행 가능한 상태까지 이어지도록 관리했습니다.</p>
       <div class="mt-10 divide-y divide-neutral-200 border-y border-neutral-200">
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
