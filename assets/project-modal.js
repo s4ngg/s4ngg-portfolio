@@ -10,7 +10,7 @@
       description:
         "AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 프로젝트입니다.",
       domain: { label: "준비중", href: null },
-      tags: ["React", "Spring Boot", "FastAPI", "AWS"],
+      tags: ["Java", "React", "Spring Boot", "FastAPI", "AWS"],
       techGroups: [
         { label: "Frontend", items: ["React", "JavaScript", "HTML/CSS", "Axios"] },
         { label: "Backend", items: ["Java", "Spring Boot", "Spring Security", "JPA", "JWT", "MySQL"] },
@@ -19,14 +19,21 @@
       ],
       role: "AI 추천(FastAPI)과 EC2·S3·CloudFront 기반 AWS 배포 구성을 단독으로 담당했고, 프론트엔드·백엔드에서는 JWT 인증 흐름과 주문·결제, 쿠폰·멤버십 기능을 맡았습니다.",
       href: "mini-project.html",
-      previewImage: { src: "assets/blank-placeholder.svg", alt: "AllPick 실제 배포 화면 스크린샷 (준비중)" },
+      previewImage: { src: "assets/allpick-modal-summary.png", alt: "AllPick 쇼핑몰 주요 화면 요약" },
+      previewImages: [
+        { src: "assets/allpick-main-home.png", alt: "AllPick 쇼핑몰 메인 홈페이지 화면", caption: "메인 홈" },
+        { src: "assets/allpick-auth-seller-flow.png", alt: "AllPick 회원가입, 로그인, 판매자 신청 화면", caption: "회원가입·로그인·판매자 신청" },
+        { src: "assets/allpick-product-category-management.png", alt: "AllPick 상품과 카테고리 관리 화면", caption: "상품·카테고리 관리" },
+        { src: "assets/allpick-order-payment-flow.png", alt: "AllPick 주문서, Toss Payments 결제창, 주문 내역 화면", caption: "주문·결제 흐름" },
+        { src: "assets/allpick-ai-recommendation.png", alt: "AllPick AI 상품 추천 화면", caption: "AI 상품 추천" },
+      ],
     },
     final: {
       kind: "롤토체스 전적 검색 서비스",
       title: "TFT-gogo",
       description:
         "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 프로젝트입니다.",
-      domain: { label: "tftgogo.com", href: "https://tftgogo.com" },
+      domain: { label: "https://d15b731cpaqp76.cloudfront.net/ (배포중단상태)", href: "https://d15b731cpaqp76.cloudfront.net/" },
       tags: ["Spring Boot", "React", "FastAPI", "Docker"],
       techGroups: [
         { label: "Frontend", items: ["React", "TypeScript", "Vite", "TanStack Query", "Axios", "Zustand"] },
@@ -67,8 +74,8 @@
       #${MODAL_ID} .project-modal-panel {
         position: relative;
         display: flex;
-        width: min(1120px, 94vw);
-        height: min(720px, 88vh);
+        width: min(1320px, 96vw);
+        height: min(800px, 90vh);
         border-radius: 16px;
         background: #ffffff;
         overflow: hidden;
@@ -83,17 +90,47 @@
       }
       #${MODAL_ID} .project-modal-preview {
         position: relative;
-        flex: 1 1 58%;
-        overflow: hidden;
+        flex: 1 1 62%;
+        overflow-y: auto;
         background: #f8fafc;
         border-right: 1px solid #e6e7e9;
       }
-      #${MODAL_ID} .project-modal-preview img {
+      #${MODAL_ID} .project-modal-preview > img {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        padding: 18px;
+      }
+      #${MODAL_ID} .project-modal-preview-scroll {
+        display: grid;
+        gap: 18px;
+        padding: 22px;
+      }
+      #${MODAL_ID} .project-modal-shot {
+        overflow: hidden;
+        border: 1px solid #e1e6ef;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      }
+      #${MODAL_ID} .project-modal-shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 520px;
+        object-fit: contain;
+        background: #eef2ff;
+      }
+      #${MODAL_ID} .project-modal-shot figcaption {
+        border-top: 1px solid #e5e7eb;
+        padding: 10px 14px;
+        color: #4f565c;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1.5;
+        background: #ffffff;
       }
       #${MODAL_ID} .project-modal-preview-badge {
         position: absolute;
@@ -107,7 +144,7 @@
         font-weight: 700;
       }
       #${MODAL_ID} .project-modal-body {
-        flex: 1 1 42%;
+        flex: 1 1 38%;
         min-width: 0;
         padding: 32px;
         overflow-y: auto;
@@ -250,9 +287,12 @@
           border-radius: 0;
         }
         #${MODAL_ID} .project-modal-preview {
-          flex: 0 0 34%;
+          flex: 0 0 46%;
           border-right: none;
           border-bottom: 1px solid #e6e7e9;
+        }
+        #${MODAL_ID} .project-modal-preview-scroll {
+          padding: 16px;
         }
         #${MODAL_ID} .project-modal-body {
           flex: 1 1 auto;
@@ -276,8 +316,7 @@
       <div class="project-modal-panel">
         <button class="project-modal-close" type="button" aria-label="닫기">×</button>
         <div class="project-modal-preview">
-          <img alt="" />
-          <span class="project-modal-preview-badge">실제 배포 화면 준비중</span>
+          <div class="project-modal-preview-scroll"></div>
         </div>
         <div class="project-modal-body">
           <span class="project-modal-kind"></span>
@@ -326,12 +365,39 @@
     return row.querySelector("dd");
   }
 
+  function renderPreview(modal, project) {
+    const preview = modal.querySelector(".project-modal-preview-scroll");
+    preview.innerHTML = "";
+
+    const images = project.previewImages && project.previewImages.length
+      ? project.previewImages
+      : [project.previewImage];
+
+    images.forEach((image) => {
+      const figure = document.createElement("figure");
+      figure.className = "project-modal-shot";
+
+      const img = document.createElement("img");
+      img.src = image.src;
+      img.alt = image.alt || "";
+      figure.appendChild(img);
+
+      if (image.caption) {
+        const caption = document.createElement("figcaption");
+        caption.textContent = image.caption;
+        figure.appendChild(caption);
+      }
+
+      preview.appendChild(figure);
+    });
+
+    preview.scrollTop = 0;
+  }
+
   function openModal(modal, project, trigger) {
     lastTrigger = trigger;
 
-    const previewImg = modal.querySelector(".project-modal-preview img");
-    previewImg.src = project.previewImage.src;
-    previewImg.alt = project.previewImage.alt;
+    renderPreview(modal, project);
 
     modal.querySelector(".project-modal-kind").textContent = project.kind;
     modal.querySelector(".project-modal-title").textContent = project.title;
