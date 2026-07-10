@@ -16,6 +16,11 @@
   .feature-card { display: flex; flex-direction: column; }
   .feature-card > .p-5 { flex: 1; }
   .feature-combo { height: 17rem; }
+  .proof-grid { display: grid; gap: 0.75rem; background: #fafafa; padding: 0.75rem; }
+  .proof-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proof-grid--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proof-thumb { width: 100%; height: 15rem; object-fit: cover; object-position: left top; border: 1px solid #e5e5e5; border-radius: 0.375rem; background: #fff; }
+  .proof-grid--four .proof-thumb { height: 11.5rem; }
 </style>
 </head>
 <body>
@@ -114,10 +119,10 @@
           </figcaption>
         </figure>
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-          <img class="project-shot" src="assets/blank-placeholder.svg" alt="TFT-gogo ERD" width="900" height="1200"/>
+          <img class="project-shot" src="assets/tft-erd-overview.png" alt="TFT-gogo 전체 ERD" width="1755" height="893"/>
           <figcaption class="border-t border-neutral-200 p-4">
             <strong class="text-neutral-950">ERD</strong>
-            <p class="mt-2 text-sm leading-6 text-neutral-600">소환사, 매치, 메타덱, 게임 가이드, AI 추천, 회원 정보의 관계와 저장 기준을 정리합니다.</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">소환사 전적, 매치 상세, 메타덱, 게임 가이드, AI 추천, 회원 정보를 도메인별로 분리해 저장 기준을 잡았습니다. Riot API 데이터를 그대로 화면에 넘기기보다 반복 조회되는 데이터와 추천에 필요한 데이터를 구분해 테이블 관계를 설계했습니다.</p>
           </figcaption>
         </figure>
       </div>
@@ -255,61 +260,69 @@
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">01 / Requirement</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">Notion에서 요구사항과 역할을 먼저 맞췄습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">사용자 역할, 핵심 화면, API 필요 항목, 담당 범위를 문서로 정리했습니다. 변경된 요구사항은 구현 전에 문서에 먼저 반영해 팀원이 같은 기준을 보고 작업하도록 맞췄습니다.</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">기능 범위와 핵심 목표를 먼저 정리했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">프로젝트 초기에 기능 영역별 목표와 구현 범위를 문서로 정리했습니다. 전적 검색, 메타 분석, AI 추천, 게임 가이드처럼 의존성이 다른 기능을 나누고 각 기능이 어떤 사용자 흐름과 데이터 기준을 가져야 하는지 먼저 맞췄습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> 회의록, 화면 정의, 역할 분담, 완료 기준</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 작업 전 문서 기준을 맞추고 이슈로 구현 범위를 분리</li>
+              <li><strong class="text-neutral-950">관리 항목</strong> 기능 영역, 구현 기능, 핵심 목표, 우선순위</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 기능 단위로 범위를 나누고 이슈와 PR에서 구현 기준을 확인</li>
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/blank-placeholder.svg" alt="Notion 요구사항과 역할 분담 문서 화면" width="900" height="1200"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">Notion 요구사항과 역할 분담</figcaption>
+            <img class="project-shot" src="assets/tft-requirements-scope.png" alt="TFT-gogo 구현 기능과 핵심 목표 문서 화면" width="603" height="467"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">기능 범위와 핵심 목표 정리</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">02 / Pull Request</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">Issue, Branch, PR을 연결해 변경 이력을 남겼습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">GitHub Issue를 기준으로 브랜치를 만들고 PR에서 구현 의도, 변경 범위, 확인 방법을 공유했습니다. 리뷰 코멘트가 생기면 수정 커밋으로 반영해 논의가 코드에 어떻게 반영됐는지 추적할 수 있게 했습니다.</p>
+            <p class="text-xs font-bold uppercase text-blue-700">02 / Issue & PR</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">이슈와 PR을 라벨로 분류해 변경 이력을 남겼습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">작업은 GitHub Issue로 분리하고 backend, frontend, infra, bug, perf 같은 라벨로 성격을 구분했습니다. PR에서는 관련 이슈를 연결해 머지와 동시에 이슈가 닫히도록 관리했고, 구현 의도와 확인 방법을 남겨 변경 이력을 추적할 수 있게 했습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> 브랜치 전략, 커밋 컨벤션, PR 설명, 코드리뷰 코멘트</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 병합 전 변경 파일과 테스트 결과를 PR에 함께 기록</li>
+              <li><strong class="text-neutral-950">관리 항목</strong> Issue, PR, Label, Milestone, 리뷰 코멘트</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> PR 설명에 변경 요약과 테스트 계획을 남기고 관련 이슈를 연결</li>
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
-            <img class="project-shot" src="assets/blank-placeholder.svg" alt="GitHub Issue Branch PR 코드리뷰 화면" width="900" height="1200"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">GitHub Issue, Branch, PR 흐름</figcaption>
+            <div class="proof-grid proof-grid--two">
+              <img class="proof-thumb" src="assets/tft-github-issues-labels.png" alt="TFT-gogo GitHub 이슈 라벨 목록 화면" width="1230" height="674"/>
+              <img class="proof-thumb" src="assets/tft-github-pr-closes-issues.png" alt="TFT-gogo PR에서 이슈를 연결해 닫은 화면" width="1232" height="768"/>
+            </div>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">GitHub Issue, PR, Label 기반 변경 이력</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">03 / Release</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">API 계약과 배포 준비로 릴리즈 위험을 줄였습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">요청/응답 필드, 에러 포맷, 인증이 필요한 API를 프론트엔드와 먼저 맞췄습니다. 배포 전에는 환경 변수, DB 연결, 외부 AI API 키, 빌드 결과를 확인해 릴리즈 직전의 실패 가능성을 줄였습니다.</p>
+            <p class="text-xs font-bold uppercase text-blue-700">03 / API & Integration</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">API와 외부 연동 범위를 기능별로 나눴습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">Riot API, Community Dragon, FastAPI 추천 서버, 인증/회원 기능처럼 필요한 데이터와 외부 연동이 다른 영역을 기능별로 분리했습니다. 구현 전에 어떤 API와 데이터가 필요한지 정리해 프론트엔드와 백엔드 작업 기준이 어긋나지 않도록 했습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> API 계약, 환경 변수, DB 연결, 외부 API 키, 빌드 결과</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 배포 전 체크리스트로 누락 항목을 먼저 제거</li>
+              <li><strong class="text-neutral-950">관리 항목</strong> Riot API, Community Dragon, FastAPI, 인증 API, AI 추천 데이터</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 기능별 필요 API와 사용 목적을 문서화한 뒤 구현 범위 확인</li>
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/blank-placeholder.svg" alt="API 계약과 배포 체크리스트 화면" width="900" height="1200"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">API 계약과 배포 준비 체크리스트</figcaption>
+            <img class="project-shot" src="assets/tft-api-integration-plan.png" alt="TFT-gogo 기능별 필요 API와 외부 연동 문서 화면" width="719" height="486"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">기능별 API와 외부 연동 정리</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">04 / Release QA</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">릴리즈 이후 확인 기준과 대응 순서를 정리했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">배포가 끝난 뒤에는 주요 화면 접근, 소환사 검색, 매치 조회, 메타덱 조회, 게임 가이드, AI 추천 요청처럼 사용자가 실제로 거치는 흐름을 기준으로 다시 확인했습니다. 문제가 발생했을 때는 로그, 환경 변수, DB 연결, Riot API·AI 서버 응답을 순서대로 확인하는 기준을 팀 문서에 남겼습니다.</p>
+            <p class="text-xs font-bold uppercase text-blue-700">04 / Release</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">릴리즈 단위로 변경 사항과 후속 작업을 정리했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">기능 추가, 버그 수정, 성능 개선, 리팩토링, 문서 작업을 릴리즈 노트에 묶어 기록했습니다. 각 릴리즈마다 포함된 PR과 변경 내용을 남기고, 완료되지 않은 작업은 다음 마일스톤으로 넘겨 이후 개발 범위가 흐려지지 않도록 관리했습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> 릴리즈 노트, 배포 후 확인 목록, 장애 대응 순서</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 핵심 사용자 흐름과 실패 로그를 기준으로 릴리즈 완료 판단</li>
+              <li><strong class="text-neutral-950">관리 항목</strong> Release Note, PR 목록, 버그 수정, 성능 개선, 다음 버전 전환 항목</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 릴리즈별 변경 사항과 후속 과제를 분리해 기록</li>
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
-            <img class="project-shot" src="assets/blank-placeholder.svg" alt="릴리즈 이후 QA와 장애 대응 문서 화면" width="900" height="1200"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">릴리즈 QA와 장애 대응 기준</figcaption>
+            <div class="proof-grid proof-grid--four">
+              <img class="proof-thumb" src="assets/tft-release-list.png" alt="TFT-gogo 릴리즈 목록 화면" width="214" height="246"/>
+              <img class="proof-thumb" src="assets/tft-release-v040-summary.png" alt="TFT-gogo v0.4.0 릴리즈 노트 신규 기능 화면" width="610" height="682"/>
+              <img class="proof-thumb" src="assets/tft-release-v040-quality.png" alt="TFT-gogo v0.4.0 릴리즈 노트 버그 수정과 성능 개선 화면" width="604" height="796"/>
+              <img class="proof-thumb" src="assets/tft-release-v040-retro.png" alt="TFT-gogo v0.4.0 릴리즈 노트 리팩토링과 요약 화면" width="600" height="826"/>
+            </div>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">릴리즈 노트와 변경 사항 정리</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">

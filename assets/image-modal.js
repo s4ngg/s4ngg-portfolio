@@ -45,6 +45,33 @@
         line-height: 1;
         cursor: pointer;
       }
+      #${MODAL_ID} .image-modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        color: #111827;
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+      }
+      #${MODAL_ID} .image-modal-nav:hover {
+        background: #ffffff;
+      }
+      #${MODAL_ID} .image-modal-prev {
+        left: -58px;
+      }
+      #${MODAL_ID} .image-modal-next {
+        right: -58px;
+      }
       #${MODAL_ID} img {
         display: block;
         width: 100%;
@@ -58,12 +85,23 @@
         font: 600 14px/1.5 "Noto Sans KR", sans-serif;
         text-align: center;
       }
+      #${MODAL_ID} .image-modal-counter {
+        margin-left: 8px;
+        color: rgba(255, 255, 255, 0.72);
+        font-weight: 700;
+      }
       @media (max-width: 640px) {
         #${MODAL_ID} {
           padding: 18px;
         }
         #${MODAL_ID} .image-modal-close {
           top: 8px;
+          right: 8px;
+        }
+        #${MODAL_ID} .image-modal-prev {
+          left: 8px;
+        }
+        #${MODAL_ID} .image-modal-next {
           right: 8px;
         }
       }
@@ -83,8 +121,10 @@
     modal.innerHTML = `
       <div class="image-modal-panel">
         <button class="image-modal-close" type="button" aria-label="이미지 닫기">×</button>
+        <button class="image-modal-nav image-modal-prev" type="button" aria-label="이전 이미지 보기">‹</button>
+        <button class="image-modal-nav image-modal-next" type="button" aria-label="다음 이미지 보기">›</button>
         <img alt="" />
-        <p class="image-modal-caption"></p>
+        <p class="image-modal-caption"><span class="image-modal-caption-text"></span><span class="image-modal-counter"></span></p>
       </div>
     `;
     document.body.appendChild(modal);
@@ -96,12 +136,35 @@
     document.body.style.overflow = "";
   }
 
-  function openModal(modal, image) {
+  let modalImages = [];
+  let currentIndex = 0;
+
+  function renderModal(modal) {
+    const image = modalImages[currentIndex];
+    if (!image) return;
     const modalImage = modal.querySelector("img");
-    const caption = modal.querySelector(".image-modal-caption");
+    const captionText = modal.querySelector(".image-modal-caption-text");
+    const counter = modal.querySelector(".image-modal-counter");
+    const prevButton = modal.querySelector(".image-modal-prev");
+    const nextButton = modal.querySelector(".image-modal-next");
     modalImage.src = image.currentSrc || image.src;
     modalImage.alt = image.alt || "확대 이미지";
-    caption.textContent = image.alt || "";
+    captionText.textContent = image.alt || "";
+    counter.textContent = modalImages.length > 1 ? ` ${currentIndex + 1} / ${modalImages.length}` : "";
+    const shouldShowNav = modalImages.length > 1;
+    prevButton.hidden = !shouldShowNav;
+    nextButton.hidden = !shouldShowNav;
+  }
+
+  function showAdjacent(modal, direction) {
+    if (modalImages.length < 2) return;
+    currentIndex = (currentIndex + direction + modalImages.length) % modalImages.length;
+    renderModal(modal);
+  }
+
+  function openModal(modal, image) {
+    currentIndex = Math.max(0, modalImages.indexOf(image));
+    renderModal(modal);
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     modal.querySelector(".image-modal-close").focus();
@@ -111,19 +174,29 @@
     ensureStyle();
     const modal = ensureModal();
     const closeButton = modal.querySelector(".image-modal-close");
+    const prevButton = modal.querySelector(".image-modal-prev");
+    const nextButton = modal.querySelector(".image-modal-next");
 
-    document.querySelectorAll("img:not(#portfolio-image-modal img):not([data-project-modal] img):not(#portfolio-project-modal img)").forEach((image) => {
+    modalImages = Array.from(document.querySelectorAll("img:not(#portfolio-image-modal img):not([data-project-modal] img):not(#portfolio-project-modal img)"));
+    modalImages.forEach((image) => {
       image.dataset.imageModal = "true";
       image.addEventListener("click", () => openModal(modal, image));
     });
 
     closeButton.addEventListener("click", () => closeModal(modal));
+    prevButton.addEventListener("click", () => showAdjacent(modal, -1));
+    nextButton.addEventListener("click", () => showAdjacent(modal, 1));
     modal.addEventListener("click", (event) => {
       if (event.target === modal) closeModal(modal);
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
+      if (modal.getAttribute("aria-hidden") === "true") return;
+      if (event.key === "Escape") {
         closeModal(modal);
+      } else if (event.key === "ArrowLeft") {
+        showAdjacent(modal, -1);
+      } else if (event.key === "ArrowRight") {
+        showAdjacent(modal, 1);
       }
     });
   }
