@@ -12,6 +12,10 @@
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
   .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
   .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+  .feature-shot { aspect-ratio: 16 / 9; width: 100%; height: 17rem; object-fit: cover; object-position: top; }
+  .feature-card { display: flex; flex-direction: column; }
+  .feature-card > .p-5 { flex: 1; }
+  .feature-combo { height: 17rem; }
 </style>
 </head>
 <body>
@@ -50,7 +54,7 @@
       <div>
         <p class="text-sm font-bold uppercase text-blue-700">롤토체스 전적 검색 서비스</p>
         <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">TFT-gogo 전적 검색 서비스</h1>
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">전략적 팀 전투(TFT) 유저가 소환사 전적을 검색하고 최근 매치, 증강, 덱 구성, 메타덱, 패치노트를 확인할 수 있는 서비스입니다. Spring Boot 백엔드, React 프론트엔드, FastAPI AI 서버를 모노레포로 구성하고 Riot API와 OpenAI API 연동 흐름을 함께 다루고 있습니다.</p>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">전략적 팀 전투(TFT) 유저가 소환사 전적을 검색하고 최근 매치, 증강, 덱 구성, 메타덱과 게임 가이드를 확인할 수 있는 서비스입니다. Spring Boot 백엔드, React 프론트엔드, FastAPI AI 서버를 모노레포로 구성하고 Riot API와 OpenAI API 연동 흐름을 함께 다루고 있습니다.</p>
         <div class="mt-8 flex flex-wrap gap-2">
           <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Java</span>
           <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Spring Boot</span>
@@ -61,7 +65,7 @@
         </div>
       </div>
       <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
-        <img class="project-shot" src="assets/blank-placeholder.svg" alt="TFT-gogo 전적 검색 서비스 대시보드" width="900" height="1200"/>
+        <img class="project-shot" src="assets/tft-main-dashboard.png" alt="TFT-gogo 메인 대시보드와 메타 스냅샷 화면" width="1537" height="899"/>
         <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">TFT-gogo 전적 검색 화면</figcaption>
       </figure>
     </div>
@@ -106,14 +110,14 @@
           <img class="project-shot" src="assets/blank-placeholder.svg" alt="TFT-gogo 유스케이스 다이어그램" width="900" height="1200"/>
           <figcaption class="border-t border-neutral-200 p-4">
             <strong class="text-neutral-950">유스케이스 다이어그램</strong>
-            <p class="mt-2 text-sm leading-6 text-neutral-600">비회원, 로그인 사용자, 관리자 기준으로 전적 검색, 덱 추천, 커뮤니티, 패치노트 관리 흐름을 구분합니다.</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">비회원, 로그인 사용자 기준으로 전적 검색, 메타덱 조회, 게임 가이드, AI 추천 흐름을 구분합니다.</p>
           </figcaption>
         </figure>
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
           <img class="project-shot" src="assets/blank-placeholder.svg" alt="TFT-gogo ERD" width="900" height="1200"/>
           <figcaption class="border-t border-neutral-200 p-4">
             <strong class="text-neutral-950">ERD</strong>
-            <p class="mt-2 text-sm leading-6 text-neutral-600">소환사, 매치, 메타덱, 가이드, 패치노트, 커뮤니티 파티, 회원 정보의 관계와 저장 기준을 정리합니다.</p>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">소환사, 매치, 메타덱, 게임 가이드, AI 추천, 회원 정보의 관계와 저장 기준을 정리합니다.</p>
           </figcaption>
         </figure>
       </div>
@@ -125,32 +129,41 @@
       <p class="text-sm font-bold text-blue-700">Features</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현 기능</h2>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/blank-placeholder.svg" alt="소환사 전적 검색 화면" width="900" height="1200"/>
+      <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="feature-shot" src="assets/tft-search-detail.png" alt="TFT-gogo 소환사 전적 검색 결과와 최근 매치 목록 화면" width="744" height="902"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">소환사 전적 검색과 매치 분석</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-600">Riot API에서 소환사와 매치 데이터를 조회해 최근 경기, 순위, 증강, 챔피언·아이템 구성 정보를 화면에 제공합니다. 외부 API 응답 실패와 데이터 없음 상태를 구분해 사용자 흐름이 끊기지 않도록 설계했습니다.</p>
         </div>
       </article>
-      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/blank-placeholder.svg" alt="메타덱과 AI 추천 화면" width="900" height="1200"/>
+      <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="feature-shot" src="assets/tft-decks-list.png" alt="TFT-gogo 덱모음 메타덱 목록 화면" width="1897" height="908"/>
         <div class="p-5">
-          <h3 class="font-bold text-neutral-950">메타덱과 AI 추천</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">메타덱 데이터를 수집·집계하고 FastAPI AI 서버와 연동해 현재 상황에 맞는 덱 추천 흐름을 구성했습니다. 추천 요청은 백엔드 API를 거쳐 AI 서버로 전달되도록 경계를 나눴습니다.</p>
+          <h3 class="font-bold text-neutral-950">메타덱 목록</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">최근 메타 데이터를 기준으로 덱 구성, 승률, 평균 등수, 픽률을 한 화면에서 비교할 수 있도록 구성했습니다. 반복 조회되는 메타 정보는 DB와 캐시 전략을 함께 고려해 불필요한 외부 호출을 줄이는 방향으로 설계했습니다.</p>
         </div>
       </article>
-      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/blank-placeholder.svg" alt="게임 가이드와 패치노트 화면" width="900" height="1200"/>
+      <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="feature-shot" src="assets/tft-game-guide.png" alt="TFT-gogo 게임 가이드 시너지 정보 화면" width="1045" height="817"/>
         <div class="p-5">
-          <h3 class="font-bold text-neutral-950">게임 가이드와 패치노트</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">챔피언, 시너지, 증강 정보와 패치노트를 정리해 사용자가 메타 변화를 빠르게 확인할 수 있도록 구성했습니다. Community Dragon 자산과 패치노트 데이터를 API로 분리했습니다.</p>
+          <h3 class="font-bold text-neutral-950">게임 가이드</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">시너지, 아이템, 증강체, 챔피언 정보를 한 화면에서 빠르게 비교할 수 있도록 구성했습니다. Community Dragon 자산을 활용해 게임 데이터와 이미지 리소스를 분리하고, 기준 패치에 맞는 가이드 정보를 조회할 수 있게 했습니다.</p>
         </div>
       </article>
-      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/blank-placeholder.svg" alt="커뮤니티와 파티 모집 화면" width="900" height="1200"/>
+      <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <div class="feature-combo grid grid-cols-2 gap-3 bg-slate-950 p-3">
+          <figure class="overflow-hidden rounded-lg border border-cyan-900/60 bg-slate-900">
+            <img class="h-52 w-full object-cover object-top" src="assets/tft-ai-analysis.png" alt="TFT-gogo AI 덱 추천 전적 분석 화면" width="884" height="810"/>
+            <figcaption class="px-3 py-2 text-xs font-bold text-cyan-200">개인 전적 분석</figcaption>
+          </figure>
+          <figure class="overflow-hidden rounded-lg border border-cyan-900/60 bg-slate-900">
+            <img class="h-52 w-full object-cover object-top" src="assets/tft-ai-recommendation.png" alt="TFT-gogo AI 맞춤 덱 추천 결과 화면" width="896" height="678"/>
+            <figcaption class="px-3 py-2 text-xs font-bold text-cyan-200">AI 맞춤 덱 추천</figcaption>
+          </figure>
+        </div>
         <div class="p-5">
-          <h3 class="font-bold text-neutral-950">커뮤니티와 파티 모집</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">유저가 공략을 공유하고 파티를 모집할 수 있는 커뮤니티 기능을 제공합니다. 채팅과 파티 상태는 화면 상태와 서버 상태가 어긋나지 않도록 API 응답 기준을 맞췄습니다.</p>
+          <h3 class="font-bold text-neutral-950">AI 맞춤 덱 추천</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">최근 전적을 기반으로 자주 플레이한 시너지와 성적을 분석하고, 현재 메타 데이터와 함께 비교해 추천 덱을 제안하는 흐름을 구성했습니다. Spring Boot API와 FastAPI AI 서버의 책임을 나눠 추천 요청과 응답 경계를 분리했습니다.</p>
         </div>
       </article>
       </div>
@@ -162,10 +175,60 @@
       <p class="text-sm font-bold text-blue-700">Architecture Notes</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현하면서 고려한 기술 포인트</h2>
       <p class="mt-4 max-w-3xl leading-7 text-neutral-700">TFT-gogo는 Riot API, Community Dragon, AI 서버, DB 캐시처럼 여러 외부·내부 의존성이 맞물립니다. 그래서 요청이 어디서 시작되고 어느 저장소와 외부 API에 도달하는지 추적 가능한 구조를 우선했습니다.</p>
-      <div class="mt-8 space-y-3">
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <article class="rounded-xl border border-blue-100 bg-blue-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Backend API</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">프론트엔드와 맞출 API 계약을 먼저 정리했습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">소환사 검색, 매치 목록, 메타덱, 게임 가이드, AI 추천 기능은 요청·응답 필드와 실패 응답 형식을 먼저 맞췄습니다. Spring Boot에서는 Controller, Service, Repository 책임을 나누고 BusinessException 기반 공통 예외로 프론트엔드가 같은 방식으로 처리할 수 있게 했습니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-blue-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Java</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Spring Boot</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">JPA</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">BusinessException</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">REST API</span>
+          </div>
+        </article>
+        <article class="rounded-xl border border-cyan-100 bg-cyan-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-700">Frontend State</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">검색·상세·목록 화면의 상태가 어긋나지 않게 나눴습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">React 화면에서는 검색 입력, 최근 검색, 로딩, 데이터 없음, 실패 상태를 구분했습니다. Riot API 결과가 늦거나 실패해도 이전 화면 상태와 섞이지 않도록 API 응답 기준으로 렌더링 조건을 나누고, 사용자에게 보여줄 메시지를 화면별로 정리했습니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-cyan-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">React</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">TypeScript</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Axios</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Loading State</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Error State</span>
+          </div>
+        </article>
+        <article class="rounded-xl border border-violet-100 bg-violet-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">AI & Data</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">AI 추천 서버와 데이터 저장소의 책임을 분리했습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">AI 추천은 Spring Boot API가 요청을 받고 FastAPI 서버가 추천 로직을 처리하는 구조로 나눴습니다. 메타덱·게임 가이드처럼 반복 조회되는 데이터는 MySQL과 Redis 캐시를 고려했고, 추천 데이터는 PostgreSQL/pgvector와 OpenAI API를 함께 활용하는 흐름을 학습하며 구성했습니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-violet-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">FastAPI</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">OpenAI API</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">MySQL</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">Redis</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">PostgreSQL/pgvector</span>
+          </div>
+        </article>
+        <article class="rounded-xl border border-emerald-100 bg-emerald-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">Infra & Integration</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">모노레포 서비스를 한 번에 실행하고 연결 상태를 확인했습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">Docker Compose로 React, Spring Boot, FastAPI, MySQL, Redis, PostgreSQL/pgvector를 함께 실행할 수 있도록 구성했습니다. 서비스 간 연결 실패가 발생했을 때 API 주소, 내부 시크릿, DB URL, 컨테이너 상태 중 어디를 확인해야 하는지 기준을 나눴습니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-emerald-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Docker</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Docker Compose</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">AWS ECS</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">ECR</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">ALB</span>
+          </div>
+        </article>
+      </div>
+      <div class="mt-8 hidden">
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">API 계약</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">프론트엔드와 맞춰야 하는 소환사 검색, 매치 목록, 메타덱, 패치노트, 파티 모집 API의 요청·응답 형식을 먼저 정리했습니다. 실패 응답도 같은 공통 포맷으로 다룰 수 있도록 필드를 명확히 나눴습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">프론트엔드와 맞춰야 하는 소환사 검색, 매치 목록, 메타덱, 게임 가이드, AI 추천 API의 요청·응답 형식을 먼저 정리했습니다. 실패 응답도 같은 공통 포맷으로 다룰 수 있도록 필드를 명확히 나눴습니다.</p>
         </details>
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">외부 API 경계</summary>
@@ -173,7 +236,7 @@
         </details>
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">집계와 캐시</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">메타덱 집계, 가이드 자산, 패치노트처럼 반복 조회되는 데이터는 DB와 Redis, 캐시 전략을 함께 고려했습니다. 최신 데이터 반영과 불필요한 외부 호출 감소 사이의 균형을 잡는 데 집중했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">메타덱 집계와 게임 가이드 자산처럼 반복 조회되는 데이터는 DB와 Redis, 캐시 전략을 함께 고려했습니다. 최신 데이터 반영과 불필요한 외부 호출 감소 사이의 균형을 잡는 데 집중했습니다.</p>
         </details>
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">로컬 통합 실행</summary>
@@ -238,7 +301,7 @@
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">04 / Release QA</p>
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">릴리즈 이후 확인 기준과 대응 순서를 정리했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">배포가 끝난 뒤에는 주요 화면 접근, 소환사 검색, 매치 조회, 메타덱 조회, AI 추천 요청, 커뮤니티 기능처럼 사용자가 실제로 거치는 흐름을 기준으로 다시 확인했습니다. 문제가 발생했을 때는 로그, 환경 변수, DB 연결, Riot API·AI 서버 응답을 순서대로 확인하는 기준을 팀 문서에 남겼습니다.</p>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">배포가 끝난 뒤에는 주요 화면 접근, 소환사 검색, 매치 조회, 메타덱 조회, 게임 가이드, AI 추천 요청처럼 사용자가 실제로 거치는 흐름을 기준으로 다시 확인했습니다. 문제가 발생했을 때는 로그, 환경 변수, DB 연결, Riot API·AI 서버 응답을 순서대로 확인하는 기준을 팀 문서에 남겼습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
               <li><strong class="text-neutral-950">관리 항목</strong> 릴리즈 노트, 배포 후 확인 목록, 장애 대응 순서</li>
               <li><strong class="text-neutral-950">확인 방식</strong> 핵심 사용자 흐름과 실패 로그를 기준으로 릴리즈 완료 판단</li>

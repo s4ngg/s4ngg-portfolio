@@ -178,54 +178,54 @@
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현하면서 고려한 기술 포인트</h2>
       <p class="mt-4 max-w-3xl leading-7 text-neutral-700">AllPick은 단순히 화면을 많이 만드는 것보다 회원, 판매자, 관리자 요청이 Spring Boot API와 React 화면 상태에서 같은 기준으로 동작하는지가 중요했습니다. 그래서 도메인 책임, 인증·예외 응답, 데이터 상태 전이, 배포 환경을 나눠 확인했습니다.</p>
       <div class="mt-8 grid gap-4 md:grid-cols-2">
-        <article class="rounded-lg border border-neutral-200 bg-white p-5">
+        <article class="rounded-xl border border-blue-100 bg-blue-50/60 p-5 shadow-sm">
           <p class="text-xs font-bold uppercase text-blue-700">Spring Boot</p>
           <h3 class="mt-2 font-bold text-neutral-950">도메인 기준으로 API 책임을 나눴습니다</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-700">회원, 상품, 주문, 쿠폰, 리뷰, CS, 관리자 기능을 도메인별로 나누고 Controller, Service, Repository 책임을 분리했습니다. 기능을 수정할 때 영향 범위를 좁히고, 역할별로 접근 가능한 API가 섞이지 않도록 확인했습니다.</p>
-          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-neutral-700">
-            <li class="rounded-full bg-neutral-100 px-3 py-1">Member</li>
-            <li class="rounded-full bg-neutral-100 px-3 py-1">Product</li>
-            <li class="rounded-full bg-neutral-100 px-3 py-1">Order</li>
-            <li class="rounded-full bg-neutral-100 px-3 py-1">Coupon</li>
-            <li class="rounded-full bg-neutral-100 px-3 py-1">Admin</li>
+          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-blue-700">
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Member</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Product</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Order</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Coupon</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Admin</li>
           </ul>
         </article>
-        <article class="rounded-lg border border-neutral-200 bg-white p-5">
-          <p class="text-xs font-bold uppercase text-blue-700">Security & Error</p>
+        <article class="rounded-xl border border-rose-100 bg-rose-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase text-rose-700">Security & Error</p>
           <h3 class="mt-2 font-bold text-neutral-950">인증 실패와 권한 실패를 구분했습니다</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-700">Spring Security와 JWT를 기준으로 로그인 실패, 토큰 누락, 권한 부족, 존재하지 않는 리소스를 구분했습니다. BusinessException과 공통 응답 형식을 맞춰 React 화면에서도 같은 기준으로 실패 메시지를 처리할 수 있게 했습니다.</p>
-          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold">
-            <li class="rounded-full bg-red-50 px-3 py-1 text-red-700">Spring Security</li>
-            <li class="rounded-full bg-red-50 px-3 py-1 text-red-700">JWT</li>
-            <li class="rounded-full bg-red-50 px-3 py-1 text-red-700">BusinessException</li>
-            <li class="rounded-full bg-red-50 px-3 py-1 text-red-700">공통 응답</li>
-            <li class="rounded-full bg-red-50 px-3 py-1 text-red-700">권한 실패</li>
+          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-rose-700">
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">Spring Security</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">JWT</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">BusinessException</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">공통 응답</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">권한 실패</li>
           </ul>
         </article>
-        <article class="rounded-lg border border-neutral-200 bg-white p-5">
-          <p class="text-xs font-bold uppercase text-blue-700">React</p>
+        <article class="rounded-xl border border-cyan-100 bg-cyan-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase text-cyan-700">React</p>
           <h3 class="mt-2 font-bold text-neutral-950">화면 상태와 API 응답이 어긋나지 않게 확인했습니다</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-700">React 화면에서는 로그인 여부, 판매자 승인 상태, 주문 상태, 결제 결과에 따라 노출되는 버튼과 이동 경로가 달라집니다. Axios 요청 결과와 실패 응답을 기준으로 화면 상태를 갱신하고, 새로고침 이후에도 사용자가 같은 흐름을 이어갈 수 있는지 확인했습니다.</p>
-          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold">
-            <li class="rounded-full bg-violet-50 px-3 py-1 text-violet-700">React</li>
-            <li class="rounded-full bg-violet-50 px-3 py-1 text-violet-700">Axios</li>
-            <li class="rounded-full bg-violet-50 px-3 py-1 text-violet-700">Form Validation</li>
-            <li class="rounded-full bg-violet-50 px-3 py-1 text-violet-700">Role UI</li>
-            <li class="rounded-full bg-violet-50 px-3 py-1 text-violet-700">Error Message</li>
+          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-cyan-700">
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">React</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Axios</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Form Validation</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Role UI</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Error Message</li>
           </ul>
         </article>
-        <article class="rounded-lg border border-neutral-200 bg-white p-5">
-          <p class="text-xs font-bold uppercase text-blue-700">Data & Deploy</p>
+        <article class="rounded-xl border border-emerald-100 bg-emerald-50/60 p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase text-emerald-700">Data & Deploy</p>
           <h3 class="mt-2 font-bold text-neutral-950">상태 전이와 배포 설정을 함께 검증했습니다</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-700">상품 승인, 주문 생성, 결제 완료, 배송, 환불처럼 상태가 바뀌는 기능은 요청 성공 이후 DB 조회 결과까지 확인했습니다. 프론트엔드는 S3·CloudFront, 백엔드는 EC2 기준으로 API 주소, Toss Payments, EmailJS, Redis 설정을 분리해 점검했습니다.</p>
-          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold">
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">JPA</li>
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">MySQL</li>
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">Redis</li>
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">S3</li>
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">CloudFront</li>
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">EC2</li>
-            <li class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">GitHub Actions</li>
+          <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-emerald-700">
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">JPA</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">MySQL</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Redis</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">S3</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">CloudFront</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">EC2</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">GitHub Actions</li>
           </ul>
         </article>
       </div>

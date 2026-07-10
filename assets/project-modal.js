@@ -9,7 +9,7 @@
       title: "AllPick",
       description:
         "AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 프로젝트입니다.",
-      domain: { label: "준비중", href: null },
+      domain: { label: "https://d15b731cpaqp76.cloudfront.net/ (배포중단상태)", href: "https://d15b731cpaqp76.cloudfront.net/" },
       tags: ["Java", "React", "Spring Boot", "FastAPI", "AWS"],
       techGroups: [
         { label: "Frontend", items: ["React", "JavaScript", "HTML/CSS", "Axios"] },
@@ -33,7 +33,7 @@
       title: "TFT-gogo",
       description:
         "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 프로젝트입니다.",
-      domain: { label: "https://d15b731cpaqp76.cloudfront.net/ (배포중단상태)", href: "https://d15b731cpaqp76.cloudfront.net/" },
+      domain: { label: "tftgogo.com (배포중단상태)", href: null },
       tags: ["Spring Boot", "React", "FastAPI", "Docker"],
       techGroups: [
         { label: "Frontend", items: ["React", "TypeScript", "Vite", "TanStack Query", "Axios", "Zustand"] },
