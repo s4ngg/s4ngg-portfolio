@@ -32,9 +32,9 @@
       kind: "롤토체스 전적 검색 서비스",
       title: "TFT-gogo",
       description:
-        "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱·패치노트, AI 추천, 커뮤니티 기능을 모노레포로 구현 중인 프로젝트입니다.",
+        "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱, 게임 가이드, AI 맞춤 덱 추천 기능을 모노레포로 구현 중인 프로젝트입니다.",
       domain: { label: "tftgogo.com (배포중단상태)", href: null },
-      tags: ["Spring Boot", "React", "FastAPI", "Docker"],
+      tags: ["Java", "Spring Boot", "React", "FastAPI", "Docker", "AWS"],
       techGroups: [
         { label: "Frontend", items: ["React", "TypeScript", "Vite", "TanStack Query", "Axios", "Zustand"] },
         { label: "Backend", items: ["Java", "Spring Boot", "Spring Security", "Spring Data JPA", "MySQL", "Redis", "Flyway", "JWT"] },
@@ -43,7 +43,14 @@
       ],
       role: "AWS 인프라 구축을 단독으로 담당했고, 프론트엔드·백엔드·AI 서버를 연결해 덱 모음과 AI 기반 덱 추천 기능의 화면, API 계약, 배포 흐름을 맡았습니다.",
       href: "final-project.html",
-      previewImage: { src: "assets/blank-placeholder.svg", alt: "TFT-gogo 실제 배포 화면 스크린샷 (준비중)" },
+      previewImage: { src: "assets/tft-main-dashboard.png", alt: "TFT-gogo 메인 대시보드와 메타 스냅샷 화면" },
+      previewImages: [
+        { src: "assets/tft-main-dashboard.png", alt: "TFT-gogo 메인 대시보드와 메타 스냅샷 화면", caption: "메인 대시보드" },
+        { src: "assets/tft-search-detail.png", alt: "TFT-gogo 소환사 전적 검색 결과와 최근 매치 목록 화면", caption: "전적 검색" },
+        { src: "assets/tft-decks-list.png", alt: "TFT-gogo 덱모음 메타덱 목록 화면", caption: "메타덱 목록" },
+        { src: "assets/tft-game-guide.png", alt: "TFT-gogo 게임 가이드 시너지 정보 화면", caption: "게임 가이드" },
+        { src: "assets/tft-ai-recommendation.png", alt: "TFT-gogo AI 맞춤 덱 추천 결과 화면", caption: "AI 맞춤 덱 추천" },
+      ],
     },
   };
 
