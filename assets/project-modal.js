@@ -50,6 +50,8 @@
         { src: "assets/tft-decks-list.png", alt: "TFT-gogo 덱모음 메타덱 목록 화면", caption: "메타덱 목록" },
         { src: "assets/tft-game-guide.png", alt: "TFT-gogo 게임 가이드 시너지 정보 화면", caption: "게임 가이드" },
         { src: "assets/tft-ai-recommendation.png", alt: "TFT-gogo AI 맞춤 덱 추천 결과 화면", caption: "AI 맞춤 덱 추천" },
+        { src: "assets/tft-aws-architecture.png", alt: "TFT-gogo AWS 아키텍처 다이어그램", caption: "AWS 아키텍처" },
+        { src: "assets/tft-usecase-diagram.png", alt: "TFT-gogo 유스케이스 다이어그램", caption: "유스케이스 다이어그램" },
       ],
     },
   };

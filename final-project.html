@@ -105,14 +105,14 @@
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">설계 산출물</h2>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-          <img class="project-shot" src="assets/blank-placeholder.svg" alt="TFT-gogo 서비스 아키텍처 다이어그램" width="900" height="1200"/>
+          <img class="project-shot" src="assets/tft-aws-architecture.png" alt="TFT-gogo AWS 아키텍처 다이어그램" width="2600" height="1500"/>
           <figcaption class="border-t border-neutral-200 p-4">
             <strong class="text-neutral-950">AWS 아키텍처</strong>
             <p class="mt-2 text-sm leading-6 text-neutral-600">React, Spring Boot, FastAPI, MySQL, Redis, PostgreSQL/pgvector, Riot API, OpenAI API 연결 흐름을 정리합니다.</p>
           </figcaption>
         </figure>
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-          <img class="project-shot" src="assets/blank-placeholder.svg" alt="TFT-gogo 유스케이스 다이어그램" width="900" height="1200"/>
+          <img class="project-shot" src="assets/tft-usecase-diagram.png" alt="TFT-gogo 유스케이스 다이어그램" width="3600" height="2500"/>
           <figcaption class="border-t border-neutral-200 p-4">
             <strong class="text-neutral-950">유스케이스 다이어그램</strong>
             <p class="mt-2 text-sm leading-6 text-neutral-600">비회원, 로그인 사용자 기준으로 전적 검색, 메타덱 조회, 게임 가이드, AI 추천 흐름을 구분합니다.</p>
@@ -328,16 +328,19 @@
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">05 / AI Skills</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">AI를 개발 흐름을 보조하는 도구로 활용했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">요구사항을 먼저 정리하고, AI에게 역할과 제약 조건, 검증 기준을 함께 전달해 코드 초안을 만들었습니다. 생성된 코드는 바로 붙여넣지 않고 프로젝트 구조, 의존성, 예외 처리 방식에 맞는지 읽고 수정한 뒤 적용했습니다.</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">AI 리뷰를 병합 전 검증 단계로 사용했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">AI를 단순 코드 생성 도구가 아니라 PR 리뷰 보조 도구로 활용했습니다. 자동 리뷰가 놓친 JSON null 처리, 실행 기준 DDL 누락, Flyway 버전 충돌 같은 런타임 리스크를 별도 기준으로 재검토하고, 수정 후 재리뷰로 병합 가능 상태를 확인했습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> 스펙 정리, 프롬프트 컨텍스트, 코드 리뷰, 검증 체크</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> AI 제안 코드를 분석하고 팀 컨벤션과 검증 기준에 맞게 조정</li>
+              <li><strong class="text-neutral-950">관리 항목</strong> PR 변경 요약, Critical/Warning 분류, 병합 차단 사유, 재리뷰 결과</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> AI 리뷰 결과를 프로젝트 컨벤션과 실행 환경 기준으로 다시 판단하고 수정 반영 여부를 확인</li>
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/blank-placeholder.svg" alt="AI Skills 기반 개발 방식과 코드 검토 기록 화면" width="900" height="1200"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI Skills 기반 개발 방식과 코드 검토 기록</figcaption>
+            <div class="proof-grid proof-grid--two">
+              <img class="proof-thumb" src="assets/tft-ai-review-blocked.png" alt="TFT-gogo AI 코드 리뷰에서 승인 보류와 병합 차단 사유를 정리한 화면" width="900" height="884"/>
+              <img class="proof-thumb" src="assets/tft-ai-review-approved.png" alt="TFT-gogo AI 재리뷰에서 수정 반영 후 승인 가능 상태를 확인한 화면" width="904" height="574"/>
+            </div>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI 리뷰로 병합 전 위험을 차단하고 재리뷰로 수정 반영을 확인한 기록</figcaption>
           </figure>
         </article>
       </div>
