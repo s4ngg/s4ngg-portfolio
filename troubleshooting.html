@@ -86,26 +86,26 @@
         <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">TFT-gogo</p>
-            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">TFT-gogo 트러블슈팅 작성 예정</h2>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">관리자 수동 집계 요청 후 실제 작업 상태와 화면 상태가 어긋난 문제</h2>
           </div>
-          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Coming Soon</span>
+          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Async · Executor · State</span>
         </div>
         <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-red-700">Problem</dt>
-            <dd class="text-neutral-700">TFT-gogo 진행 중 실제로 재현한 문제를 기준으로 작성할 예정입니다.</dd>
+            <dd class="text-neutral-700">TFT-gogo 관리자 페이지에는 메타 덱 데이터를 수동으로 집계하는 기능이 필요했습니다. 기존에는 Swagger나 백엔드 API를 직접 호출해야 했기 때문에 운영자가 집계가 필요한 시점에 화면에서 바로 실행할 수 있도록 버튼을 추가했습니다. 하지만 기능을 검토하는 과정에서 버튼 클릭 후 성공 메시지가 표시되더라도 실제 백엔드 비동기 집계가 시작됐는지, 이미 실행 중인 작업과 중복되지 않았는지, 작업 등록에 실패했는지를 화면에서 구분할 수 없는 문제가 확인됐습니다. 특히 HTTP 요청은 성공했지만 실제 작업은 실행되지 않은 상태가 될 수 있어, 운영자가 잘못된 성공 상태를 믿고 데이터를 확인할 위험이 있었습니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-neutral-950">Cause</dt>
-            <dd class="text-neutral-700">요청 흐름, 외부 API, DB, 캐시, 비동기 처리 중 어느 지점에서 상태가 어긋났는지 확인한 내용을 정리합니다.</dd>
+            <dd class="text-neutral-700">처음에는 프론트엔드의 버튼 상태 관리 문제라고 판단했습니다. 그래서 집계 요청을 보내는 동안 버튼을 비활성화하고, 요청이 끝나면 다시 활성화하는 방식으로 수정했습니다. 그러나 백엔드는 요청을 받은 뒤 비동기 작업만 등록하고 바로 응답하기 때문에, HTTP 요청이 끝나는 시점과 실제 집계가 끝나는 시점이 달랐습니다. 다음으로는 짧은 시간 안에 재클릭되는 것을 막기 위해 10초 쿨다운을 두는 방식도 검토했습니다. 하지만 집계는 Riot API 호출과 랭크별 저장 작업을 포함해 10초보다 오래 걸릴 수 있었고, 다른 탭이나 다른 사용자의 중복 요청도 막을 수 없었습니다. 이후 백엔드 실행 흐름을 따라가며 확인해보니, 이미 집계 중인 요청은 내부에서 skip되면서도 호출자에게는 동일한 성공 응답을 반환하고 있었습니다. 더 큰 문제는 executor가 작업을 받을 수 없는 상황에서 작업이 조용히 폐기되면, 집계 중 여부를 나타내는 플래그가 원래 상태로 돌아오지 않아 이후 요청이 계속 실행 중으로 판단될 수 있다는 점이었습니다. 결국 원인은 단순한 UI 처리 문제가 아니라, 요청 접수와 실제 비동기 작업 시작·중복·등록 실패를 구분하지 않은 상태 계약 문제였습니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-blue-700">Solution</dt>
-            <dd class="text-neutral-700">임시 우회가 아니라 상태 계약을 보존하는 방향으로 수정한 과정을 작성합니다.</dd>
+            <dd class="text-neutral-700">먼저 백엔드에서 작업이 실제로 등록되지 못하는 상황을 숨기지 않도록 executor의 거부 정책을 조용히 버리는 방식에서 예외가 발생하는 방식으로 변경했습니다. 작업 등록 단계에서 예외가 발생하면 집계 중 플래그를 다시 해제하고, 공통 예외 응답으로 변환해 호출자가 실패를 알 수 있도록 했습니다. 또한 이미 집계가 실행 중인 경우에는 성공 응답이 아니라 중복 요청임을 구분할 수 있는 응답을 반환하도록 수정했습니다. 프론트엔드에서는 단순히 요청 성공 여부만 보고 메시지를 표시하지 않고, 중복 실행, 서버 오류, 네트워크 오류, 타임아웃, 인증 오류를 나누어 안내하도록 정리했습니다. 이를 통해 화면의 버튼 상태와 메시지가 “요청을 보냈다”가 아니라 “서버가 실제로 어떤 상태로 판단했는가”를 기준으로 동작하도록 맞췄습니다.</dd>
           </div>
           <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
             <dt class="font-bold text-emerald-700">Result</dt>
-            <dd class="text-neutral-700">수정 후 어떤 조건으로 다시 검증했는지 함께 남길 예정입니다.</dd>
+            <dd class="text-neutral-700">수정 후에는 정상적으로 집계 요청을 보냈을 때 작업이 등록되고 성공 메시지가 표시되는지 확인했습니다. 이어서 이미 집계 중인 상태에서 다시 요청했을 때는 새 작업이 실행된 것처럼 보이지 않고 중복 실행 안내가 표시되는지 검증했습니다. executor가 작업을 거부하는 상황에서는 플래그가 원래 상태로 복구되어 이후 요청이 다시 가능한지도 테스트로 고정했습니다. 이 과정을 통해 HTTP 성공 응답을 실제 비즈니스 작업 성공으로 단정하지 않고, 요청 접수, 작업 등록, 작업 실행 상태를 분리해서 다루는 방식으로 관리자 집계 흐름을 안정화했습니다.</dd>
           </div>
         </dl>
       </article>
