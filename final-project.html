@@ -138,21 +138,21 @@
         <img class="feature-shot" src="assets/tft-search-detail.png" alt="TFT-gogo 소환사 전적 검색 결과와 최근 매치 목록 화면" width="744" height="902"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">소환사 전적 검색과 매치 분석</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">Riot API에서 소환사와 매치 데이터를 조회해 최근 경기, 순위, 증강, 챔피언·아이템 구성 정보를 화면에 제공합니다. 외부 API 응답 실패와 데이터 없음 상태를 구분해 사용자 흐름이 끊기지 않도록 설계했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">Riot API 기반으로 최근 경기, 순위, 챔피언·아이템 정보를 조회합니다.</p>
         </div>
       </article>
       <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
         <img class="feature-shot" src="assets/tft-decks-list.png" alt="TFT-gogo 덱모음 메타덱 목록 화면" width="1897" height="908"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">메타덱 목록</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">최근 메타 데이터를 기준으로 덱 구성, 승률, 평균 등수, 픽률을 한 화면에서 비교할 수 있도록 구성했습니다. 반복 조회되는 메타 정보는 DB와 캐시 전략을 함께 고려해 불필요한 외부 호출을 줄이는 방향으로 설계했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">덱 구성, 승률, 평균 등수, 픽률을 한 화면에서 비교할 수 있게 구성했습니다.</p>
         </div>
       </article>
       <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
         <img class="feature-shot" src="assets/tft-game-guide.png" alt="TFT-gogo 게임 가이드 시너지 정보 화면" width="1045" height="817"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">게임 가이드</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">시너지, 아이템, 증강체, 챔피언 정보를 한 화면에서 빠르게 비교할 수 있도록 구성했습니다. Community Dragon 자산을 활용해 게임 데이터와 이미지 리소스를 분리하고, 기준 패치에 맞는 가이드 정보를 조회할 수 있게 했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">시너지, 아이템, 증강체, 챔피언 정보를 기준 패치에 맞춰 조회합니다.</p>
         </div>
       </article>
       <article class="feature-card overflow-hidden rounded-lg border border-neutral-200 bg-white">
@@ -168,7 +168,7 @@
         </div>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">AI 맞춤 덱 추천</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">최근 전적을 기반으로 자주 플레이한 시너지와 성적을 분석하고, 현재 메타 데이터와 함께 비교해 추천 덱을 제안하는 흐름을 구성했습니다. Spring Boot API와 FastAPI AI 서버의 책임을 나눠 추천 요청과 응답 경계를 분리했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">최근 전적과 메타 데이터를 바탕으로 맞춤 덱을 추천합니다.</p>
         </div>
       </article>
       </div>
@@ -177,76 +177,39 @@
 
   <section class="border-y border-neutral-200 bg-white">
     <div class="mx-auto max-w-6xl px-5 py-14">
-      <p class="text-sm font-bold text-blue-700">Architecture Notes</p>
-      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현하면서 고려한 기술 포인트</h2>
-      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">TFT-gogo는 Riot API, Community Dragon, AI 서버, DB 캐시처럼 여러 외부·내부 의존성이 맞물립니다. 그래서 요청이 어디서 시작되고 어느 저장소와 외부 API에 도달하는지 추적 가능한 구조를 우선했습니다.</p>
-      <div class="mt-8 grid gap-4 md:grid-cols-2">
-        <article class="rounded-xl border border-blue-100 bg-blue-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Backend API</p>
-          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">프론트엔드와 맞출 API 계약을 먼저 정리했습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">소환사 검색, 매치 목록, 메타덱, 게임 가이드, AI 추천 기능은 요청·응답 필드와 실패 응답 형식을 먼저 맞췄습니다. Spring Boot에서는 Controller, Service, Repository 책임을 나누고 BusinessException 기반 공통 예외로 프론트엔드가 같은 방식으로 처리할 수 있게 했습니다.</p>
+      <p class="text-sm font-bold text-blue-700">Spec & Harness</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">AI를 쓰기 전에 기준을 먼저 고정했습니다</h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="rounded-lg border border-blue-100 bg-blue-50/60 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">01 / Spec</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">먼저 스펙을 쪼갰습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">기능을 바로 구현하지 않고 요청값, 응답 필드, 실패 응답, DB 상태 변화를 먼저 적었습니다. 이 기준을 Claude에 함께 전달해 AI가 임의로 구조를 바꾸거나 실패 케이스를 빠뜨리지 않게 했습니다.</p>
           <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-blue-700">
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Java</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Spring Boot</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">JPA</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">BusinessException</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">REST API</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">API 계약</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">실패 응답</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">상태 전이</span>
           </div>
         </article>
-        <article class="rounded-xl border border-cyan-100 bg-cyan-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-700">Frontend State</p>
-          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">검색·상세·목록 화면의 상태가 어긋나지 않게 나눴습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">React 화면에서는 검색 입력, 최근 검색, 로딩, 데이터 없음, 실패 상태를 구분했습니다. Riot API 결과가 늦거나 실패해도 이전 화면 상태와 섞이지 않도록 API 응답 기준으로 렌더링 조건을 나누고, 사용자에게 보여줄 메시지를 화면별로 정리했습니다.</p>
-          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-cyan-700">
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">React</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">TypeScript</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Axios</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Loading State</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Error State</span>
-          </div>
-        </article>
-        <article class="rounded-xl border border-violet-100 bg-violet-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">AI & Data</p>
-          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">AI 추천 서버와 데이터 저장소의 책임을 분리했습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">AI 추천은 Spring Boot API가 요청을 받고 FastAPI 서버가 추천 로직을 처리하는 구조로 나눴습니다. 메타덱·게임 가이드처럼 반복 조회되는 데이터는 MySQL과 Redis 캐시를 고려했고, 추천 데이터는 PostgreSQL/pgvector와 OpenAI API를 함께 활용하는 흐름을 학습하며 구성했습니다.</p>
+        <article class="rounded-lg border border-violet-100 bg-violet-50/60 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">02 / Claude</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">Claude에는 역할과 제약을 줬습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700"><code class="rounded bg-white px-1.5 py-0.5 text-xs text-violet-700">/claude</code>로 구현 범위, 수정 금지 영역, 테스트 명령을 함께 넘겼습니다. 단순히 코드를 생성시키는 것이 아니라, 정해진 스펙 안에서만 수정하도록 작업 환경을 만들었습니다.</p>
           <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-violet-700">
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">FastAPI</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">OpenAI API</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">MySQL</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">Redis</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">PostgreSQL/pgvector</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">작업 범위</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">수정 제약</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">테스트 명령</span>
           </div>
         </article>
-        <article class="rounded-xl border border-emerald-100 bg-emerald-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">Infra & Integration</p>
-          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">모노레포 서비스를 한 번에 실행하고 연결 상태를 확인했습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">Docker Compose로 React, Spring Boot, FastAPI, MySQL, Redis, PostgreSQL/pgvector를 함께 실행할 수 있도록 구성했습니다. 서비스 간 연결 실패가 발생했을 때 API 주소, 내부 시크릿, DB URL, 컨테이너 상태 중 어디를 확인해야 하는지 기준을 나눴습니다.</p>
-          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-emerald-700">
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Docker</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Docker Compose</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">AWS ECS</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">ECR</span>
-            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">ALB</span>
+        <article class="rounded-lg border border-cyan-100 bg-cyan-50/60 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-700">03 / Codex Review</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">Codex로 다시 검증했습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">PR에서는 <code class="rounded bg-white px-1.5 py-0.5 text-xs text-cyan-700">@codex</code> 리뷰를 요청해 정상 동작보다 실패 경로, 동시 요청, 누락 테스트를 먼저 확인했습니다. 리뷰 후에는 같은 테스트 명령으로 재검증하고 빌드 성공 여부까지 확인한 뒤 병합했습니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-cyan-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">PR 리뷰</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">실패 경로</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">재검증</span>
           </div>
         </article>
-      </div>
-      <div class="mt-8 hidden">
-        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
-          <summary class="cursor-pointer list-none font-bold text-neutral-950">API 계약</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">프론트엔드와 맞춰야 하는 소환사 검색, 매치 목록, 메타덱, 게임 가이드, AI 추천 API의 요청·응답 형식을 먼저 정리했습니다. 실패 응답도 같은 공통 포맷으로 다룰 수 있도록 필드를 명확히 나눴습니다.</p>
-        </details>
-        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
-          <summary class="cursor-pointer list-none font-bold text-neutral-950">외부 API 경계</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">Riot API 키, 호출 제한, 응답 지연, 데이터 없음 상태를 고려해 백엔드에서 실패 조건을 구분했습니다. 외부 API 결과를 그대로 화면에 넘기지 않고 서비스 응답으로 정리해 프론트엔드가 안정적으로 처리하도록 했습니다.</p>
-        </details>
-        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
-          <summary class="cursor-pointer list-none font-bold text-neutral-950">집계와 캐시</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">메타덱 집계와 게임 가이드 자산처럼 반복 조회되는 데이터는 DB와 Redis, 캐시 전략을 함께 고려했습니다. 최신 데이터 반영과 불필요한 외부 호출 감소 사이의 균형을 잡는 데 집중했습니다.</p>
-        </details>
-        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
-          <summary class="cursor-pointer list-none font-bold text-neutral-950">로컬 통합 실행</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">Docker Compose로 MySQL, Redis, PostgreSQL/pgvector, Spring Boot, FastAPI, React를 함께 띄울 수 있도록 구성했습니다. 서비스 간 연결 실패가 발생했을 때 어느 컨테이너와 환경 변수를 확인해야 하는지 정리했습니다.</p>
-        </details>
       </div>
     </div>
   </section>
@@ -255,17 +218,12 @@
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Release Management</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">팀 협업과 릴리즈 관리</h2>
-      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">TFT-gogo는 여러 사람이 동시에 작업하는 팀 프로젝트로 진행했습니다. 요구사항 문서, API 계약, 이슈와 PR, 배포 체크리스트, 릴리즈 이후 확인 기준을 연결해 기능 구현이 실제 실행 가능한 상태까지 이어지도록 관리했습니다.</p>
       <div class="mt-10 divide-y divide-neutral-200 border-y border-neutral-200">
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">01 / Requirement</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">기능 범위와 핵심 목표를 먼저 정리했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">프로젝트 초기에 기능 영역별 목표와 구현 범위를 문서로 정리했습니다. 전적 검색, 메타 분석, AI 추천, 게임 가이드처럼 의존성이 다른 기능을 나누고 각 기능이 어떤 사용자 흐름과 데이터 기준을 가져야 하는지 먼저 맞췄습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> 기능 영역, 구현 기능, 핵심 목표, 우선순위</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 기능 단위로 범위를 나누고 이슈와 PR에서 구현 기준을 확인</li>
-            </ul>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">기능 범위 정리</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">전적 검색, 메타 분석, AI 추천, 게임 가이드 범위를 문서로 정리했습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
             <img class="project-shot" src="assets/tft-requirements-scope.png" alt="TFT-gogo 구현 기능과 핵심 목표 문서 화면" width="603" height="467"/>
@@ -275,30 +233,22 @@
         <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">02 / Issue & PR</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">이슈와 PR을 라벨로 분류해 변경 이력을 남겼습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">작업은 GitHub Issue로 분리하고 backend, frontend, infra, bug, perf 같은 라벨로 성격을 구분했습니다. PR에서는 관련 이슈를 연결해 머지와 동시에 이슈가 닫히도록 관리했고, 구현 의도와 확인 방법을 남겨 변경 이력을 추적할 수 있게 했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> Issue, PR, Label, Milestone, 리뷰 코멘트</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> PR 설명에 변경 요약과 테스트 계획을 남기고 관련 이슈를 연결</li>
-            </ul>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">이슈·PR 관리</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">작업 성격을 라벨로 나누고 PR과 이슈를 연결해 변경 이력을 남겼습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
             <div class="proof-grid proof-grid--two">
               <img class="proof-thumb" src="assets/tft-github-issues-labels.png" alt="TFT-gogo GitHub 이슈 라벨 목록 화면" width="1230" height="674"/>
               <img class="proof-thumb" src="assets/tft-github-pr-closes-issues.png" alt="TFT-gogo PR에서 이슈를 연결해 닫은 화면" width="1232" height="768"/>
             </div>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">GitHub Issue, PR, Label 기반 변경 이력</figcaption>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">이슈와 PR 변경 이력</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">03 / API & Integration</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">API와 외부 연동 범위를 기능별로 나눴습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">Riot API, Community Dragon, FastAPI 추천 서버, 인증/회원 기능처럼 필요한 데이터와 외부 연동이 다른 영역을 기능별로 분리했습니다. 구현 전에 어떤 API와 데이터가 필요한지 정리해 프론트엔드와 백엔드 작업 기준이 어긋나지 않도록 했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> Riot API, Community Dragon, FastAPI, 인증 API, AI 추천 데이터</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 기능별 필요 API와 사용 목적을 문서화한 뒤 구현 범위 확인</li>
-            </ul>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">API 연동 범위 정리</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">Riot API, Community Dragon, FastAPI 추천 서버 연동 범위를 나눴습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
             <img class="project-shot" src="assets/tft-api-integration-plan.png" alt="TFT-gogo 기능별 필요 API와 외부 연동 문서 화면" width="719" height="486"/>
@@ -308,12 +258,8 @@
         <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">04 / Release</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">릴리즈 단위로 변경 사항과 후속 작업을 정리했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">기능 추가, 버그 수정, 성능 개선, 리팩토링, 문서 작업을 릴리즈 노트에 묶어 기록했습니다. 각 릴리즈마다 포함된 PR과 변경 내용을 남기고, 완료되지 않은 작업은 다음 마일스톤으로 넘겨 이후 개발 범위가 흐려지지 않도록 관리했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> Release Note, PR 목록, 버그 수정, 성능 개선, 다음 버전 전환 항목</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> 릴리즈별 변경 사항과 후속 과제를 분리해 기록</li>
-            </ul>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">릴리즈 노트 관리</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">기능 추가, 버그 수정, 성능 개선 내용을 릴리즈 노트로 정리했습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
             <div class="proof-grid proof-grid--four">
@@ -327,20 +273,16 @@
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">05 / AI Skills</p>
-            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">AI 리뷰를 병합 전 검증 단계로 사용했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">AI를 단순 코드 생성 도구가 아니라 PR 리뷰 보조 도구로 활용했습니다. 자동 리뷰가 놓친 JSON null 처리, 실행 기준 DDL 누락, Flyway 버전 충돌 같은 런타임 리스크를 별도 기준으로 재검토하고, 수정 후 재리뷰로 병합 가능 상태를 확인했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관리 항목</strong> PR 변경 요약, Critical/Warning 분류, 병합 차단 사유, 재리뷰 결과</li>
-              <li><strong class="text-neutral-950">확인 방식</strong> AI 리뷰 결과를 프로젝트 컨벤션과 실행 환경 기준으로 다시 판단하고 수정 반영 여부를 확인</li>
-            </ul>
+            <p class="text-xs font-bold uppercase text-blue-700">05 / Review Harness</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">AI 리뷰 검증</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">AI 리뷰로 병합 전 위험을 확인하고 수정 반영 여부를 재검토했습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
             <div class="proof-grid proof-grid--two">
               <img class="proof-thumb" src="assets/tft-ai-review-blocked.png" alt="TFT-gogo AI 코드 리뷰에서 승인 보류와 병합 차단 사유를 정리한 화면" width="900" height="884"/>
               <img class="proof-thumb" src="assets/tft-ai-review-approved.png" alt="TFT-gogo AI 재리뷰에서 수정 반영 후 승인 가능 상태를 확인한 화면" width="904" height="574"/>
             </div>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI 리뷰로 병합 전 위험을 차단하고 재리뷰로 수정 반영을 확인한 기록</figcaption>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI 리뷰와 재검증 기록</figcaption>
           </figure>
         </article>
       </div>

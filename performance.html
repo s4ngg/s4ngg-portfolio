@@ -76,10 +76,42 @@
             <h3 class="font-bold text-blue-700">해결</h3>
             <p class="mt-2 text-neutral-700">전체 조회를 제거하고, 화면에 필요한 최소 정보만 먼저 가져오도록 호출 흐름을 바꿨습니다.</p>
           </div>
-          <div class="rounded-lg border border-emerald-100 bg-emerald-50/70 p-4">
-            <h3 class="font-bold text-emerald-700">결과</h3>
-            <p class="mt-2 text-neutral-700">평균 응답속도는 134ms에서 18ms로 줄었고, 처리량은 약 7배 증가했습니다.</p>
+          <div class="rounded-lg border border-amber-100 bg-amber-50/70 p-4">
+            <h3 class="font-bold text-amber-800">추가 판단</h3>
+            <p class="mt-2 text-neutral-700">캐싱으로 가리는 대신, 불필요한 호출 자체를 없애는 방향을 선택했습니다.</p>
           </div>
+        </div>
+        <div class="mt-4 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead class="bg-neutral-50 text-left text-neutral-600">
+              <tr>
+                <th class="px-4 py-3 font-bold">항목</th>
+                <th class="px-4 py-3 font-bold">개선 전</th>
+                <th class="px-4 py-3 font-bold">개선 후</th>
+                <th class="px-4 py-3 font-bold">변화</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 text-neutral-700">
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">평균 응답속도</td>
+                <td class="px-4 py-3">134ms</td>
+                <td class="px-4 py-3">18ms</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">-87%</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">p95 응답속도</td>
+                <td class="px-4 py-3">247ms</td>
+                <td class="px-4 py-3">24ms</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">-90%</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">처리량</td>
+                <td class="px-4 py-3">366.7/s</td>
+                <td class="px-4 py-3">2,711.7/s</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">+639%</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <a class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700 hover:underline" href="https://github.com/s4ngg/TFT-gogo/issues/647" target="_blank" rel="noreferrer">
           Issue #647 보기
@@ -111,10 +143,42 @@
             <h3 class="font-bold text-blue-700">해결</h3>
             <p class="mt-2 text-neutral-700">연관 데이터를 묶어서 조회하고, 자주 바뀌지 않는 메타덱 응답은 캐싱해 반복 조회 비용을 줄였습니다.</p>
           </div>
-          <div class="rounded-lg border border-emerald-100 bg-emerald-50/70 p-4">
-            <h3 class="font-bold text-emerald-700">결과</h3>
-            <p class="mt-2 text-neutral-700">평균 응답속도는 480ms에서 5.8ms로 줄었고, 처리량은 약 82배 증가했습니다.</p>
+          <div class="rounded-lg border border-amber-100 bg-amber-50/70 p-4">
+            <h3 class="font-bold text-amber-800">추가 판단</h3>
+            <p class="mt-2 text-neutral-700">데이터 특성상 반복 조회가 많아, 배치 조회에 캐싱까지 함께 적용했습니다.</p>
           </div>
+        </div>
+        <div class="mt-4 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead class="bg-neutral-50 text-left text-neutral-600">
+              <tr>
+                <th class="px-4 py-3 font-bold">항목</th>
+                <th class="px-4 py-3 font-bold">개선 전</th>
+                <th class="px-4 py-3 font-bold">개선 후</th>
+                <th class="px-4 py-3 font-bold">변화</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 text-neutral-700">
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">평균 응답속도</td>
+                <td class="px-4 py-3">480ms</td>
+                <td class="px-4 py-3">5.8ms</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">-99%</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">처리량</td>
+                <td class="px-4 py-3">103.3/s</td>
+                <td class="px-4 py-3">8,465.9/s</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">약 82배</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">요청당 쿼리</td>
+                <td class="px-4 py-3">123회</td>
+                <td class="px-4 py-3">0회</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">캐시 HIT 기준</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <a class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700 hover:underline" href="https://github.com/s4ngg/TFT-gogo/issues/709" target="_blank" rel="noreferrer">
           Issue #709 보기
@@ -146,14 +210,42 @@
             <h3 class="font-bold text-blue-700">해결</h3>
             <p class="mt-2 text-neutral-700">요청 처리 전체가 아니라 필요한 구간에서만 DB 커넥션을 사용하도록 설정을 바꿨습니다.</p>
           </div>
-          <div class="rounded-lg border border-emerald-100 bg-emerald-50/70 p-4">
-            <h3 class="font-bold text-emerald-700">결과</h3>
-            <p class="mt-2 text-neutral-700">평균 응답속도는 429ms에서 355ms로 줄었고, 처리량은 20% 증가했습니다.</p>
+          <div class="rounded-lg border border-amber-100 bg-amber-50/70 p-4">
+            <h3 class="font-bold text-amber-800">추가 판단</h3>
+            <p class="mt-2 text-neutral-700">AI 서버 확장도 검토했지만, 비용 제한 로직이 약해질 수 있어 보류했습니다.</p>
           </div>
         </div>
-        <div class="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-neutral-700">
-          <strong class="text-amber-800">후속 확인</strong>
-          AI 서버 프로세스를 늘리면 추가 개선이 가능했지만, 비용 제한 로직이 약해질 수 있어 코드 반영은 보류했습니다.
+        <div class="mt-4 overflow-hidden rounded-lg border border-neutral-200">
+          <table class="w-full text-sm">
+            <thead class="bg-neutral-50 text-left text-neutral-600">
+              <tr>
+                <th class="px-4 py-3 font-bold">항목</th>
+                <th class="px-4 py-3 font-bold">개선 전</th>
+                <th class="px-4 py-3 font-bold">개선 후</th>
+                <th class="px-4 py-3 font-bold">변화</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 text-neutral-700">
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">평균 응답속도</td>
+                <td class="px-4 py-3">429ms</td>
+                <td class="px-4 py-3">355ms</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">-17%</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">처리량</td>
+                <td class="px-4 py-3">115.2/s</td>
+                <td class="px-4 py-3">138.7/s</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">+20%</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-neutral-900">커넥션 점유</td>
+                <td class="px-4 py-3">외부 호출 중 유지</td>
+                <td class="px-4 py-3">필요 구간만 사용</td>
+                <td class="px-4 py-3 font-bold text-emerald-700">대기 병목 완화</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <a class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700 hover:underline" href="https://github.com/s4ngg/TFT-gogo/issues/733" target="_blank" rel="noreferrer">
           Issue #733 보기
