@@ -48,95 +48,86 @@
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Troubleshooting</p>
       <h1 class="display mt-2 text-4xl font-extrabold text-neutral-950 md:text-5xl">문제를 재현하고 원인을 좁힌 기록</h1>
-      <p class="mt-5 max-w-3xl leading-7 text-neutral-700">트러블슛팅은 코드를 고친 결과뿐 아니라 문제가 발생한 프로젝트, 재현 조건, 원인을 좁힌 과정, 수정 후 다시 확인한 기준까지 함께 남기는 기록이라고 생각합니다. 아래 사례는 단순 해결 요약이 아니라 로그, 요청 흐름, 트랜잭션 경계, 쿼리 실행 방식까지 확인하며 원인을 좁혀간 예시입니다.</p>
+      <p class="mt-5 max-w-3xl leading-7 text-neutral-700">문제가 발생한 흐름을 재현하고, 실패한 가설과 확인 과정을 따라 원인을 좁힌 기록입니다.</p>
     </div>
   </section>
 
   <section class="mx-auto max-w-6xl px-5 py-12">
     <div class="space-y-5">
-      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
-        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">AllPick</p>
             <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">역할 기반 JWT 인증 흐름에서 Role 정보 불일치가 발생한 문제</h2>
           </div>
-          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">JWT · Redis · Spring Security</span>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">JWT · Redis · Spring Security</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">member의 role 구조가 변경됐지만 로그인 코드에는 기존 role 기준 로직이 남아 있어, JWT 발급 이후 권한 판단이 실제 계정 구조와 어긋났습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">사용하지 않는 role 의존 로직을 제거하고 구매자·판매자·관리자 인증 흐름과 토큰 저장 방식을 분리했습니다.</p>
+          </div>
         </div>
-        <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-red-700">Problem</dt>
-            <dd class="text-neutral-700">AllPick은 구매자, 판매자, 관리자가 함께 사용하는 쇼핑몰 플랫폼입니다. QA 과정에서 로그인은 성공했지만 이후 일부 요청에서 사용자 역할이 정상적으로 인식되지 않아, 역할별로 접근해야 하는 API 흐름이 흔들리는 문제가 발생했습니다. 판매자 승인, 상품 승인, 주문/환불 처리처럼 권한 기준이 명확해야 하는 기능에서 토큰과 역할 정보가 맞지 않으면 잘못된 인증 상태로 요청이 처리될 수 있었습니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-neutral-950">Cause</dt>
-            <dd class="text-neutral-700">처음에는 로그인/회원가입 API 응답 문제이거나 JWT 보안 설정 문제라고 판단해 인증 API와 토큰 검증 로직을 먼저 확인했습니다. 토큰 저장 방식, 요청 헤더, Spring Security 설정을 수정해보았지만 문제가 해결되지 않았고, 정상 로그인 이후에도 특정 역할이 계속 인식되지 않았습니다. 이후 로그인 응답과 회원 도메인 변경 이력을 함께 추적하면서, 초기 설계에서는 member에 role을 부여했다가 이후 제거했는데 기존 로그인 코드에는 role을 기준으로 처리하는 로직이 남아 있다는 점을 발견했습니다. 결과적으로 현재 회원 데이터 구조와 로그인 코드의 역할 처리 방식이 서로 맞지 않아 JWT 인증 이후 권한 판단이 어긋난 것이 원인이었습니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-blue-700">Solution</dt>
-            <dd class="text-neutral-700">먼저 로그인 코드에서 더 이상 사용하지 않는 member role 의존 로직을 제거하고, 실제 서비스 구조에 맞게 일반 회원, 판매자, 관리자 인증 흐름을 분리했습니다. 프론트엔드에서는 userToken, sellerToken, adminToken을 구분해 저장하고 API 경로에 따라 올바른 토큰을 Authorization 헤더에 실도록 정리했습니다. 서버에서는 JWT의 권한 정보와 요청 대상 API의 역할 기준을 다시 맞췄고, Refresh Token은 Redis에 저장하며 로그아웃 또는 토큰 폐기 시 블랙리스트 처리로 기존 토큰이 계속 사용되지 않도록 보완했습니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-emerald-700">Result</dt>
-            <dd class="text-neutral-700">구매자, 판매자, 관리자 계정으로 각각 로그인한 뒤 상품 등록, 판매자 승인, 상품 승인, 주문/환불 처리 API를 다시 호출하며 접근 가능 범위를 검증했습니다. 잘못된 역할의 토큰으로 요청했을 때는 권한 오류가 반환되고, 올바른 역할의 토큰으로 요청했을 때만 기능이 동작하는 것을 확인했습니다. 이 과정을 통해 화면 상태가 아니라 서버 권한 검증을 기준으로 역할별 흐름을 안정화했습니다.</dd>
-          </div>
-        </dl>
-      </article>
+        </div>
+      </details>
 
-      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
-        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">TFT-gogo</p>
             <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">관리자 수동 집계 요청 후 실제 작업 상태와 화면 상태가 어긋난 문제</h2>
           </div>
-          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Async · Executor · State</span>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">Async · Executor · State</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">HTTP 요청 성공과 실제 비동기 작업 등록·실행 상태를 구분하지 않아, 중복 요청이나 executor 등록 실패도 성공처럼 보일 수 있었습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">중복 실행과 작업 등록 실패를 별도 응답으로 분리하고, 실패 시 실행 중 플래그가 복구되도록 상태 계약을 정리했습니다.</p>
+          </div>
         </div>
-        <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-red-700">Problem</dt>
-            <dd class="text-neutral-700">TFT-gogo 관리자 페이지에는 메타 덱 데이터를 수동으로 집계하는 기능이 필요했습니다. 기존에는 Swagger나 백엔드 API를 직접 호출해야 했기 때문에 운영자가 집계가 필요한 시점에 화면에서 바로 실행할 수 있도록 버튼을 추가했습니다. 하지만 기능을 검토하는 과정에서 버튼 클릭 후 성공 메시지가 표시되더라도 실제 백엔드 비동기 집계가 시작됐는지, 이미 실행 중인 작업과 중복되지 않았는지, 작업 등록에 실패했는지를 화면에서 구분할 수 없는 문제가 확인됐습니다. 특히 HTTP 요청은 성공했지만 실제 작업은 실행되지 않은 상태가 될 수 있어, 운영자가 잘못된 성공 상태를 믿고 데이터를 확인할 위험이 있었습니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-neutral-950">Cause</dt>
-            <dd class="text-neutral-700">처음에는 프론트엔드의 버튼 상태 관리 문제라고 판단했습니다. 그래서 집계 요청을 보내는 동안 버튼을 비활성화하고, 요청이 끝나면 다시 활성화하는 방식으로 수정했습니다. 그러나 백엔드는 요청을 받은 뒤 비동기 작업만 등록하고 바로 응답하기 때문에, HTTP 요청이 끝나는 시점과 실제 집계가 끝나는 시점이 달랐습니다. 다음으로는 짧은 시간 안에 재클릭되는 것을 막기 위해 10초 쿨다운을 두는 방식도 검토했습니다. 하지만 집계는 Riot API 호출과 랭크별 저장 작업을 포함해 10초보다 오래 걸릴 수 있었고, 다른 탭이나 다른 사용자의 중복 요청도 막을 수 없었습니다. 이후 백엔드 실행 흐름을 따라가며 확인해보니, 이미 집계 중인 요청은 내부에서 skip되면서도 호출자에게는 동일한 성공 응답을 반환하고 있었습니다. 더 큰 문제는 executor가 작업을 받을 수 없는 상황에서 작업이 조용히 폐기되면, 집계 중 여부를 나타내는 플래그가 원래 상태로 돌아오지 않아 이후 요청이 계속 실행 중으로 판단될 수 있다는 점이었습니다. 결국 원인은 단순한 UI 처리 문제가 아니라, 요청 접수와 실제 비동기 작업 시작·중복·등록 실패를 구분하지 않은 상태 계약 문제였습니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-blue-700">Solution</dt>
-            <dd class="text-neutral-700">먼저 백엔드에서 작업이 실제로 등록되지 못하는 상황을 숨기지 않도록 executor의 거부 정책을 조용히 버리는 방식에서 예외가 발생하는 방식으로 변경했습니다. 작업 등록 단계에서 예외가 발생하면 집계 중 플래그를 다시 해제하고, 공통 예외 응답으로 변환해 호출자가 실패를 알 수 있도록 했습니다. 또한 이미 집계가 실행 중인 경우에는 성공 응답이 아니라 중복 요청임을 구분할 수 있는 응답을 반환하도록 수정했습니다. 프론트엔드에서는 단순히 요청 성공 여부만 보고 메시지를 표시하지 않고, 중복 실행, 서버 오류, 네트워크 오류, 타임아웃, 인증 오류를 나누어 안내하도록 정리했습니다. 이를 통해 화면의 버튼 상태와 메시지가 “요청을 보냈다”가 아니라 “서버가 실제로 어떤 상태로 판단했는가”를 기준으로 동작하도록 맞췄습니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-emerald-700">Result</dt>
-            <dd class="text-neutral-700">수정 후에는 정상적으로 집계 요청을 보냈을 때 작업이 등록되고 성공 메시지가 표시되는지 확인했습니다. 이어서 이미 집계 중인 상태에서 다시 요청했을 때는 새 작업이 실행된 것처럼 보이지 않고 중복 실행 안내가 표시되는지 검증했습니다. executor가 작업을 거부하는 상황에서는 플래그가 원래 상태로 복구되어 이후 요청이 다시 가능한지도 테스트로 고정했습니다. 이 과정을 통해 HTTP 성공 응답을 실제 비즈니스 작업 성공으로 단정하지 않고, 요청 접수, 작업 등록, 작업 실행 상태를 분리해서 다루는 방식으로 관리자 집계 흐름을 안정화했습니다.</dd>
-          </div>
-        </dl>
-      </article>
+        </div>
+      </details>
 
-      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
-        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
           <div>
-            <p class="text-xs font-bold uppercase text-blue-700">추가 사례</p>
-            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">추가 트러블슈팅 작성 예정</h2>
+            <p class="text-xs font-bold uppercase text-blue-700">TFT-gogo</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">매치 집계 중 Riot API 요청이 키 한도를 초과할 수 있던 문제</h2>
           </div>
-          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Draft</span>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">Riot API · Rate Limiter · Queue</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">Riot API 호출 경로가 <code>RiotApiClient</code>와 <code>RiotQueue</code>로 나뉘어 있었고, 매치 수집 경로만 더 짧은 간격으로 요청해 API 한도를 초과했습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">모든 매치 수집 요청을 단일 rate limiter로 통합하고, 큐 크기 제한과 종료 처리 기준을 추가했습니다.</p>
+          </div>
         </div>
-        <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-red-700">Problem</dt>
-            <dd class="text-neutral-700">배포, 성능, 인증, 외부 API 연동 중 포트폴리오에 추가할 사례를 선별해 작성할 예정입니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-neutral-950">Cause</dt>
-            <dd class="text-neutral-700">로그, 요청 값, DB 상태, 실행 환경을 함께 확인해 원인을 좁힌 과정을 작성합니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-blue-700">Solution</dt>
-            <dd class="text-neutral-700">수정 내용과 함께 같은 문제가 반복되지 않도록 남긴 기준을 정리합니다.</dd>
-          </div>
-          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
-            <dt class="font-bold text-emerald-700">Result</dt>
-            <dd class="text-neutral-700">정상 경로와 실패 경로를 다시 검증한 결과를 작성할 예정입니다.</dd>
-          </div>
-        </dl>
-      </article>
+        </div>
+      </details>
     </div>
   </section>
 </main>
