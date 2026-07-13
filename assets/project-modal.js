@@ -7,6 +7,7 @@
     mini: {
       kind: "쇼핑몰 서비스",
       title: "AllPick",
+      accent: "blue",
       description:
         "AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 프로젝트입니다.",
       domain: { label: "https://d15b731cpaqp76.cloudfront.net/ (배포중단상태)", href: "https://d15b731cpaqp76.cloudfront.net/" },
@@ -31,6 +32,7 @@
     final: {
       kind: "롤토체스 전적 검색 서비스",
       title: "TFT-gogo",
+      accent: "violet",
       description:
         "TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱, 게임 가이드, AI 맞춤 덱 추천 기능을 모노레포로 구현 중인 프로젝트입니다.",
       domain: { label: "tftgogo.com (배포중단상태)", href: null },
@@ -285,6 +287,36 @@
       #${MODAL_ID} .project-modal-link .material-symbols-outlined {
         font-size: 17px;
       }
+      #${MODAL_ID} .project-modal-panel[data-accent="blue"] .project-modal-title {
+        color: #1d4ed8;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="blue"] .project-modal-tech-label {
+        color: #1d4ed8;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="blue"] .project-modal-tech-list li,
+      #${MODAL_ID} .project-modal-panel[data-accent="blue"] .project-modal-tags li {
+        background: #eff6ff;
+        border-color: #dbeafe;
+        color: #1d4ed8;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="blue"] .project-modal-link {
+        background: #1d4ed8;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="violet"] .project-modal-title {
+        color: #6d28d9;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="violet"] .project-modal-tech-label {
+        color: #6d28d9;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="violet"] .project-modal-tech-list li,
+      #${MODAL_ID} .project-modal-panel[data-accent="violet"] .project-modal-tags li {
+        background: #f5f3ff;
+        border-color: #ede9fe;
+        color: #6d28d9;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="violet"] .project-modal-link {
+        background: #6d28d9;
+      }
       @media (max-width: 800px) {
         #${MODAL_ID} {
           padding: 0;
@@ -405,6 +437,8 @@
 
   function openModal(modal, project, trigger) {
     lastTrigger = trigger;
+
+    modal.querySelector(".project-modal-panel").dataset.accent = project.accent || "";
 
     renderPreview(modal, project);
 

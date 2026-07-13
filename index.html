@@ -373,6 +373,14 @@
             text-decoration: none;
             transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
+        .project-card-blue {
+            background: #eff6ff;
+            border-color: #dbeafe;
+        }
+        .project-card-violet {
+            background: #f5f3ff;
+            border-color: #ede9fe;
+        }
         button.project-card {
             width: 100%;
             font: inherit;
@@ -445,12 +453,50 @@
             line-height: 18px;
             text-transform: uppercase;
         }
-        .project-card-title {
+        .project-title-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             margin-top: 14px;
+        }
+        .project-card-title {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 8px;
+            background: #ffffff;
             color: #141516;
             font-size: 22px;
             font-weight: 800;
             line-height: 1.25;
+        }
+        .project-title-blue {
+            color: #1d4ed8;
+            box-shadow: inset 0 0 0 1px #dbeafe;
+        }
+        .project-title-violet {
+            color: #6d28d9;
+            box-shadow: inset 0 0 0 1px #ede9fe;
+        }
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 4px 10px;
+            background: #ffffff;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 16px;
+            white-space: nowrap;
+        }
+        .project-badge-blue {
+            color: #1d4ed8;
+            box-shadow: inset 0 0 0 1px #dbeafe;
+        }
+        .project-badge-violet {
+            color: #6d28d9;
+            box-shadow: inset 0 0 0 1px #ede9fe;
         }
         .project-card-copy {
             margin-top: 14px;
@@ -607,25 +653,6 @@
             font-size: 22px;
             font-weight: 800;
             line-height: 1.35;
-        }
-        .activity-copy {
-            margin-top: 8px;
-            color: #4f565c;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-        .activity-detail {
-            display: grid;
-            gap: 5px;
-            margin-top: 10px;
-            padding-left: 18px;
-            color: #4f565c;
-            font-size: 14px;
-            line-height: 1.55;
-            list-style: disc;
-        }
-        .activity-detail li {
-            padding-left: 2px;
         }
         .activity-link {
             display: inline-flex;
@@ -807,9 +834,6 @@
             .activity-title {
                 font-size: 20px;
             }
-            .activity-copy {
-                font-size: 14px;
-            }
         }
         @media (min-width: 768px) and (max-width: 1120px) {
             .hero-content {
@@ -913,12 +937,16 @@
 </div>
 </div>
 <div class="project-grid">
-<button type="button" class="project-card reveal-on-scroll" data-project-modal="mini" aria-haspopup="dialog" aria-label="AllPick 자세히 보기">
+<button type="button" class="project-card project-card-blue reveal-on-scroll" data-project-modal="mini" aria-haspopup="dialog" aria-label="AllPick 자세히 보기">
 <div class="project-media project-media--shot">
 <img src="assets/allpick-main-home.png" alt="AllPick 쇼핑몰 메인 홈페이지 화면" width="1050" height="808"/>
 </div>
 <span class="project-kind">쇼핑몰 서비스</span>
-<h3 class="project-card-title">AllPick</h3>
+<div class="project-title-row">
+<h3 class="project-card-title project-title-blue">AllPick</h3>
+<span class="project-badge project-badge-blue">26.03 ~ 26.05</span>
+<span class="project-badge project-badge-blue">6인 진행</span>
+</div>
 <p class="project-card-copy">AllPick 쇼핑몰에서 회원·판매자·관리자 흐름, 상품·주문·결제·쿠폰·CS 기능과 FastAPI 기반 AI 추천 연동을 구현한 프로젝트입니다.</p>
 <ul class="project-tags" aria-label="기술스택">
 <li>Java</li>
@@ -929,12 +957,16 @@
 </ul>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </button>
-<button type="button" class="project-card reveal-on-scroll" data-project-modal="final" aria-haspopup="dialog" aria-label="TFT-gogo 자세히 보기">
+<button type="button" class="project-card project-card-violet reveal-on-scroll" data-project-modal="final" aria-haspopup="dialog" aria-label="TFT-gogo 자세히 보기">
 <div class="project-media project-media--shot">
 <img src="assets/tft-main-dashboard.png" alt="TFT-gogo 메인 대시보드와 메타 스냅샷 화면" width="1537" height="899"/>
 </div>
 <span class="project-kind">롤토체스 전적 검색 서비스</span>
-<h3 class="project-card-title">TFT-gogo</h3>
+<div class="project-title-row">
+<h3 class="project-card-title project-title-violet">TFT-gogo</h3>
+<span class="project-badge project-badge-violet">26.05 ~ 26.07</span>
+<span class="project-badge project-badge-violet">4인 진행</span>
+</div>
 <p class="project-card-copy">TFT-gogo 전적 검색 서비스에서 Riot API 기반 매치 분석, 메타덱, 게임 가이드, AI 맞춤 덱 추천 기능을 모노레포로 구현 중인 프로젝트입니다.</p>
 <ul class="project-tags" aria-label="기술스택">
 <li>React</li>
@@ -1027,7 +1059,6 @@
 <span class="activity-meta">Notion</span>
 <div>
 <h4 class="activity-title">회의가 끝나면 바로 Notion에 씁니다</h4>
-<p class="activity-copy">말로만 결정된 건 나중에 기억이 다릅니다. 기능 범위, 담당자, 결정 이유를 그날 정리해두면 나중에 "그때 그거 왜 그렇게 했어요?"가 줄어듭니다.</p>
 <div class="collaboration-gallery" aria-label="Notion 협업 자료 이미지 영역">
 <figure class="collaboration-shot">
 <img src="assets/collab-notion-spec.png" alt="Notion 구현 기능 및 핵심 목표 정리" width="900" height="1200"/>
@@ -1044,10 +1075,6 @@
 <span class="activity-meta">GitHub</span>
 <div>
 <h4 class="activity-title">PR 하나에 하나의 맥락만 담으려 했습니다</h4>
-<ul class="activity-detail">
-<li>기능 단위로 브랜치를 나눴습니다. 리뷰어가 무엇을 봐야 하는지 한눈에 들어오게 하려고요.</li>
-<li>커밋 메시지엔 왜 바꿨는지를 씁니다. 무엇을 바꿨는지는 diff가 보여주니까요.</li>
-</ul>
 <div class="mt-4 overflow-hidden rounded-lg border border-neutral-200">
 <table class="w-full text-sm">
 <thead>
@@ -1085,7 +1112,6 @@
 <span class="activity-meta">Issue</span>
 <div>
 <h4 class="activity-title">사소한 코드 수정도 이슈로 남겼습니다</h4>
-<p class="activity-copy">왜 문제가 발생했는지, 왜 수정이 필요한지, 처음 설계했던 기능과 달라진 점은 무엇인지 확인하고 기록하기 위해 이슈부터 작성했습니다.</p>
 <div class="collaboration-gallery" aria-label="GitHub 이슈 자료 이미지 영역">
 <figure class="collaboration-shot">
 <img src="assets/collab-issue-list.png" alt="GitHub 이슈 목록" width="900" height="1200"/>
@@ -1106,7 +1132,6 @@
 <span class="activity-meta">Code Review</span>
 <div>
 <h4 class="activity-title">AI 리뷰를 PR 검증 과정에 씁니다</h4>
-<p class="activity-copy">CI 실패 원인 분석, 재현 조건, 수정 방향까지 AI가 코멘트로 정리합니다. 수정 후엔 같은 조건으로 재검증해 BUILD SUCCESSFUL을 확인하고 머지합니다.</p>
 <div class="collaboration-gallery" aria-label="코드리뷰 자료 이미지 영역">
 <figure class="collaboration-shot">
 <img src="assets/collab-review-1.png" alt="AI 코드리뷰 - CI 실패 원인 분석과 수정 방향 제시" width="900" height="1200"/>
