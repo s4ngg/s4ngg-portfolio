@@ -12,6 +12,22 @@
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
   .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
   .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; background: #fafafa; padding: 0.75rem; }
+  .proof-thumb {
+    width: 100%;
+    height: 13rem;
+    object-fit: contain;
+    object-position: center top;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.375rem;
+    background: #fff;
+  }
+  .proof-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 640px) {
+    .proof-grid { grid-template-columns: 1fr; }
+    .proof-grid--two { grid-template-columns: 1fr; }
+    .proof-thumb { height: 12.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -48,10 +64,10 @@
   <section class="bg-white">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:items-center">
       <div>
-        <p class="text-sm font-bold uppercase text-blue-700">쇼핑몰 서비스</p>
-        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">AllPick 쇼핑몰 플랫폼</h1>
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">일반 회원, 판매자, 관리자가 함께 사용하는 B2C 쇼핑몰 프로젝트입니다. 상품 조회와 주문·결제, 장바구니, 쿠폰, 리뷰, 고객 문의, 판매자 승인, 관리자 기능을 Spring Boot API와 React 화면으로 연결하고 FastAPI 기반 AI 상품 추천까지 연동했습니다.</p>
-        <p class="mt-4 max-w-3xl text-base leading-7 text-neutral-600">팀장으로 참여하며 JWT·Redis 기반 인증/보안 흐름, Toss Payments 결제 연동, 위시리스트 기반 AI 추천, AWS S3·CloudFront·EC2와 GitHub Actions 배포 흐름을 중심으로 구현과 검증을 맡았습니다.</p>
+        <p class="text-sm font-bold uppercase text-blue-700">All Pick</p>
+        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">All Pick</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">역할별 권한과 구매 흐름을 갖춘 쇼핑몰 서비스</p>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-neutral-600">팀장으로 인증/권한, 주문·결제, AI 추천, AWS 배포를 담당했습니다.</p>
         <div class="mt-8 flex flex-wrap gap-2">
           <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Java</span>
           <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">React</span>
@@ -141,31 +157,46 @@
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현 기능</h2>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/allpick-auth-seller-flow.png" alt="AllPick 회원가입, 로그인, 마이페이지 판매자 신청 화면" width="1600" height="1000"/>
+        <div class="proof-grid">
+          <img class="proof-thumb" src="assets/allpick-originals/auth-signup.png" alt="AllPick 회원가입 입력 검증 화면" width="1020" height="891"/>
+          <img class="proof-thumb" src="assets/allpick-originals/seller-application.png" alt="AllPick 마이페이지 판매자 신청 화면" width="1137" height="646"/>
+          <img class="proof-thumb" src="assets/allpick-originals/admin-seller-list.png" alt="AllPick 관리자 판매자 승인 관리 화면" width="776" height="383"/>
+        </div>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">회원·판매자 인증과 역할 분리</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">일반 회원과 판매자, 관리자 계정을 분리하고 JWT 기반 인증으로 접근 가능한 API를 구분했습니다. 판매자 신청과 승인 상태에 따라 상품 등록 가능 여부가 달라지도록 흐름을 나눴습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">회원가입, 판매자 신청, 관리자 승인 흐름을 분리했습니다. 승인 상태에 따라 상품 등록 권한이 달라지도록 처리했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/allpick-product-category-management.png" alt="AllPick 관리자 상품 목록과 카테고리 노출·정렬 관리 화면" width="1400" height="1500"/>
+        <div class="proof-grid">
+          <img class="proof-thumb" src="assets/allpick-originals/admin-product-list.png" alt="AllPick 관리자 상품 목록 관리 화면" width="751" height="863"/>
+          <img class="proof-thumb" src="assets/allpick-originals/admin-category-list.png" alt="AllPick 관리자 카테고리 목록 관리 화면" width="1676" height="601"/>
+          <img class="proof-thumb" src="assets/allpick-originals/admin-category-edit.png" alt="AllPick 관리자 카테고리 노출·정렬 수정 화면" width="1676" height="601"/>
+        </div>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">상품·카테고리·승인 관리</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">판매자가 상품을 등록하면 관리자가 승인 또는 반려할 수 있도록 상품 상태를 관리했습니다. 부모·자식 카테고리 구조를 기준으로 상품 목록과 상세 조회가 이어지도록 구성했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">상품 승인 상태와 카테고리 노출 순서를 관리했습니다. 카테고리 기준으로 상품 목록과 상세 조회가 이어지도록 구성했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/allpick-order-payment-flow.png" alt="AllPick 주문서, Toss Payments 결제창, 결제 완료 주문 내역 화면" width="1600" height="1000"/>
+        <div class="proof-grid">
+          <img class="proof-thumb" src="assets/allpick-originals/order-checkout.png" alt="AllPick 주문서 작성 화면" width="1033" height="760"/>
+          <img class="proof-thumb" src="assets/allpick-originals/payment-window.png" alt="AllPick Toss Payments 결제창 화면" width="522" height="521"/>
+          <img class="proof-thumb" src="assets/allpick-originals/order-history.png" alt="AllPick 주문 내역 화면" width="1020" height="540"/>
+        </div>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">장바구니·주문·결제 흐름</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">장바구니 담기부터 주문 생성, 배송지 관리, 결제 정보 조회까지 구매 흐름을 연결했습니다. React 화면에서는 API 응답과 사용자 상태를 기준으로 주문 단계를 분리했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">주문서 작성, Toss Payments 결제, 주문 내역 조회까지 구매 흐름을 연결했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/allpick-ai-recommendation.png" alt="AllPick 관심 카테고리와 위시리스트 기반 AI 상품 추천 화면" width="1351" height="555"/>
+        <div class="proof-grid">
+          <img class="proof-thumb" src="assets/allpick-originals/ai-recommendation.png" alt="AllPick 관심 카테고리와 위시리스트 기반 AI 상품 추천 화면" width="1351" height="555"/>
+          <img class="proof-thumb" src="assets/allpick-originals/email-verification.png" alt="AllPick EmailJS 인증 메일 수신 화면" width="478" height="380"/>
+        </div>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">AI 상품 추천과 CS 기능</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">FastAPI 서버에서 관심 카테고리와 위시리스트를 받아 OpenAI API 기반 추천 결과를 반환하도록 구성했습니다. 문의, 클레임, FAQ, 공지사항은 관리자와 사용자 흐름을 나눠 처리했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">관심 카테고리와 위시리스트를 바탕으로 FastAPI 추천 서버와 OpenAI API를 연동했습니다.</p>
         </div>
       </article>
       </div>
@@ -174,54 +205,50 @@
 
   <section class="border-y border-neutral-200 bg-white">
     <div class="mx-auto max-w-6xl px-5 py-14">
-      <p class="text-sm font-bold text-blue-700">Architecture Notes</p>
-      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현하면서 고려한 기술 포인트</h2>
-      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">AllPick은 단순히 화면을 많이 만드는 것보다 회원, 판매자, 관리자 요청이 Spring Boot API와 React 화면 상태에서 같은 기준으로 동작하는지가 중요했습니다. 그래서 도메인 책임, 인증·예외 응답, 데이터 상태 전이, 배포 환경을 나눠 확인했습니다.</p>
+      <p class="text-sm font-bold text-blue-700">Skills</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">사용 기술</h2>
       <div class="mt-8 grid gap-4 md:grid-cols-2">
         <article class="rounded-xl border border-blue-100 bg-blue-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase text-blue-700">Spring Boot</p>
-          <h3 class="mt-2 font-bold text-neutral-950">도메인 기준으로 API 책임을 나눴습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">회원, 상품, 주문, 쿠폰, 리뷰, CS, 관리자 기능을 도메인별로 나누고 Controller, Service, Repository 책임을 분리했습니다. 기능을 수정할 때 영향 범위를 좁히고, 역할별로 접근 가능한 API가 섞이지 않도록 확인했습니다.</p>
+          <p class="text-xs font-bold uppercase text-blue-700">Backend</p>
+          <h3 class="mt-2 font-bold text-neutral-950">Spring Boot 기반 쇼핑몰 API</h3>
           <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-blue-700">
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Member</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Product</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Order</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Coupon</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Admin</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Java 21</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Spring Boot</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">Spring Security</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">JPA</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">JWT</li>
           </ul>
         </article>
         <article class="rounded-xl border border-rose-100 bg-rose-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase text-rose-700">Security & Error</p>
-          <h3 class="mt-2 font-bold text-neutral-950">인증 실패와 권한 실패를 구분했습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">Spring Security와 JWT를 기준으로 로그인 실패, 토큰 누락, 권한 부족, 존재하지 않는 리소스를 구분했습니다. BusinessException과 공통 응답 형식을 맞춰 React 화면에서도 같은 기준으로 실패 메시지를 처리할 수 있게 했습니다.</p>
+          <p class="text-xs font-bold uppercase text-rose-700">Database</p>
+          <h3 class="mt-2 font-bold text-neutral-950">회원·상품·주문 데이터 관리</h3>
           <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-rose-700">
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">Spring Security</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">JWT</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">BusinessException</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">공통 응답</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">권한 실패</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">MySQL</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">Redis</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">JPA Entity</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-rose-100">Repository</li>
           </ul>
         </article>
         <article class="rounded-xl border border-cyan-100 bg-cyan-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase text-cyan-700">React</p>
-          <h3 class="mt-2 font-bold text-neutral-950">화면 상태와 API 응답이 어긋나지 않게 확인했습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">React 화면에서는 로그인 여부, 판매자 승인 상태, 주문 상태, 결제 결과에 따라 노출되는 버튼과 이동 경로가 달라집니다. Axios 요청 결과와 실패 응답을 기준으로 화면 상태를 갱신하고, 새로고침 이후에도 사용자가 같은 흐름을 이어갈 수 있는지 확인했습니다.</p>
+          <p class="text-xs font-bold uppercase text-cyan-700">Frontend</p>
+          <h3 class="mt-2 font-bold text-neutral-950">역할별 쇼핑몰 화면 구현</h3>
           <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-cyan-700">
             <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">React</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Vite</li>
             <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Axios</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Form Validation</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Role UI</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Error Message</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">Zustand</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">TanStack Query</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-cyan-100">CSS Modules</li>
           </ul>
         </article>
         <article class="rounded-xl border border-emerald-100 bg-emerald-50/60 p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase text-emerald-700">Data & Deploy</p>
-          <h3 class="mt-2 font-bold text-neutral-950">상태 전이와 배포 설정을 함께 검증했습니다</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">상품 승인, 주문 생성, 결제 완료, 배송, 환불처럼 상태가 바뀌는 기능은 요청 성공 이후 DB 조회 결과까지 확인했습니다. 프론트엔드는 S3·CloudFront, 백엔드는 EC2 기준으로 API 주소, Toss Payments, EmailJS, Redis 설정을 분리해 점검했습니다.</p>
+          <p class="text-xs font-bold uppercase text-emerald-700">Integration & Deploy</p>
+          <h3 class="mt-2 font-bold text-neutral-950">결제·AI 추천·배포 연동</h3>
           <ul class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-emerald-700">
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">JPA</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">MySQL</li>
-            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Redis</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">FastAPI</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">OpenAI API</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">Toss Payments</li>
+            <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">EmailJS</li>
             <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">S3</li>
             <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">CloudFront</li>
             <li class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">EC2</li>
@@ -236,20 +263,19 @@
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Verification</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">기능 구현과 검증 기록</h2>
-      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">AllPick에서는 쇼핑몰 기능을 화면별로만 보지 않고 회원, 판매자, 관리자 흐름이 API와 DB 상태로 어떻게 이어지는지 확인했습니다. 인증, 주문, 승인, 추천, CS 기능을 구현 단위로 나누고 실패 조건과 응답 흐름을 함께 기록했습니다.</p>
+      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">AllPick은 화면 기능과 함께 API 응답, 권한, DB 상태를 확인하며 구현했습니다.</p>
       <div class="mt-10 divide-y divide-neutral-200 border-y border-neutral-200">
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">01 / Authentication</p>
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">회원·판매자·관리자 인증 기준을 분리했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">일반 회원 로그인, 판매자 로그인, 관리자 로그인 흐름을 나누고 요청 경로에 따라 필요한 토큰과 권한이 다르게 적용되도록 확인했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">확인 조건</strong> 로그인 실패, 토큰 누락, 역할이 맞지 않는 관리자·판매자 요청</li>
-              <li><strong class="text-neutral-950">검증 결과</strong> 역할별 접근 가능 API와 화면 노출 기준을 분리</li>
-            </ul>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">회원, 판매자, 관리자 요청 경로별로 토큰과 권한을 분리했습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/allpick-admin-member-management.png" alt="AllPick 관리자 구매자 계정 관리와 판매자 승인·정지 관리 화면" width="1600" height="900"/>
+            <div class="proof-grid proof-grid--two">
+              <img class="proof-thumb" src="assets/allpick-originals/admin-member-list.png" alt="AllPick 관리자 구매자 계정 관리 화면" width="769" height="557"/>
+              <img class="proof-thumb" src="assets/allpick-originals/admin-seller-list.png" alt="AllPick 관리자 판매자 승인·정지 관리 화면" width="776" height="383"/>
+            </div>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">역할별 인증과 접근 기준 검증</figcaption>
           </figure>
         </article>
@@ -257,14 +283,13 @@
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">02 / Permission</p>
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">승인과 주문 상태가 뒤틀리지 않도록 확인했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">판매자 승인, 상품 승인, 주문 생성, 클레임 처리처럼 상태가 바뀌는 기능은 요청 성공 이후 실제 DB 상태와 후속 조회 결과가 일치하는지 확인했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">확인 조건</strong> 승인 전 상품 등록, 존재하지 않는 주문, 이미 처리된 클레임</li>
-              <li><strong class="text-neutral-950">검증 결과</strong> 실패 조건별 메시지와 상태 변경 여부를 문서에 기록</li>
-            </ul>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">승인, 주문, 환불 상태가 화면과 DB에서 같은 기준으로 바뀌는지 확인했습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
-            <img class="project-shot" src="assets/allpick-order-refund-status-check.png" alt="AllPick 관리자 주문 상태와 환불 승인 대기 화면" width="1400" height="1200"/>
+            <div class="proof-grid proof-grid--two">
+              <img class="proof-thumb" src="assets/allpick-originals/admin-order-list.png" alt="AllPick 관리자 주문 상태 관리 목록 화면" width="1664" height="628"/>
+              <img class="proof-thumb" src="assets/allpick-originals/admin-order-detail.png" alt="AllPick 관리자 주문 상세와 환불 승인 대기 화면" width="1642" height="238"/>
+            </div>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">주문 상태와 환불 승인 흐름 검증</figcaption>
           </figure>
         </article>
@@ -272,14 +297,14 @@
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">03 / AI & Integration</p>
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">외부 연동 기능은 입력과 실패 응답을 함께 확인했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">Toss Payments, EmailJS, 사업자등록번호 검증, FastAPI 추천 서버처럼 외부 연동이 필요한 기능은 입력값과 요청 흐름, 실패 응답을 나누어 확인했습니다. 사업자등록번호 검증은 실제 번호를 보유한 사용자가 없어 테스트용 더미 데이터 기준으로 검증했습니다.</p>
-            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">확인 조건</strong> 추천 입력 누락, 외부 API 키 누락, 결제·메일 연동 실패</li>
-              <li><strong class="text-neutral-950">검증 결과</strong> 기능별 재현 방법과 수정 결과를 이슈 단위로 정리</li>
-            </ul>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">Toss Payments, EmailJS, FastAPI 추천 서버 연동을 요청 흐름과 실패 응답 기준으로 확인했습니다.</p>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/allpick-external-integration-check.png" alt="AllPick EmailJS 인증 메일, Toss Payments 결제창, FastAPI AI 추천 응답 검증 화면" width="1400" height="1200"/>
+            <div class="proof-grid">
+              <img class="proof-thumb" src="assets/allpick-originals/email-verification.png" alt="AllPick EmailJS 인증 메일 수신 화면" width="478" height="380"/>
+              <img class="proof-thumb" src="assets/allpick-originals/payment-window.png" alt="AllPick Toss Payments 결제창 화면" width="522" height="521"/>
+              <img class="proof-thumb" src="assets/allpick-originals/ai-recommendation.png" alt="AllPick FastAPI AI 추천 응답 검증 화면" width="1351" height="555"/>
+            </div>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">외부 연동과 입력값 검증 기록</figcaption>
           </figure>
         </article>
