@@ -1043,39 +1043,39 @@
 <div class="ai-principles-grid reveal-on-scroll">
 <div class="ai-principles-copy">
 <span class="ai-principles-eyebrow">TFT-gogo AI Harness</span>
-<h2>AI가 만든 변경을, 사람이 검증 가능한 단위로 좁혔습니다.</h2>
-<p>TFT-gogo 저장소의 PR, AI용 스펙, handoff 문서, 테스트를 기준으로 AI 작업 구간과 사람의 개입 지점을 분리해 정리했습니다.</p>
+<h2>AI가 계속 일하게 두되, 사람의 판단 지점을 남겼습니다.</h2>
+<p>AI가 제안한 변경을 그대로 합치지 않고, 작업 단위마다 검토·수정·테스트·운영 안정성 확인을 거쳐 반영했습니다.</p>
 </div>
 <div class="ai-metric-grid" aria-label="TFT-gogo AI 하네스 지표">
 <article class="ai-metric">
-<span class="ai-metric-kicker">AI Scope PR <span class="material-symbols-outlined" aria-hidden="true">psychology</span></span>
+<span class="ai-metric-kicker">AI-Assisted Work <span class="material-symbols-outlined" aria-hidden="true">psychology</span></span>
 <strong class="ai-metric-value">44<small>/100</small></strong>
-<p>최근 merged PR 100개 중 AI 추천, GameGuide AI, fallback, pgvector 등 AI 기능 범위에 해당하는 변경입니다.</p>
+<p>최근 merged PR 100개 중 AI 추천, 게임가이드 AI, 벡터 검색, fallback 흐름처럼 AI가 지속적으로 관여한 변경입니다.</p>
 </article>
 <article class="ai-metric">
-<span class="ai-metric-kicker">Human Guardrail <span class="material-symbols-outlined" aria-hidden="true">verified_user</span></span>
+<span class="ai-metric-kicker">Human Intervention <span class="material-symbols-outlined" aria-hidden="true">verified_user</span></span>
 <strong class="ai-metric-value">34<small>/100</small></strong>
-<p>중복 실행 방지, 부분 데이터 삭제 차단, 인증 실패 분리, 운영 설정 검증처럼 사람이 상태 계약을 고정한 PR입니다.</p>
+<p>AI 제안을 그대로 쓰지 않고, 중복 실행·데이터 삭제·인증 실패·운영 설정 같은 위험 지점을 사람이 다시 고친 변경입니다.</p>
 </article>
 <article class="ai-metric">
-<span class="ai-metric-kicker">AI Spec Files <span class="material-symbols-outlined" aria-hidden="true">description</span></span>
+<span class="ai-metric-kicker">Working Rules <span class="material-symbols-outlined" aria-hidden="true">description</span></span>
 <strong class="ai-metric-value">20</strong>
-<p><code>docs/for-ai</code>에 도메인별 계약을 분리해 AI가 임의 구현하지 않도록 입력 경계를 만들었습니다.</p>
+<p>AI가 참고할 도메인별 스펙과 작업 규칙을 분리해, 구현 범위와 데이터 계약을 먼저 고정했습니다.</p>
 </article>
 <article class="ai-metric">
-<span class="ai-metric-kicker">Test Surface <span class="material-symbols-outlined" aria-hidden="true">fact_check</span></span>
+<span class="ai-metric-kicker">Verified Surface <span class="material-symbols-outlined" aria-hidden="true">fact_check</span></span>
 <strong class="ai-metric-value">107</strong>
-<p>backend, frontend, ai-server 테스트 파일을 통해 AI 산출물을 기능·상태·회귀 케이스로 재검증했습니다.</p>
+<p>backend, frontend, ai-server 테스트로 AI 산출물이 실제 기능과 상태 전이를 깨지 않는지 확인했습니다.</p>
 </article>
 <article class="ai-metric ai-metric-wide">
 <div>
-<span class="ai-metric-kicker">Harness Flow</span>
-<strong class="ai-metric-value">6 handoff</strong>
+<span class="ai-metric-kicker">Harness Loop</span>
+<strong class="ai-metric-value">AI → 사람 → 검증</strong>
 </div>
 <div class="ai-handoff-list" aria-label="AI 작업 통제 방식">
-<span>Issue #566, #647처럼 작업 계획과 성능 테스트 handoff를 먼저 작성</span>
-<span>Claude/Codex/CodeRabbit 결과를 PR 리뷰와 테스트 결과로 교차 확인</span>
-<span>AI 제안은 운영 상태 계약, DB 락, timeout, fallback 차단 기준으로 사람이 최종 선택</span>
+<span>AI가 초안과 개선안을 만들고, 사람은 요구사항과 위험 범위를 다시 좁힘</span>
+<span>변경은 PR 단위로 나누고 테스트·성능 수치·화면 확인으로 재검증</span>
+<span>운영 안정성에 영향을 주는 락, timeout, fallback, 인증 흐름은 사람이 최종 판단</span>
 </div>
 </article>
 </div>
