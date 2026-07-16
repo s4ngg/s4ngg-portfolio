@@ -215,10 +215,119 @@
         }
         .ai-principles-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+            gap: 36px;
+            align-items: start;
+            padding-top: 76px;
+            padding-bottom: 96px;
+        }
+        .ai-principles-copy {
+            position: sticky;
+            top: 96px;
+        }
+        .ai-principles-eyebrow {
+            display: inline-flex;
+            margin-bottom: 14px;
+            color: #1554e8;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 18px;
+            text-transform: uppercase;
+        }
+        .ai-principles-copy h2 {
+            color: #141516;
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.24;
+            letter-spacing: 0;
+        }
+        .ai-principles-copy p {
+            max-width: 460px;
+            margin-top: 18px;
+            color: #5d6368;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.7;
+        }
+        .ai-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .ai-metric {
+            min-height: 154px;
+            padding: 18px;
+            border: 1px solid #e1e4e7;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        .ai-metric-kicker {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            color: #6a7075;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            line-height: 18px;
+            text-transform: uppercase;
+        }
+        .ai-metric-value {
+            display: block;
+            margin-top: 16px;
+            color: #141516;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0;
+        }
+        .ai-metric-value small {
+            font-size: 16px;
+            font-weight: 800;
+        }
+        .ai-metric p {
+            margin-top: 12px;
+            color: #5d6368;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.55;
+        }
+        .ai-metric-wide {
+            display: grid;
+            grid-column: 1 / -1;
+            grid-template-columns: 190px minmax(0, 1fr);
             gap: 22px;
-            padding-top: 80px;
-            padding-bottom: 108px;
+            align-items: center;
+            min-height: auto;
+            background: #f8fafc;
+        }
+        .ai-metric-wide .ai-metric-value {
+            font-size: 28px;
+            line-height: 1.18;
+        }
+        .ai-handoff-list {
+            display: grid;
+            gap: 10px;
+            color: #3f4448;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        .ai-handoff-list span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-handoff-list span::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #1554e8;
+            flex: 0 0 auto;
         }
         .ai-principle {
             border-top: 2px solid #1a1c1d;
@@ -726,6 +835,31 @@
                 padding-top: 48px;
                 padding-bottom: 60px;
             }
+            .ai-principles-copy {
+                position: static;
+            }
+            .ai-principles-copy h2 {
+                font-size: 30px;
+                line-height: 1.32;
+            }
+            .ai-principles-copy p {
+                max-width: 100%;
+                font-size: 14px;
+            }
+            .ai-metric-grid {
+                grid-template-columns: 1fr;
+            }
+            .ai-metric {
+                min-height: auto;
+                padding: 16px;
+            }
+            .ai-metric-value {
+                font-size: 32px;
+            }
+            .ai-metric-wide {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
             .ai-principle {
                 min-height: auto;
             }
@@ -903,27 +1037,47 @@
 </div>
 </div>
 </section>
-<!-- 개발 강점 -->
-<section class="ai-principles-section px-margin-mobile md:px-margin-desktop" aria-label="개발 강점">
+<!-- AI 하네스 지표 -->
+<section class="ai-principles-section px-margin-mobile md:px-margin-desktop" aria-label="AI 하네스 지표">
 <div class="max-w-container-max mx-auto">
 <div class="ai-principles-grid reveal-on-scroll">
-<div class="ai-principle">
-<span class="material-symbols-outlined ai-principle-icon" aria-hidden="true">account_tree</span>
-<strong>전체 흐름 이해</strong>
-<span>코드가 어디서 어떻게 쓰이는지 먼저 봅니다.</span>
-<p>기능 하나가 어느 레이어를 거치고 어떤 데이터를 건드리는지 파악하면 방향을 잡기 쉽습니다. 그래야 나중에 생길 문제도 미리 짚을 수 있습니다.</p>
+<div class="ai-principles-copy">
+<span class="ai-principles-eyebrow">AI Harness Metrics</span>
+<h2>AI가 작업해도, 기준은 지표와 검증으로 남깁니다.</h2>
+<p>포트폴리오 저장소의 커밋과 PR 흐름을 기준으로 AI 개입 구간, 사람의 판단 지점, 검증 루프를 짧은 수치로 정리했습니다.</p>
 </div>
-<div class="ai-principle">
-<span class="material-symbols-outlined ai-principle-icon" aria-hidden="true">construction</span>
-<strong>하네스 엔지니어링</strong>
-<span>AI가 잘 작동할 조건을 먼저 만듭니다.</span>
-<p>좋은 출력은 좋은 입력에서 나옵니다. 범위를 쪼개고 제약을 걸고 결과를 검증하는 구조를 설계하면 AI 활용의 품질이 달라집니다.</p>
+<div class="ai-metric-grid" aria-label="포트폴리오 저장소 AI 하네스 지표">
+<article class="ai-metric">
+<span class="ai-metric-kicker">Merged PR <span class="material-symbols-outlined" aria-hidden="true">merge</span></span>
+<strong class="ai-metric-value">11</strong>
+<p>홈, 프로젝트 상세, 성능개선, 트러블슈팅을 PR 단위로 나누어 반영했습니다.</p>
+</article>
+<article class="ai-metric">
+<span class="ai-metric-kicker">Commit Trail <span class="material-symbols-outlined" aria-hidden="true">commit</span></span>
+<strong class="ai-metric-value">35</strong>
+<p>초기 배포부터 카피 개선, 증빙 보강, 지표 페이지 추가까지 변경 이력을 남겼습니다.</p>
+</article>
+<article class="ai-metric">
+<span class="ai-metric-kicker">Codex Branch <span class="material-symbols-outlined" aria-hidden="true">hub</span></span>
+<strong class="ai-metric-value">3</strong>
+<p><code>codex/</code> 브랜치에서 상세 설명, 증빙 갤러리, AI 리뷰 자료를 분리해 작업했습니다.</p>
+</article>
+<article class="ai-metric">
+<span class="ai-metric-kicker">Evidence Loop <span class="material-symbols-outlined" aria-hidden="true">fact_check</span></span>
+<strong class="ai-metric-value">4<small> areas</small></strong>
+<p>Notion, Issue, PR, 성능 지표를 함께 보여주어 결과보다 판단 과정을 먼저 확인하게 했습니다.</p>
+</article>
+<article class="ai-metric ai-metric-wide">
+<div>
+<span class="ai-metric-kicker">Human Control</span>
+<strong class="ai-metric-value">검토 후 반영</strong>
 </div>
-<div class="ai-principle">
-<span class="material-symbols-outlined ai-principle-icon" aria-hidden="true">verified_user</span>
-<strong>스펙 주도 개발</strong>
-<span>개발자가 알아야 AI도 제대로 씁니다.</span>
-<p>Claude로 코드를 짜고 Codex로 리뷰하는 2중 구조를 씁니다. 스펙과 컨벤션, 제약 조건을 먼저 정의해두면 AI가 이를 벗어나지 않습니다.</p>
+<div class="ai-handoff-list" aria-label="AI 작업 통제 방식">
+<span>요구사항을 이슈와 스펙으로 먼저 좁힘</span>
+<span>AI 산출물은 PR, 스크린샷, 성능 수치로 재검증</span>
+<span>최종 문구와 노출 범위는 사람이 조정</span>
+</div>
+</article>
 </div>
 </div>
 </div>
