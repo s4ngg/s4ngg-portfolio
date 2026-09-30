@@ -14,6 +14,7 @@
 <meta name="twitter:description" content="Spring Boot/JPA 기반 백엔드 신입 개발자 김상우의 포트폴리오. AllPick, TFT-gogo, 로스트아크 AI 에이전트 플랫폼 Lojipsa 프로젝트와 트러블슈팅 기록."/>
 <meta name="twitter:image" content="assets/profile-hero.jpg"/>
 <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="assets/scroll-effects.css" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -112,15 +113,6 @@
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
         .nav-link-active {
             color: #000000;
@@ -1041,7 +1033,7 @@
 <main class="overflow-x-hidden">
 <!-- 히어로 섹션 -->
 <section class="hero-section flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop">
-<figure class="hero-portrait" aria-label="김상우 프로필 이미지">
+<figure class="hero-portrait hero-portrait-float" aria-label="김상우 프로필 이미지">
 <img src="assets/profile-hero.jpg" alt="김상우 프로필 사진" width="354" height="472"/>
 </figure>
 <div class="hero-content reveal-on-scroll visible">
@@ -1358,23 +1350,8 @@
 </footer>
 <script src="assets/image-modal.js" defer></script>
 <script src="assets/project-modal.js" defer></script>
+<script src="assets/scroll-effects.js" defer></script>
 <script>
-    // Simple Intersection Observer for reveal effects
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

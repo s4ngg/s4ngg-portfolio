@@ -14,6 +14,7 @@
   <meta name="twitter:description" content="AllPick 쇼핑몰 — 회원·판매자·관리자 흐름과 상품·주문·결제·AI 추천을 구현한 팀 프로젝트. AWS 배포와 AI 추천(FastAPI) 담당."/>
   <meta name="twitter:image" content="assets/allpick-main-home.png"/>
   <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="assets/scroll-effects.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -96,7 +97,7 @@
     </div>
   </section>
 
-  <section class="bg-neutral-50">
+  <section class="bg-neutral-50 reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 py-16">
       <div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-end">
       <div>
@@ -133,7 +134,7 @@
     </div>
   </section>
 
-  <section class="border-y border-neutral-200 bg-white">
+  <section class="border-y border-neutral-200 bg-white reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Design Assets</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">설계 산출물</h2>
@@ -163,7 +164,7 @@
     </div>
   </section>
 
-  <section class="bg-neutral-50">
+  <section class="bg-neutral-50 reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Features</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현 기능</h2>
@@ -215,7 +216,7 @@
     </div>
   </section>
 
-  <section class="border-y border-neutral-200 bg-white">
+  <section class="border-y border-neutral-200 bg-white reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Skills</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">사용 기술</h2>
@@ -271,7 +272,7 @@
     </div>
   </section>
 
-  <section class="bg-neutral-50">
+  <section class="bg-neutral-50 reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 py-14">
       <p class="text-sm font-bold text-blue-700">Verification</p>
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">기능 구현과 검증 기록</h2>
@@ -335,6 +336,7 @@
   </div>
 </footer>
 <script src="assets/image-modal.js" defer></script>
+<script src="assets/scroll-effects.js" defer></script>
 <!-- Portfolio AI 챗봇 위젯 -->
 <script src="assets/chat-widget.js" data-endpoint="https://portfolio-agent-muuk.onrender.com" defer></script>
 </body>
