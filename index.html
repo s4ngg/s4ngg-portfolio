@@ -490,6 +490,10 @@
             background: #f5f3ff;
             border-color: #ede9fe;
         }
+        .project-card-emerald {
+            background: #ecfdf5;
+            border-color: #d1fae5;
+        }
         button.project-card {
             width: 100%;
             font: inherit;
@@ -587,6 +591,10 @@
             color: #6d28d9;
             box-shadow: inset 0 0 0 1px #ede9fe;
         }
+        .project-title-emerald {
+            color: #047857;
+            box-shadow: inset 0 0 0 1px #d1fae5;
+        }
         .project-badge {
             display: inline-flex;
             align-items: center;
@@ -606,6 +614,10 @@
         .project-badge-violet {
             color: #6d28d9;
             box-shadow: inset 0 0 0 1px #ede9fe;
+        }
+        .project-badge-emerald {
+            color: #047857;
+            box-shadow: inset 0 0 0 1px #d1fae5;
         }
         .project-card-copy {
             margin-top: 14px;
@@ -994,6 +1006,7 @@
 <div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="lojipsa-project.html">Lojipsa</a>
 </div>
 </details>
 <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
@@ -1008,6 +1021,7 @@
 <p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
 <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
 <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+<a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="lojipsa-project.html">Lojipsa</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
 </nav>
@@ -1127,6 +1141,26 @@
 <li>Spring Boot</li>
 <li>FastAPI</li>
 <li>Docker</li>
+<li>AWS</li>
+</ul>
+<span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</button>
+<button type="button" class="project-card project-card-emerald reveal-on-scroll" data-project-modal="lojipsa" aria-haspopup="dialog" aria-label="Lojipsa 자세히 보기">
+<div class="project-media project-media--shot">
+<img src="assets/blank-placeholder.svg" alt="Lojipsa 홈 화면" width="1400" height="900"/>
+</div>
+<span class="project-kind">로스트아크 AI 에이전트 플랫폼</span>
+<div class="project-title-row">
+<h3 class="project-card-title project-title-emerald">Lojipsa</h3>
+<span class="project-badge project-badge-emerald">26.09 ~ 진행중</span>
+<span class="project-badge project-badge-emerald">개인 프로젝트</span>
+</div>
+<p class="project-card-copy">로스트아크 게임 정보를 자동으로 수집·판단해 Slack으로 전달하는 AI 에이전트 여러 개를 혼자 기획·개발·배포·운영하는 개인 프로젝트입니다. 배포 후에도 스스로 품질을 점검하는 피드백 에이전트까지 구현했습니다.</p>
+<ul class="project-tags" aria-label="기술스택">
+<li>Spring Boot</li>
+<li>Next.js</li>
+<li>Claude API</li>
+<li>PostgreSQL</li>
 <li>AWS</li>
 </ul>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>

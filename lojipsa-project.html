@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Lojipsa | 김상우 포트폴리오</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #ffffff; word-break: keep-all; overflow-wrap: break-word; }
+  .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
+  .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+  .agent-card { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김상우</a>
+    <nav class="hidden items-center gap-7 md:flex">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
+      <details class="relative">
+        <summary class="flex list-none cursor-pointer items-center gap-1 text-sm font-semibold text-neutral-600 hover:text-blue-700">프로젝트<span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></summary>
+        <div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+          <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="lojipsa-project.html">Lojipsa</a>
+        </div>
+      </details>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="performance.html">성능개선</a>
+    </nav>
+    <details class="relative md:hidden">
+      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
+        <p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-bold text-blue-700" href="lojipsa-project.html">Lojipsa</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="bg-white">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+      <div>
+        <p class="text-sm font-bold uppercase text-blue-700">로스트아크 AI 에이전트 플랫폼 · 개인 프로젝트</p>
+        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">Lojipsa</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">로스트아크 게임 정보를 자동으로 수집·판단해 Slack으로 전달하는 AI 에이전트를 여러 개 혼자 기획부터 배포·운영까지 담당하는 개인 프로젝트입니다. 배포하고 끝나는 게 아니라, 운영 중에도 스스로 품질을 점검하는 피드백 에이전트까지 구현했습니다.</p>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Spring Boot</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Next.js</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Claude API</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">PostgreSQL</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Docker</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">AWS</span>
+        </div>
+      </div>
+      <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+        <img class="project-shot" src="assets/blank-placeholder.svg" alt="Lojipsa 홈 화면" width="1400" height="900"/>
+        <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">Lojipsa 홈 — 배포된 에이전트 소개</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 pt-16 pb-28">
+      <div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+      <div>
+        <p class="text-sm font-bold text-blue-700">Repository</p>
+        <div class="mt-2 flex flex-wrap items-center gap-3">
+          <h2 class="display text-3xl font-extrabold text-neutral-950">GitHub 저장소</h2>
+          <span class="inline-flex rounded bg-white px-2.5 py-1 text-xs font-bold uppercase text-blue-700 ring-1 ring-neutral-200">Solo Project</span>
+        </div>
+      </div>
+      </div>
+      <div class="mt-6 grid gap-4">
+        <a class="flex flex-col gap-4 rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-blue-700 hover:shadow-sm md:flex-row md:items-center md:justify-between" href="https://github.com/s4ngg/Lojipsa" target="_blank" rel="noreferrer">
+          <div>
+          <p class="font-bold text-neutral-950">Lojipsa</p>
+          <p class="mt-1 text-sm text-neutral-600">Spring Boot, Next.js, Claude API, Docker, AWS(EC2/RDS/Route53), Vercel</p>
+          </div>
+          <span class="inline-flex shrink-0 items-center gap-1 text-sm font-bold text-blue-700">GitHub 바로가기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></span>
+        </a>
+        <a class="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-blue-700 hover:shadow-sm md:flex-row md:items-center md:justify-between" href="https://lojipsa.com" target="_blank" rel="noreferrer">
+          <div>
+          <p class="font-bold text-neutral-950">lojipsa.com</p>
+          <p class="mt-1 text-sm text-neutral-600">실제 배포된 서비스 — Discord 로그인 후 캐릭터를 등록하면 바로 확인할 수 있습니다.</p>
+          </div>
+          <span class="inline-flex shrink-0 items-center gap-1 text-sm font-bold text-blue-700">사이트 바로가기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Agents</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">배포된 에이전트 / 기능</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <article class="agent-card rounded-lg border border-neutral-200 bg-white p-5">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">Slack 알림 · 매일 / 30분</span>
+          <h3 class="mt-3 font-bold text-neutral-950">숙제·시세 알림</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">숙제 체크리스트를 매일 발송하고, 관심 재료의 가격 변동을 30분 주기로 감시해 Slack으로 전달합니다.</p>
+        </article>
+        <article class="agent-card rounded-lg border border-neutral-200 bg-white p-5">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">Slack 알림 · 매분</span>
+          <h3 class="mt-3 font-bold text-neutral-950">일정 알리미</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">모험 섬, 카오스게이트, 필드보스, 항해 같은 시간 제한 콘텐츠가 다가오면 카운트다운 알림을 보냅니다.</p>
+        </article>
+        <article class="agent-card rounded-lg border border-neutral-200 bg-white p-5">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">Slack 알림 · 15분 · Claude</span>
+          <h3 class="mt-3 font-bold text-neutral-950">공지 요약봇</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">공식 공지를 크롤링해 Claude로 핵심 내용만 요약하고, 관리자가 등록한 배경지식 범위 안에서만 답하도록 제한했습니다.</p>
+        </article>
+        <article class="agent-card rounded-lg border border-emerald-200 bg-emerald-50/60 p-5">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-emerald-700">Slack 알림 · 매일 09:00 · Claude</span>
+          <h3 class="mt-3 font-bold text-neutral-950">피드백 에이전트</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">실 유저 데이터 없이 합성 시나리오로 핵심 LLM 기능(원정대 방향성 추천)을 매일 자동 실행하고, 그 출력을 다시 다른 LLM 호출로 채점(PASS/FAIL)시켜 운영 품질을 스스로 점검합니다.</p>
+        </article>
+        <article class="agent-card rounded-lg border border-neutral-200 bg-white p-5">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700">Discord 로그인</span>
+          <h3 class="mt-3 font-bold text-neutral-950">내 공격대 / 숙제 관리 / 주간 골드 계산</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">대표 캐릭터 하나만 등록하면 전체 로스터를 불러오고, 캐릭터별 주간 레이드 체크리스트와 예상 주간 골드를 계산해줍니다.</p>
+        </article>
+        <article class="agent-card rounded-lg border border-neutral-200 bg-white p-5">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700">Discord 로그인 · Claude</span>
+          <h3 class="mt-3 font-bold text-neutral-950">원정대 방향성</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">현재/목표 아이템 레벨의 주간 골드 차이와 강화 비용, admin이 등록한 최신 게임 지식을 함께 Claude에 전달해 강화 vs 주차 판단을 추천합니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">AI Reliability</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">AI에게 정답을 맡기지 않고, 검증 장치를 함께 만들었습니다</h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="rounded-lg border border-blue-100 bg-blue-50/60 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">01 / 데이터 원칙</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">임의로 만든 데이터를 쓰지 않습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">사용자가 직접 확인해준 사실이거나, 로스트아크 공식 Open API·CDN이 실제로 내려주는 데이터만 사용합니다. 캐릭터 직업 아이콘도 자체 제작 대신 공식 CDN의 직업 엠블럼 이미지를 가져다 씁니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-blue-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">공식 Open API</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-blue-100">검증 가능한 데이터</span>
+          </div>
+        </article>
+        <article class="rounded-lg border border-violet-100 bg-violet-50/60 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">02 / 배경지식 주입</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">LLM이 최신 정보를 지어내지 못하게 막습니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">공지 요약, 원정대 방향성 같은 기능은 admin이 편집 가능한 "배경지식" 텍스트를 프롬프트에 주입해서, 모델이 아는 척하지 않고 검증된 정보 안에서만 답하도록 설계했습니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-violet-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">프롬프트 주입</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-violet-100">환각 방지</span>
+          </div>
+        </article>
+        <article class="rounded-lg border border-emerald-100 bg-emerald-50/60 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">03 / LLM-as-judge</p>
+          <h3 class="mt-2 text-lg font-extrabold text-neutral-950">배포 후에도 스스로 채점합니다</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">합성 시나리오로 핵심 기능을 매일 자동 실행하고, 그 출력을 다시 다른 LLM 호출로 PASS/FAIL 채점시켜 Slack에 보고합니다. "동작한다"와 "운영 가능하다"의 차이를 스스로 확인하는 장치입니다.</p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-emerald-700">
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">자체 채점</span>
+            <span class="rounded-md bg-white px-2.5 py-1 ring-1 ring-emerald-100">운영 품질 점검</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Troubleshooting</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">피드백 에이전트가 실제로 버그를 잡았습니다</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-7 text-neutral-700">피드백 에이전트를 로컬에서 검증하는 과정 자체에서, 기존에 있던 두 가지 문제를 실제로 찾아냈습니다.</p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <h3 class="font-bold text-neutral-950">Claude 응답이 "thinking" 블록만 오고 텍스트가 없을 때 NPE로 새던 문제</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">공용 Claude 클라이언트가 응답의 첫 콘텐츠 블록이 항상 텍스트라고 가정하고 있었는데, 상위 모델이 사고 과정(thinking) 블록만 반환하는 경우가 실제로 있었습니다. type이 "text"인 블록을 명시적으로 찾도록 고치고, 못 찾으면 예외 대신 빈 결과를 반환하도록 정리했습니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <h3 class="font-bold text-neutral-950">채점 호출 실패를 "정상"으로 잘못 표시하던 로직 결함</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">채점 자체가 실패한 경우와 실제 PASS를 구분하지 않아서, 채점 불능 상태가 Slack에 "정상"으로 잘못 보고되고 있었습니다. 판정 보류(🟡) 상태를 따로 두어 진짜 이상 상황을 놓치지 않도록 고쳤습니다.</p>
+        </article>
+      </div>
+      <a class="mt-8 inline-flex items-center gap-1 text-sm font-bold text-blue-700" href="https://github.com/s4ngg/Lojipsa/blob/main/TROUBLESHOOTING.md" target="_blank" rel="noreferrer">TROUBLESHOOTING.md 전체 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Deploy & Operate</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">배포하고 끝나지 않고, 운영까지 책임집니다</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <article class="rounded-lg border border-neutral-200 bg-white p-5">
+          <h3 class="font-bold text-neutral-950">EC2 프리티어 메모리 제약 대응</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">t3.micro(1GB)에서 <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-xs">docker compose up --build</code>를 직접 돌리면 서버 자체가 응답 불능이 되는 걸 겪었습니다. 빌드가 필요한 재배포에만 t3.small로 일시 업사이징했다가 다시 내리는 절차로 정리해, 평상시 비용은 그대로 두고 안정성을 확보했습니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-white p-5">
+          <h3 class="font-bold text-neutral-950">프론트 / 백엔드 / DNS 분리 배포</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">프론트엔드는 Vercel에 GitHub push로 자동 배포하고, 백엔드는 EC2 + Docker + Nginx + Certbot으로 별도 운영합니다. 인스턴스를 재시작할 때마다 IP가 바뀌는 걸 감안해 Route 53 레코드 갱신까지 포함한 재배포 절차를 문서화했습니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-neutral-200 bg-white py-10">
+  <div class="mx-auto max-w-6xl px-5 text-sm text-neutral-500">
+    <a class="font-semibold text-blue-700" href="index.html">← 김상우 포트폴리오 홈으로</a>
+  </div>
+</footer>
+</body>
+</html>

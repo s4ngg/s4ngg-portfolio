@@ -56,6 +56,28 @@
         { src: "assets/tft-usecase-diagram.png", alt: "TFT-gogo 유스케이스 다이어그램", caption: "유스케이스 다이어그램" },
       ],
     },
+    // TODO: previewImage는 실제 배포 도메인 스크린샷을 촬영한 뒤 assets/에 추가하고 교체할 것
+    lojipsa: {
+      kind: "로스트아크 AI 에이전트 플랫폼",
+      title: "Lojipsa",
+      accent: "emerald",
+      description:
+        "로스트아크 게임 정보를 자동으로 수집·판단해 Slack으로 전달하는 AI 에이전트 여러 개를 혼자 기획·개발·배포·운영하는 개인 프로젝트입니다. 배포 후에도 스스로 품질을 점검하는 피드백 에이전트까지 구현했습니다.",
+      domain: { label: "lojipsa.com", href: "https://lojipsa.com" },
+      tags: ["Spring Boot", "Next.js", "Claude API", "PostgreSQL", "AWS"],
+      techGroups: [
+        { label: "Backend", items: ["Java", "Spring Boot", "Spring Data JPA", "Discord OAuth2", "JWT"] },
+        { label: "Frontend", items: ["Next.js", "TypeScript", "Tailwind CSS"] },
+        { label: "AI", items: ["Claude API(Anthropic)", "스케줄 기반 Agent", "LLM-as-judge"] },
+        { label: "Infra", items: ["Docker", "AWS EC2", "RDS(PostgreSQL)", "Route 53", "Vercel"] },
+      ],
+      role: "1인 프로젝트로 기획·백엔드·프론트·인프라·운영 전체를 담당. 배경지식 주입으로 LLM의 환각을 막고, 실 유저 데이터 없이 합성 시나리오로 핵심 기능을 매일 자동 실행해 그 결과를 다시 LLM으로 채점(LLM-as-judge)하는 자체 피드백 루프를 설계·구현했습니다.",
+      href: "lojipsa-project.html",
+      previewImage: { src: "assets/blank-placeholder.svg", alt: "Lojipsa 홈 화면" },
+      previewImages: [
+        { src: "assets/blank-placeholder.svg", alt: "Lojipsa 홈 화면", caption: "홈 — 배포된 에이전트 소개" },
+      ],
+    },
   };
 
   function ensureStyle() {
@@ -316,6 +338,21 @@
       }
       #${MODAL_ID} .project-modal-panel[data-accent="violet"] .project-modal-link {
         background: #6d28d9;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="emerald"] .project-modal-title {
+        color: #047857;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="emerald"] .project-modal-tech-label {
+        color: #047857;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="emerald"] .project-modal-tech-list li,
+      #${MODAL_ID} .project-modal-panel[data-accent="emerald"] .project-modal-tags li {
+        background: #ecfdf5;
+        border-color: #d1fae5;
+        color: #047857;
+      }
+      #${MODAL_ID} .project-modal-panel[data-accent="emerald"] .project-modal-link {
+        background: #047857;
       }
       @media (max-width: 800px) {
         #${MODAL_ID} {
