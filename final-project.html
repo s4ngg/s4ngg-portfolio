@@ -89,6 +89,47 @@
     </div>
   </section>
 
+  <section class="border-y border-neutral-200 bg-white reveal-on-scroll">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">AI 활용 기록</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">AI를 기능이 아니라, 개발과 운영 전체에서 사용했습니다</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-7 text-neutral-700">제가 담당한 merged PR 120개를 본문·커밋·리뷰·댓글까지 확인해 AI 활용과 사람 검증 비중을 퍼센트로 정리했습니다. Lojipsa에서는 배포 후에도 AI가 스스로 자기 출력을 채점하는 피드백 루프를 직접 설계·운영하고 있습니다.</p>
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">Claude Code Trace</p>
+          <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">96<small class="text-lg">%</small></strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 본문이나 커밋에 Claude Code 기반 작업 흔적이 남아 있는 비율입니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">AI Review Linked</p>
+          <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">95<small class="text-lg">%</small></strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 CodeRabbit 리뷰, 요약, 코멘트가 연결되어 AI 리뷰 루프가 남아 있는 비율입니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">Human Review Loop</p>
+          <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">79<small class="text-lg">%</small></strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 AI 리뷰와 별도로 사람 리뷰 또는 팀원 검토가 함께 남아 있는 비율입니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">Verified Trace</p>
+          <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">93<small class="text-lg">%</small></strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 테스트, CI, audit, JMeter, 성능 수치처럼 검증 근거가 본문이나 커밋에 남은 비율입니다.</p>
+        </article>
+      </div>
+      <article class="mt-4 rounded-lg border border-violet-200 bg-violet-50/60 p-5 md:flex md:items-center md:gap-8">
+        <div class="md:w-56 md:shrink-0">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">Harness Loop</p>
+          <strong class="mt-2 block text-xl font-extrabold text-neutral-950">Claude → Review → 검증</strong>
+        </div>
+        <ul class="mt-3 space-y-2 text-sm leading-6 text-neutral-700 md:mt-0">
+          <li>Claude Code로 구현 초안과 리팩터링 후보를 만들고 PR 단위로 쪼갰습니다.</li>
+          <li>CodeRabbit과 Codex 리뷰를 통해 회귀 위험, 누락된 테스트, 상태 불일치를 다시 점검했습니다.</li>
+          <li>락, timeout, fallback, 인증처럼 운영 안정성에 걸리는 부분은 사람이 최종 판단했습니다.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
   <section class="bg-neutral-50 reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 pt-16 pb-28">
       <div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-end">
