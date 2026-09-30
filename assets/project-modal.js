@@ -2,7 +2,6 @@
   const STYLE_ID = "portfolio-project-modal-style";
   const MODAL_ID = "portfolio-project-modal";
 
-  // TODO: previewImage는 실제 배포 도메인 스크린샷을 촬영한 뒤 assets/에 추가하고 교체할 것
   const PROJECTS = {
     mini: {
       kind: "쇼핑몰 서비스",
@@ -56,7 +55,6 @@
         { src: "assets/tft-usecase-diagram.png", alt: "TFT-gogo 유스케이스 다이어그램", caption: "유스케이스 다이어그램" },
       ],
     },
-    // TODO: previewImage는 실제 배포 도메인 스크린샷을 촬영한 뒤 assets/에 추가하고 교체할 것
     lojipsa: {
       kind: "로스트아크 AI 에이전트 플랫폼",
       title: "Lojipsa",
@@ -73,9 +71,13 @@
       ],
       role: "1인 프로젝트로 기획·백엔드·프론트·인프라·운영 전체를 담당. 배경지식 주입으로 LLM의 환각을 막고, 실 유저 데이터 없이 합성 시나리오로 핵심 기능을 매일 자동 실행해 그 결과를 다시 LLM으로 채점(LLM-as-judge)하는 자체 피드백 루프를 설계·구현했습니다.",
       href: "lojipsa-project.html",
-      previewImage: { src: "assets/blank-placeholder.svg", alt: "Lojipsa 홈 화면" },
+      previewImage: { src: "assets/lojipsa-main-home.png", alt: "Lojipsa 홈 화면" },
       previewImages: [
-        { src: "assets/blank-placeholder.svg", alt: "Lojipsa 홈 화면", caption: "홈 — 배포된 에이전트 소개" },
+        { src: "assets/lojipsa-main-home.png", alt: "Lojipsa 홈 화면", caption: "홈 — 배포된 에이전트 소개" },
+        { src: "assets/lojipsa-my-roster.png", alt: "Lojipsa 내 공격대 캐릭터 목록 화면", caption: "내 공격대" },
+        { src: "assets/lojipsa-homework-management.png", alt: "Lojipsa 숙제 관리 화면", caption: "숙제 관리" },
+        { src: "assets/lojipsa-weekly-gold.png", alt: "Lojipsa 주간 골드 계산 화면", caption: "주간 골드 계산" },
+        { src: "assets/lojipsa-ai-recommendation.png", alt: "Lojipsa 원정대 방향성 AI 추천 결과 화면", caption: "원정대 방향성 AI 추천" },
       ],
     },
   };
