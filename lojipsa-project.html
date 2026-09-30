@@ -84,6 +84,41 @@
     </div>
   </section>
 
+  <section class="border-y border-neutral-200 bg-white reveal-on-scroll">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">AI 활용 기록</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">AI를 기능이 아니라, 개발과 운영 전체에서 사용했습니다</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-7 text-neutral-700">TFT-gogo에서는 담당 merged PR 120개를 분석해 AI 활용과 사람 검증 비중을 퍼센트로 정리했고, Lojipsa에서는 배포 후에도 AI가 스스로 자기 출력을 채점하는 피드백 루프를 직접 설계·운영하고 있습니다.</p>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">데이터 원칙</p>
+          <strong class="mt-2 block text-xl font-extrabold text-neutral-950">임의 데이터 미사용</strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">사용자가 확인해준 사실이거나, 로스트아크 공식 Open API·CDN이 실제로 내려주는 데이터만 사용합니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">배경지식 주입</p>
+          <strong class="mt-2 block text-xl font-extrabold text-neutral-950">환각 방지 설계</strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">admin이 편집하는 배경지식을 프롬프트에 주입해, 모델이 검증된 정보 안에서만 답하도록 설계했습니다.</p>
+        </article>
+        <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">LLM-as-judge</p>
+          <strong class="mt-2 block text-xl font-extrabold text-neutral-950">매일 자동 채점</strong>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">합성 시나리오로 핵심 기능을 매일 자동 실행하고, 다른 LLM 호출로 PASS/FAIL을 채점해 Slack에 보고합니다.</p>
+        </article>
+      </div>
+      <article class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50/60 p-5 md:flex md:items-center md:gap-8">
+        <div class="md:w-56 md:shrink-0">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">Found in Practice</p>
+          <strong class="mt-2 block text-xl font-extrabold text-neutral-950">실제 버그 2건 발견</strong>
+        </div>
+        <ul class="mt-3 space-y-2 text-sm leading-6 text-neutral-700 md:mt-0">
+          <li>Claude 응답이 "thinking" 블록만 오고 텍스트가 없을 때 NPE로 새던 문제</li>
+          <li>채점 호출 실패를 "정상"으로 잘못 표시하던 로직 결함</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
   <section class="bg-neutral-50 reveal-on-scroll">
     <div class="mx-auto max-w-6xl px-5 pt-16 pb-28">
       <div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-end">
