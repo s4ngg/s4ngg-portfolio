@@ -227,6 +227,23 @@
             position: sticky;
             top: 96px;
         }
+        .ai-usage-summary {
+            position: static;
+            max-width: 640px;
+        }
+        .ai-usage-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            color: #1554e8;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        .ai-usage-link .material-symbols-outlined {
+            font-size: 18px;
+        }
         .ai-principles-eyebrow {
             display: inline-flex;
             margin-bottom: 14px;
@@ -1031,6 +1048,7 @@
 </details>
 <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
 <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="performance.html">성능개선</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
 </nav>
 <details class="relative md:hidden">
 <summary class="list-none p-2 text-neutral-900 cursor-pointer">
@@ -1044,6 +1062,7 @@
 <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="lojipsa-project.html">Lojipsa</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
 </nav>
 </details>
 </div>
@@ -1071,83 +1090,14 @@
 </div>
 </div>
 </section>
-<!-- AI 활용 기록 -->
-<section class="ai-principles-section px-margin-mobile md:px-margin-desktop" aria-label="AI 활용 기록">
+<!-- AI 활용 기록 요약 -->
+<section class="ai-principles-section px-margin-mobile md:px-margin-desktop" aria-label="AI 활용 기록 요약">
 <div class="max-w-container-max mx-auto">
-<div class="ai-principles-grid reveal-on-scroll">
-<div class="ai-principles-copy">
+<div class="ai-principles-copy ai-usage-summary reveal-on-scroll">
 <span class="ai-principles-eyebrow">AI 활용 기록</span>
 <h2>AI를 기능이 아니라, 개발과 운영 전체에서 사용했습니다.</h2>
-<p>TFT-gogo에서는 제가 담당한 merged PR 120개를 본문·커밋·리뷰·댓글까지 확인해 AI 활용과 사람 검증 비중을 퍼센트로 정리했고, Lojipsa에서는 배포 후에도 AI가 스스로 자기 출력을 채점하는 피드백 루프를 직접 설계·운영하고 있습니다.</p>
-</div>
-<div class="ai-harness-stack">
-<div class="ai-harness-block">
-<span class="ai-harness-label">TFT-gogo · PR 단위 활용 지표</span>
-<div class="ai-metric-grid" aria-label="TFT-gogo AI 하네스 지표">
-<article class="ai-metric">
-<span class="ai-metric-kicker">Claude Code Trace <span class="material-symbols-outlined" aria-hidden="true">psychology</span></span>
-<strong class="ai-metric-value">96<small>%</small></strong>
-<p>담당 PR 중 본문이나 커밋에 Claude Code 기반 작업 흔적이 남아 있는 비율입니다.</p>
-</article>
-<article class="ai-metric">
-<span class="ai-metric-kicker">AI Review Linked <span class="material-symbols-outlined" aria-hidden="true">rate_review</span></span>
-<strong class="ai-metric-value">95<small>%</small></strong>
-<p>담당 PR 중 CodeRabbit 리뷰, 요약, 코멘트가 연결되어 AI 리뷰 루프가 남아 있는 비율입니다.</p>
-</article>
-<article class="ai-metric">
-<span class="ai-metric-kicker">Human Review Loop <span class="material-symbols-outlined" aria-hidden="true">verified_user</span></span>
-<strong class="ai-metric-value">79<small>%</small></strong>
-<p>담당 PR 중 AI 리뷰와 별도로 사람 리뷰 또는 팀원 검토가 함께 남아 있는 비율입니다.</p>
-</article>
-<article class="ai-metric">
-<span class="ai-metric-kicker">Verified Trace <span class="material-symbols-outlined" aria-hidden="true">fact_check</span></span>
-<strong class="ai-metric-value">93<small>%</small></strong>
-<p>담당 PR 중 테스트, CI, audit, JMeter, 성능 수치처럼 검증 근거가 본문이나 커밋에 남은 비율입니다.</p>
-</article>
-<article class="ai-metric ai-metric-wide">
-<div>
-<span class="ai-metric-kicker">Harness Loop</span>
-<strong class="ai-metric-value">Claude → Review → 검증</strong>
-</div>
-<div class="ai-handoff-list" aria-label="AI 작업 통제 방식">
-<span>Claude Code로 구현 초안과 리팩터링 후보를 만들고 PR 단위로 쪼갰습니다.</span>
-<span>CodeRabbit과 Codex 리뷰를 통해 회귀 위험, 누락된 테스트, 상태 불일치를 다시 점검했습니다.</span>
-<span>락, timeout, fallback, 인증처럼 운영 안정성에 걸리는 부분은 사람이 최종 판단했습니다.</span>
-</div>
-</article>
-</div>
-</div>
-<div class="ai-harness-block">
-<span class="ai-harness-label">Lojipsa · 배포 후 스스로 검증하는 에이전트</span>
-<div class="ai-metric-grid" aria-label="Lojipsa AI 활용 기록">
-<article class="ai-metric">
-<span class="ai-metric-kicker">데이터 원칙 <span class="material-symbols-outlined" aria-hidden="true">verified</span></span>
-<strong class="ai-metric-value ai-metric-value--text">임의 데이터 미사용</strong>
-<p>사용자가 확인해준 사실이거나, 로스트아크 공식 Open API·CDN이 실제로 내려주는 데이터만 사용합니다.</p>
-</article>
-<article class="ai-metric">
-<span class="ai-metric-kicker">배경지식 주입 <span class="material-symbols-outlined" aria-hidden="true">encrypted</span></span>
-<strong class="ai-metric-value ai-metric-value--text">환각 방지 설계</strong>
-<p>admin이 편집하는 배경지식을 프롬프트에 주입해, 모델이 검증된 정보 안에서만 답하도록 설계했습니다.</p>
-</article>
-<article class="ai-metric">
-<span class="ai-metric-kicker">LLM-as-judge <span class="material-symbols-outlined" aria-hidden="true">gavel</span></span>
-<strong class="ai-metric-value ai-metric-value--text">매일 자동 채점</strong>
-<p>합성 시나리오로 핵심 기능을 매일 자동 실행하고, 다른 LLM 호출로 PASS/FAIL을 채점해 Slack에 보고합니다.</p>
-</article>
-<article class="ai-metric ai-metric-wide">
-<div>
-<span class="ai-metric-kicker">Found in Practice</span>
-<strong class="ai-metric-value ai-metric-value--text">실제 버그 2건 발견</strong>
-</div>
-<div class="ai-handoff-list" aria-label="피드백 에이전트가 잡은 실제 버그">
-<span>Claude 응답이 "thinking" 블록만 오고 텍스트가 없을 때 NPE로 새던 문제</span>
-<span>채점 호출 실패를 "정상"으로 잘못 표시하던 로직 결함</span>
-</div>
-</article>
-</div>
-</div>
-</div>
+<p>TFT-gogo의 PR 기반 활용 지표, Lojipsa의 배포 후 자체 검증(LLM-as-judge), AllPick의 AI 추천 기능까지 — 프로젝트마다 AI를 어떻게 다뤘는지 한 곳에 정리했습니다.</p>
+<a class="ai-usage-link" href="ai-usage.html">AI 활용 기록 전체 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
 </div>
 </div>
 </section>

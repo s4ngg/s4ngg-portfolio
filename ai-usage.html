@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI 활용 기록 | 김상우 포트폴리오</title>
+<meta name="description" content="AI를 기능이 아니라, 개발과 운영 전체에서 사용한 기록 — TFT-gogo의 PR 기반 AI 활용 지표, Lojipsa의 배포 후 자체 검증, AllPick의 AI 추천 기능까지."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="AI 활용 기록 | 김상우 포트폴리오"/>
+<meta property="og:description" content="AI를 기능이 아니라, 개발과 운영 전체에서 사용한 기록 — TFT-gogo의 PR 기반 AI 활용 지표, Lojipsa의 배포 후 자체 검증, AllPick의 AI 추천 기능까지."/>
+<meta property="og:image" content="assets/profile-hero.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AI 활용 기록 | 김상우 포트폴리오"/>
+<meta name="twitter:description" content="AI를 기능이 아니라, 개발과 운영 전체에서 사용한 기록 — TFT-gogo의 PR 기반 AI 활용 지표, Lojipsa의 배포 후 자체 검증, AllPick의 AI 추천 기능까지."/>
+<meta name="twitter:image" content="assets/profile-hero.jpg"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="assets/scroll-effects.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; }
+  .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김상우</a>
+    <nav class="hidden items-center gap-7 md:flex">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
+      <details class="relative">
+        <summary class="flex list-none cursor-pointer items-center gap-1 text-sm font-semibold text-neutral-600 hover:text-blue-700">프로젝트<span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></summary>
+        <div class="absolute left-0 z-10 mt-2 w-40 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+          <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="lojipsa-project.html">Lojipsa</a>
+        </div>
+      </details>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="performance.html">성능개선</a>
+      <a class="text-sm font-bold text-blue-700" href="ai-usage.html">AI 활용</a>
+    </nav>
+    <details class="relative md:hidden">
+      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
+        <p class="px-3 pt-2 text-xs font-bold uppercase text-neutral-400">프로젝트</p>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">AllPick</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
+        <a class="block rounded px-3 py-2 pl-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="lojipsa-project.html">Lojipsa</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="performance.html">성능개선</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="ai-usage.html">AI 활용</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">AI Usage</p>
+      <h1 class="display mt-2 text-4xl font-extrabold text-neutral-950 md:text-5xl">AI를 기능이 아니라, 개발과 운영 전체에서 사용했습니다</h1>
+      <p class="mt-5 max-w-3xl leading-7 text-neutral-700">프로젝트마다 AI를 쓴 방식이 달랐습니다. TFT-gogo에서는 담당 PR 120개를 분석해 개발 루프 안에서의 AI 활용을 퍼센트로 정리했고, Lojipsa에서는 배포 후에도 AI가 스스로 자기 출력을 채점하는 피드백 루프를 설계·운영했습니다. AllPick은 그 이전 시기 프로젝트로, AI가 개발 과정이 아니라 추천 기능 자체에 있었습니다. 아래 항목을 펼치면 프로젝트별로 실제 근거를 확인할 수 있습니다.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-12">
+    <div class="space-y-5">
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll" open>
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-violet-700">TFT-gogo</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">PR 단위 AI 활용 지표 — merged PR 120개 분석</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-violet-50 px-3 py-1 text-xs font-bold text-violet-700 ring-1 ring-violet-100">Claude Code · CodeRabbit</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+          <p class="text-sm leading-6 text-neutral-700">담당한 merged PR 120개를 본문·커밋·리뷰·댓글까지 확인해 AI 활용과 사람 검증 비중을 퍼센트로 정리했습니다.</p>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">Claude Code Trace</p>
+              <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">96<small class="text-lg">%</small></strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 본문이나 커밋에 Claude Code 기반 작업 흔적이 남아 있는 비율입니다.</p>
+            </article>
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">AI Review Linked</p>
+              <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">95<small class="text-lg">%</small></strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 CodeRabbit 리뷰, 요약, 코멘트가 연결되어 AI 리뷰 루프가 남아 있는 비율입니다.</p>
+            </article>
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">Human Review Loop</p>
+              <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">79<small class="text-lg">%</small></strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 AI 리뷰와 별도로 사람 리뷰 또는 팀원 검토가 함께 남아 있는 비율입니다.</p>
+            </article>
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">Verified Trace</p>
+              <strong class="mt-2 block text-4xl font-extrabold text-neutral-950">93<small class="text-lg">%</small></strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">담당 PR 중 테스트, CI, audit, JMeter, 성능 수치처럼 검증 근거가 본문이나 커밋에 남은 비율입니다.</p>
+            </article>
+          </div>
+          <article class="mt-4 rounded-lg border border-violet-200 bg-violet-50/60 p-5 md:flex md:items-center md:gap-8">
+            <div class="md:w-56 md:shrink-0">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">Harness Loop</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">Claude → Review → 검증</strong>
+            </div>
+            <ul class="mt-3 space-y-2 text-sm leading-6 text-neutral-700 md:mt-0">
+              <li>Claude Code로 구현 초안과 리팩터링 후보를 만들고 PR 단위로 쪼갰습니다.</li>
+              <li>CodeRabbit과 Codex 리뷰를 통해 회귀 위험, 누락된 테스트, 상태 불일치를 다시 점검했습니다.</li>
+              <li>락, timeout, fallback, 인증처럼 운영 안정성에 걸리는 부분은 사람이 최종 판단했습니다.</li>
+            </ul>
+          </article>
+          <a class="mt-6 inline-flex items-center gap-1 text-sm font-bold text-violet-700" href="final-project.html">TFT-gogo 프로젝트 자세히 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        </div>
+      </details>
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll" open>
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-emerald-700">Lojipsa</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">배포 후에도 스스로 검증하는 에이전트</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">LLM-as-judge</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+          <p class="text-sm leading-6 text-neutral-700">배포 후에도 AI가 스스로 자기 출력을 채점하는 피드백 루프를 직접 설계·운영하고 있습니다.</p>
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">데이터 원칙</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">임의 데이터 미사용</strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">사용자가 확인해준 사실이거나, 로스트아크 공식 Open API·CDN이 실제로 내려주는 데이터만 사용합니다.</p>
+            </article>
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">배경지식 주입</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">환각 방지 설계</strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">admin이 편집하는 배경지식을 프롬프트에 주입해, 모델이 검증된 정보 안에서만 답하도록 설계했습니다.</p>
+            </article>
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">LLM-as-judge</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">매일 자동 채점</strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">합성 시나리오로 핵심 기능을 매일 자동 실행하고, 다른 LLM 호출로 PASS/FAIL을 채점해 Slack에 보고합니다.</p>
+            </article>
+          </div>
+          <article class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50/60 p-5 md:flex md:items-center md:gap-8">
+            <div class="md:w-56 md:shrink-0">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">Found in Practice</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">실제 버그 2건 발견</strong>
+            </div>
+            <ul class="mt-3 space-y-2 text-sm leading-6 text-neutral-700 md:mt-0">
+              <li>Claude 응답이 "thinking" 블록만 오고 텍스트가 없을 때 NPE로 새던 문제</li>
+              <li>채점 호출 실패를 "정상"으로 잘못 표시하던 로직 결함</li>
+            </ul>
+          </article>
+          <a class="mt-6 inline-flex items-center gap-1 text-sm font-bold text-emerald-700" href="lojipsa-project.html">Lojipsa 프로젝트 자세히 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        </div>
+      </details>
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">AllPick</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">이 프로젝트의 AI는 기능 안에 있었습니다</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">FastAPI · OpenAI API</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+          <p class="text-sm leading-6 text-neutral-700">AllPick은 Claude Code 같은 AI 코딩 도구를 개발 루프에 쓰기 이전 시기의 프로젝트입니다. merged PR 91개를 실제로 분석한 결과 PR 본문은 대부분 비어 있고 CodeRabbit 같은 AI 리뷰도 붙어 있지 않아서, 이 시기의 "AI 활용"은 개발 과정이 아니라 제품 기능 자체에 있었습니다.</p>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">제품 기능으로서의 AI</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">FastAPI + OpenAI API 추천 서버</strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">관심 카테고리와 위시리스트를 바탕으로 FastAPI 추천 서버와 OpenAI API를 연동해, 사용자별 맞춤 상품을 추천하는 기능을 단독으로 설계·구현했습니다.</p>
+            </article>
+            <article class="rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">그 이후의 변화</p>
+              <strong class="mt-2 block text-xl font-extrabold text-neutral-950">개발 과정 자체에 AI를 결합</strong>
+              <p class="mt-3 text-sm leading-6 text-neutral-600">이후 TFT-gogo부터는 Claude Code와 AI 코드 리뷰를 개발 루프 안에서 쓰기 시작했고, Lojipsa에서는 배포 후 AI가 스스로 결과를 채점하는 LLM-as-judge까지 도입했습니다.</p>
+            </article>
+          </div>
+          <a class="mt-6 inline-flex items-center gap-1 text-sm font-bold text-blue-700" href="mini-project.html">AllPick 프로젝트 자세히 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        </div>
+      </details>
+
+    </div>
+  </section>
+</main>
+
+<footer class="bg-white border-t border-neutral-200">
+  <div class="mx-auto max-w-6xl px-5 py-8 text-sm text-neutral-500">
+      <div class="flex items-baseline justify-between gap-6">
+        <span class="font-bold text-neutral-900">김상우</span>
+        <a class="font-bold text-neutral-900" href="https://github.com/s4ngg" target="_blank" rel="noreferrer">GitHub 프로필</a>
+      </div>
+      <p class="mt-2">© 2026 백엔드 신입 개발자 포트폴리오. Java, Spring Boot, DB, 배포와 문제 해결.</p>
+  </div>
+</footer>
+<script src="assets/scroll-effects.js" defer></script>
+<!-- Portfolio AI 챗봇 위젯 -->
+<script src="assets/chat-widget.js" data-endpoint="https://portfolio-agent-muuk.onrender.com" defer></script>
+</body>
+</html>
