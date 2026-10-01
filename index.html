@@ -671,6 +671,40 @@
             margin-top: auto;
             padding-top: 22px;
         }
+        .skill-groups {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px 40px;
+            margin-top: 32px;
+        }
+        .skill-group-label {
+            display: block;
+            margin-bottom: 12px;
+            color: #8b9196;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        .skill-chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .skill-chip-list li {
+            padding: 6px 12px;
+            border: 1px solid #dde1e5;
+            border-radius: 999px;
+            background: #f9f9fb;
+            color: #2f3438;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        @media (max-width: 720px) {
+            .skill-groups { grid-template-columns: 1fr; }
+        }
         .project-tags li {
             padding: 5px 9px;
             border: 1px solid #dde1e5;
@@ -679,6 +713,20 @@
             font-size: 12px;
             font-weight: 700;
             line-height: 16px;
+        }
+        .project-card-retro {
+            margin-top: 14px;
+            padding: 10px 12px;
+            background: #f5f6f8;
+            border-radius: 8px;
+            color: #4f565c;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .project-card-retro b {
+            color: #141516;
+            font-weight: 700;
         }
         .project-link {
             display: inline-flex;
@@ -1134,6 +1182,7 @@
 <li>FastAPI</li>
 <li>AWS</li>
 </ul>
+<p class="project-card-retro"><b>아쉬운 점 —</b> AI 도구 도입 이전 프로젝트라 전 과정을 수작업으로 검증했고, 이 경험이 이후 TFT-gogo·Lojipsa에서 AI 활용을 PR 단위로 감사하는 습관으로 이어졌습니다.</p>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </button>
 <button type="button" class="project-card project-card-violet reveal-on-scroll" data-project-modal="final" aria-haspopup="dialog" aria-label="TFT-gogo 자세히 보기">
@@ -1154,6 +1203,7 @@
 <li>Docker</li>
 <li>AWS</li>
 </ul>
+<p class="project-card-retro"><b>배운 점 —</b> AI가 만든 코드를 그대로 신뢰하지 않고, 병합된 PR 120건을 직접 감사해서 실제 적용 비율을 수치로 확인하는 습관이 생겼습니다.</p>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </button>
 <button type="button" class="project-card project-card-emerald reveal-on-scroll" data-project-modal="lojipsa" aria-haspopup="dialog" aria-label="Lojipsa 자세히 보기">
@@ -1174,8 +1224,53 @@
 <li>PostgreSQL</li>
 <li>AWS</li>
 </ul>
+<p class="project-card-retro"><b>아쉬운 점 —</b> 모바일 폭(375px)에서 사이드바가 접히지 않는 반응형 이슈를 아직 못 고쳤습니다. 다음 작업으로 남겨뒀습니다.</p>
 <span class="project-link">자세히 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </button>
+</div>
+</div>
+</section>
+<!-- 기술 스택 섹션 -->
+<section class="bg-white py-section-v-padding px-margin-mobile md:px-margin-desktop" id="skills">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg section-title reveal-on-scroll">기술 스택</h2>
+<div class="skill-groups reveal-on-scroll">
+<div class="skill-group">
+<span class="skill-group-label">Backend</span>
+<ul class="skill-chip-list">
+<li>Java</li>
+<li>Spring Boot</li>
+<li>Spring Security</li>
+<li>FastAPI</li>
+</ul>
+</div>
+<div class="skill-group">
+<span class="skill-group-label">Frontend</span>
+<ul class="skill-chip-list">
+<li>TypeScript</li>
+<li>React</li>
+<li>Next.js</li>
+</ul>
+</div>
+<div class="skill-group">
+<span class="skill-group-label">Data &amp; Infra</span>
+<ul class="skill-chip-list">
+<li>MySQL</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>Docker</li>
+<li>AWS</li>
+<li>GitHub Actions</li>
+</ul>
+</div>
+<div class="skill-group">
+<span class="skill-group-label">AI &amp; Collaboration</span>
+<ul class="skill-chip-list">
+<li>Claude API</li>
+<li>GitHub</li>
+<li>Notion</li>
+</ul>
+</div>
 </div>
 </div>
 </section>
