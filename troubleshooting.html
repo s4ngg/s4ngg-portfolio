@@ -143,6 +143,106 @@
         </div>
         </div>
       </details>
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">Lojipsa</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">LLM이 요일 간격과 운동 분류를 스스로 계산하다가 틀린 문제</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">LLM · Prompt · Spring Boot</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">응답 코드나 문장이 자연스러운지만 보지 않고 내용을 사실관계 단위로 검토하다 발견했습니다. 월→금(96시간)을 "48시간 미만"이라 하고, 이미 데드리프트가 있는 수요일을 "하체 운동 없음"이라 판단했습니다. 날짜 산수와 운동 분류처럼 결정적으로 계산할 수 있는 일을 모델 추론에 맡긴 구조가 원인이었습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">근육군은 사용자가 직접 선택하게 하고, 근육군별 세트 합계와 최소 휴식 간격(주 순환 포함)은 Java에서 계산해 "재계산 금지" 지시와 함께 프롬프트에 넣었습니다. 모델은 확정된 값을 근거로 한 조언만 생성하며, 같은 루틴 재테스트에서 두 오류가 모두 사라지고 세트 합계(11세트)까지 정확히 일치했습니다.</p>
+          </div>
+        </div>
+        </div>
+      </details>
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">Lojipsa</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">프리 티어 EC2에서 Docker 빌드 중 인스턴스가 응답 불능이 된 문제</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">AWS EC2 · Docker · Gradle</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">AWS 상태 검사는 "3/3 통과"였지만 SSH는 banner exchange timeout이었습니다. 상태 검사는 하이퍼바이저·네트워크 수준의 확인일 뿐 OS 내부 응답을 보장하지 않습니다. 메모리 1GB·스왑 없는 t3.micro에서 Gradle 빌드를 직접 돌리는 구조가 근본 원인으로, 커널이 메모리 회수에 매달리며 sshd까지 새 연결에 응답하지 못한 것으로 판단했습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">"OS 종료 건너뛰기"로 강제 중지한 뒤 t3.small(2GB)로 올려 빌드하니 46.9초에 성공했습니다. 이후 t3.micro로 되돌려도 restart 정책으로 재빌드 없이 컨테이너가 복구됩니다. 상시 운영은 t3.micro, 빌드할 때만 일시 업사이즈하는 절차로 정리하고 IP 변경에 따른 Route 53 레코드 갱신 순서도 문서화했습니다.</p>
+          </div>
+        </div>
+        </div>
+      </details>
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">Lojipsa</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">Claude 응답에 text 블록이 없을 때 NPE로 새던 문제</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">Claude API · Jackson · LLM-as-judge</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">피드백 에이전트의 채점 호출이 간헐적으로 실패했습니다. 응답을 직접 로그로 찍어보니 content가 thinking 블록만 있고 text가 null이었는데, 코드는 첫 번째 블록이 항상 텍스트라고 가정하고 바로 trim()을 호출하고 있었습니다. 기존 호출부도 같은 취약점을 갖고 있었고 우연히 재현되지 않았을 뿐이었습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">응답 배열에서 type이 text인 첫 블록을 명시적으로 찾도록 고치고, 없으면 예외 대신 빈 결과로 처리했습니다. 같은 과정에서 채점 호출 실패를 "정상"으로 표시하던 로직도 판정 보류 상태로 분리했습니다. 로컬에서 실행 주기를 낮춰 여러 사이클을 돌려 연속 성공을 확인했습니다.</p>
+          </div>
+        </div>
+        </div>
+      </details>
+
+      <details class="group rounded-lg border border-neutral-200 bg-white shadow-sm reveal-on-scroll">
+        <summary class="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">Lojipsa</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">수정·삭제 API가 500을 내고 데이터는 그대로 남던 문제</h2>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span class="rounded bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">Spring Data JPA · Transaction</span>
+            <span class="material-symbols-outlined text-neutral-400 transition-transform group-open:rotate-180">expand_more</span>
+          </div>
+        </summary>
+        <div class="border-t border-neutral-200 px-6 pb-6 pt-5">
+        <div class="grid gap-4 text-sm leading-6 md:grid-cols-2">
+          <div class="rounded-lg border border-rose-100 bg-rose-50/70 p-4">
+            <h3 class="font-bold text-rose-700">원인</h3>
+            <p class="mt-2 text-neutral-700">삭제 응답 코드(500)만 보지 않고 목록을 다시 조회해 실제 상태를 확인했더니 삭제가 반영되지 않고 있었습니다. 로그는 TransactionRequiredException이었고, 메서드 이름으로 만든 derived delete 쿼리는 조회 후 개별 remove를 호출하는 방식이라 호출부에 열린 트랜잭션이 필요했는데 서비스 메서드에 @Transactional이 없었습니다.</p>
+          </div>
+          <div class="rounded-lg border border-blue-100 bg-blue-50/70 p-4">
+            <h3 class="font-bold text-blue-700">해결</h3>
+            <p class="mt-2 text-neutral-700">삭제·수정 서비스 메서드에 @Transactional을 추가했습니다. 같은 요청으로 재테스트해 삭제가 204로 응답하고 재조회 시 실제로 비어 있는 것을 확인했습니다. 이후 derived 삭제 쿼리를 쓸 때는 트랜잭션 경계를 먼저 확인하는 체크 항목으로 남겼습니다.</p>
+          </div>
+        </div>
+        </div>
+      </details>
     </div>
   </section>
 </main>
