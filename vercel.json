@@ -1,12 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/:path(.*)",
-      "destination": "https://s4ngg.github.io/:path",
-      "permanent": false
-    }
-  ]
+  "trailingSlash": false
 }
